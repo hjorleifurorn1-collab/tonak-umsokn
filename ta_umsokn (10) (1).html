@@ -1,0 +1,2770 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Umsókn - Tónlistarskólinn á Akureyri</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #8B7355;
+            --color-primary-dark: #6B5A45;
+            --color-primary-light: #D4A574;
+            --color-background: #F5E6D3;
+            --color-background-light: #FDF8F3;
+            --color-text: #4A4A4A;
+            --color-text-light: #7A7A7A;
+            --color-white: #FFFFFF;
+            --color-error: #C45C5C;
+            --color-success: #5C8B5C;
+            --color-border: #E0D5C7;
+            --font-display: 'Cormorant Garamond', Georgia, serif;
+            --font-body: 'Source Sans 3', -apple-system, sans-serif;
+            --shadow-soft: 0 4px 20px rgba(139, 115, 85, 0.1);
+            --shadow-medium: 0 8px 30px rgba(139, 115, 85, 0.15);
+            --radius-small: 4px;
+            --radius-medium: 8px;
+            --radius-large: 16px;
+            --transition-fast: 0.2s ease;
+            --transition-medium: 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--color-text);
+            background: var(--color-background);
+            min-height: 100vh;
+        }
+
+        /* Container */
+        .form-container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        .form-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .form-header h1 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 8px;
+            letter-spacing: 0.02em;
+        }
+
+        .form-header p {
+            color: var(--color-text-light);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        /* Progress indicator */
+        .progress-container {
+            margin-bottom: 40px;
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: 8px;
+        }
+
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--color-border);
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        .progress-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            height: 2px;
+            background: var(--color-primary);
+            transform: translateY(-50%);
+            z-index: 2;
+            transition: width var(--transition-medium);
+        }
+
+        .step-indicator {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--color-white);
+            border: 2px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--color-text-light);
+            position: relative;
+            z-index: 3;
+            transition: all var(--transition-medium);
+        }
+
+        .step-indicator.active {
+            border-color: var(--color-primary);
+            background: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        .step-indicator.completed {
+            border-color: var(--color-primary);
+            background: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        .step-labels {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .step-label {
+            font-size: 0.75rem;
+            color: var(--color-text-light);
+            text-align: center;
+            width: 36px;
+            transition: color var(--transition-fast);
+        }
+
+        .step-label.active {
+            color: var(--color-primary);
+            font-weight: 500;
+        }
+
+        /* Form card */
+        .form-card {
+            background: var(--color-white);
+            border-radius: var(--radius-large);
+            box-shadow: var(--shadow-medium);
+            padding: 40px;
+            margin-bottom: 24px;
+        }
+
+        /* Step sections */
+        .form-step {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-title {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 8px;
+        }
+
+        .step-description {
+            color: var(--color-text-light);
+            margin-bottom: 32px;
+            font-size: 0.95rem;
+        }
+
+        /* Form elements */
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .field-description {
+            font-size: 0.9rem;
+            color: var(--color-text-light);
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: var(--color-text);
+            font-size: 0.95rem;
+        }
+
+        label .required {
+            color: var(--color-error);
+            margin-left: 2px;
+        }
+
+        label .optional {
+            color: var(--color-text-light);
+            font-weight: 400;
+            font-size: 0.85rem;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-medium);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: var(--color-text);
+            background: var(--color-white);
+            transition: all var(--transition-fast);
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.1);
+        }
+
+        input:disabled,
+        select:disabled {
+            background: var(--color-background-light);
+            color: var(--color-text-light);
+            cursor: not-allowed;
+        }
+
+        input.error,
+        select.error {
+            border-color: var(--color-error);
+        }
+
+        .error-message {
+            color: var(--color-error);
+            font-size: 0.85rem;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .error-message.visible {
+            display: block;
+        }
+
+        /* Info box */
+        .info-box {
+            background: var(--color-background-light);
+            border-left: 3px solid var(--color-primary);
+            padding: 16px 20px;
+            border-radius: 0 var(--radius-medium) var(--radius-medium) 0;
+            margin-bottom: 24px;
+        }
+
+        .info-box p {
+            font-size: 0.9rem;
+            color: var(--color-text);
+            margin: 0;
+        }
+
+        .info-box .age-display {
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        /* Checkboxes */
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            accent-color: var(--color-primary);
+            cursor: pointer;
+        }
+
+        .checkbox-item label {
+            margin: 0;
+            font-weight: 400;
+            cursor: pointer;
+            line-height: 1.5;
+        }
+
+        .checkbox-item label a {
+            color: var(--color-primary);
+            text-decoration: underline;
+        }
+
+        /* Radio buttons */
+        .radio-group {
+            display: flex;
+            gap: 24px;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .radio-item input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--color-primary);
+            cursor: pointer;
+        }
+
+        .radio-item label {
+            margin: 0;
+            font-weight: 400;
+            cursor: pointer;
+        }
+
+        /* Buttons */
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: var(--radius-medium);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-primary);
+            border: 1px solid var(--color-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-background-light);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-add {
+            background: transparent;
+            color: var(--color-primary);
+            border: 1px dashed var(--color-primary);
+            width: 100%;
+            padding: 12px;
+            margin-top: 16px;
+        }
+
+        .btn-add:hover {
+            background: var(--color-background-light);
+            border-style: solid;
+        }
+
+        /* Tengiliður card */
+        .contact-card {
+            background: var(--color-background-light);
+            border-radius: var(--radius-medium);
+            padding: 24px;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .contact-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .contact-card-title {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .btn-remove {
+            background: transparent;
+            border: none;
+            color: var(--color-error);
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 4px 8px;
+        }
+
+        .btn-remove:hover {
+            text-decoration: underline;
+        }
+
+        /* Subject selection */
+        .subject-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .subject-option {
+            padding: 16px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-medium);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            background: var(--color-white);
+        }
+
+        .subject-option:hover {
+            border-color: var(--color-primary-light);
+            background: var(--color-background-light);
+        }
+
+        .subject-option.selected {
+            border-color: var(--color-primary);
+            background: var(--color-background-light);
+            box-shadow: 0 0 0 2px rgba(139, 115, 85, 0.2);
+        }
+
+        .subject-option input {
+            display: none;
+        }
+
+        .subject-option .subject-name {
+            font-weight: 500;
+            color: var(--color-text);
+        }
+
+        .subject-option .subject-dept {
+            font-size: 0.85rem;
+            color: var(--color-text-light);
+            margin-top: 4px;
+        }
+
+        /* Terms box */
+        .terms-box {
+            background: var(--color-background-light);
+            border-radius: var(--radius-medium);
+            padding: 20px;
+            max-height: 200px;
+            overflow-y: auto;
+            margin-bottom: 24px;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            border: 1px solid var(--color-border);
+        }
+
+        .terms-box h4 {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            color: var(--color-primary);
+            margin-bottom: 12px;
+        }
+
+        .terms-box p {
+            margin-bottom: 12px;
+        }
+
+        /* Success message */
+        .success-message {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--color-success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+        }
+
+        .success-icon svg {
+            width: 40px;
+            height: 40px;
+            stroke: white;
+            stroke-width: 3;
+        }
+
+        .success-message h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--color-primary);
+            margin-bottom: 12px;
+        }
+
+        .success-message p {
+            color: var(--color-text-light);
+            font-size: 1.1rem;
+        }
+
+        /* Hidden elements */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Choice buttons for start screen */
+        .choice-buttons {
+            display: flex;
+            gap: 20px;
+            margin-top: 32px;
+        }
+
+        .btn-choice {
+            flex: 1;
+            padding: 32px 24px;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-large);
+            background: var(--color-white);
+            cursor: pointer;
+            transition: all var(--transition-medium);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-choice:hover {
+            border-color: var(--color-primary);
+            background: var(--color-background-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .btn-choice.small {
+            padding: 20px;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        .btn-choice.secondary {
+            background: var(--color-background-light);
+        }
+
+        .choice-icon {
+            font-size: 2.5rem;
+        }
+
+        .choice-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .btn-choice.small .choice-title {
+            font-size: 1rem;
+        }
+
+        .choice-desc {
+            font-size: 0.9rem;
+            color: var(--color-text-light);
+        }
+
+        @media (max-width: 600px) {
+            .choice-buttons {
+                flex-direction: column;
+            }
+
+            .btn-choice {
+                padding: 24px 20px;
+            }
+        }
+
+        /* Textarea */
+        textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-medium);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: var(--color-text);
+            background: var(--color-white);
+            transition: all var(--transition-fast);
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.1);
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: var(--color-border);
+            margin: 32px 0;
+        }
+
+        /* Section subtitle */
+        .section-subtitle {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--color-primary-dark);
+            margin-bottom: 16px;
+            margin-top: 32px;
+        }
+
+        .section-subtitle:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 20px 16px;
+            }
+
+            .form-card {
+                padding: 24px 20px;
+            }
+
+            .form-header h1 {
+                font-size: 2rem;
+            }
+
+            .step-title {
+                font-size: 1.5rem;
+            }
+
+            .button-group {
+                flex-direction: column-reverse;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .radio-group {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+
+        /* Validation Modal */
+        .validation-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-medium);
+        }
+
+        .validation-modal.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .validation-modal-content {
+            background: var(--color-white);
+            border-radius: var(--radius-large);
+            padding: 32px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: var(--shadow-medium);
+            transform: scale(0.9);
+            transition: transform var(--transition-medium);
+        }
+
+        .validation-modal.visible .validation-modal-content {
+            transform: scale(1);
+        }
+
+        .validation-modal-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+
+        .validation-modal-message {
+            color: var(--color-text);
+            margin-bottom: 24px;
+            white-space: pre-line;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <!-- Header -->
+        <div class="form-header">
+            <h1>Umsókn um námsvist</h1>
+            <p>Tónlistarskólinn á Akureyri</p>
+        </div>
+
+        <!-- Progress - hidden on start screen -->
+        <div class="progress-container" id="progressContainer" style="display: none;">
+            <div class="progress-steps">
+                <div class="progress-line" id="progressLine"></div>
+                <div class="step-indicator active" data-step="1">1</div>
+                <div class="step-indicator" data-step="2">2</div>
+                <div class="step-indicator" data-step="3">3</div>
+                <div class="step-indicator" data-step="4">4</div>
+                <div class="step-indicator" data-step="5">5</div>
+            </div>
+            <div class="step-labels" id="stepLabels">
+                <span class="step-label active">Nemandi</span>
+                <span class="step-label">Upplýsingar</span>
+                <span class="step-label">Tengiliðir</span>
+                <span class="step-label">Námsgrein</span>
+                <span class="step-label">Staðfesting</span>
+            </div>
+        </div>
+
+        <!-- Form Card -->
+        <div class="form-card">
+            <!-- Start Screen: Choose path -->
+            <div class="form-step active" data-step="start">
+                <h2 class="step-title">Umsókn um námsvist</h2>
+                <p class="step-description">Er nemandinn að endurnýja skólavist eða sækja um í fyrsta skipti?</p>
+
+                <div class="choice-buttons">
+                    <button type="button" class="btn-choice" onclick="startRenewal()">
+                        <span class="choice-icon">🔄</span>
+                        <span class="choice-title">Endurnýja skólavist</span>
+                        <span class="choice-desc">Nemandi hefur áður verið skráður í skólann</span>
+                    </button>
+                    <button type="button" class="btn-choice" onclick="startNewApplication()">
+                        <span class="choice-icon">✨</span>
+                        <span class="choice-title">Ný umsókn</span>
+                        <span class="choice-desc">Nemandi sækir um í fyrsta skipti</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Renewal Step 1: Enter kennitala -->
+            <div class="form-step" data-step="renewal-1">
+                <h2 class="step-title">Endurnýja skólavist</h2>
+                <p class="step-description">Sláðu inn kennitölu nemanda til að leita að skráningu.</p>
+
+                <div class="form-group">
+                    <label for="renewalKennitala">Kennitala nemanda <span class="required">*</span></label>
+                    <input type="text" id="renewalKennitala" name="renewalKennitala" placeholder="0000000000" maxlength="10">
+                    <div class="error-message" id="renewalKennitalaError">Kennitala verður að vera 10 tölustafir</div>
+                </div>
+
+                <div class="info-box hidden" id="renewalNotFound" style="border-left-color: var(--color-error);">
+                    <p><strong>Engin skráning fannst fyrir þessa kennitölu.</strong></p>
+                    <p>Ef nemandinn hefur aldrei verið skráður, vinsamlegast veldu "Ný umsókn".</p>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" onclick="goToStart()">Til baka</button>
+                    <button type="button" class="btn btn-primary" id="btnSearchRenewal" disabled onclick="searchForRenewal()">Leita</button>
+                </div>
+            </div>
+
+            <!-- Renewal Step 2: Confirm or request changes -->
+            <div class="form-step" data-step="renewal-2">
+                <h2 class="step-title">Skráning fannst</h2>
+                <p class="step-description">Við fundum skráningu fyrir þessa kennitölu frá fyrra skólaári. Viltu endurnýja skólavist?</p>
+
+                <div class="info-box" id="renewalStudentInfo">
+                    <p><strong>Nemandi:</strong> <span id="renewalStudentName">—</span></p>
+                    <p><strong>Núverandi námsgrein:</strong> <span id="renewalStudentSubject">—</span></p>
+                </div>
+
+                <div class="choice-buttons" style="margin-top: 24px;">
+                    <button type="button" class="btn-choice small" onclick="confirmRenewal()">
+                        <span class="choice-title">Já, endurnýja á sama hljóðfæri</span>
+                    </button>
+                    <button type="button" class="btn-choice small secondary" onclick="requestChanges()">
+                        <span class="choice-title">Nei, óska eftir breytingum</span>
+                    </button>
+                </div>
+
+                <div class="button-group" style="margin-top: 24px;">
+                    <button type="button" class="btn btn-secondary" onclick="goToStep('renewal-1')">Til baka</button>
+                </div>
+            </div>
+
+            <!-- Renewal Step 3a: Simple renewal confirmation -->
+            <div class="form-step" data-step="renewal-confirm">
+                <h2 class="step-title">Staðfesta endurnýjun</h2>
+                <p class="step-description">Nemandinn verður skráður áfram í sama námi. Vinsamlegast farðu yfir og samþykktu viðskiptaskilmála.</p>
+
+                <div class="terms-box">
+                    <h4>Viðskiptaskilmálar</h4>
+                    <p>Gjaldskrá skólans er háð ákvörðunum bæjarsjóðs um gjaldskrárhækkanir. Tónlistarskólinn á Akureyri áskilur sér rétt til hækkunar skóla- og hljóðfæraleigugjalda á samningstímanum í samræmi við ákvarðanir bæjarsjóðs.</p>
+                    <p>Skólagjöld tónlistarskólans eru greidd fyrir eina önn í einu en til hagræðingar fyrir greiðendur dreifast greiðslur skólagjalda á 4 jafnar greiðslur fyrir hverja önn með gjalddaga ca. 15. ág., 15.sept., 15. okt., 15. nóv. fyrir haustönn og gjalddaga 15. jan., 15. feb., 15. mars, 15. apríl fyrir vorönn.</p>
+                    <p>Einungis er mögulegt að segja upp samningi einu sinni á ári, frá og með áramótum og rennur uppsagnarfrestur fyrir vorönn út 1. nóvember ár hvert. Til þess að uppsögn sé gild verður að segja samningi upp skriflega með tölvupósti á netfangið tonak@tonak.is.</p>
+                    <p>Undantekning frá þessu eru nemendur í framhaldsnámi á hljóðfæri og nemendur í mið og framhaldsnámi í söng. Þessir nemendur geta ekki sagt upp námi og skólavist þeirra er bundin fyrir allt skólaárið með þessari umsókn.</p>
+                    <p>Tónlistarskólinn á Akureyri áskilur sér birtingar- og dreifingarrétt á öllu því hljóð- og myndefni sem tekið er upp af nemendum skólans á viðburðum sem skólinn stendur fyrir sem og í kennslustundum.</p>
+                    <p>Með því að senda inn umsókn í Tónlistarskólann á Akureyri samþykkir umsækjandi þá skilmála sem birtast í skjali þessu sem og gjaldskrá skólans og taka skilmálarnir gildi strax og umsækjandi hefur fengið staðfestingu á námsvist.</p>
+                </div>
+
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="renewalSamthykkiSkilmala" name="renewalSamthykkiSkilmala" required>
+                        <label for="renewalSamthykkiSkilmala">Ég samþykki <strong>viðskiptaskilmála</strong> Tónlistarskólans á Akureyri <span class="required">*</span></label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="renewalFristundastyrkur" name="renewalFristundastyrkur">
+                        <label for="renewalFristundastyrkur">Ég óska eftir að nota frístundastyrk</label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="renewalMyndefni" name="renewalMyndefni">
+                        <label for="renewalMyndefni">Ég samþykki að myndefni sem tekið er upp af nemanda megi nota á upplýsingasíðum skólans</label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="renewalHljodfaraleiga" name="renewalHljodfaraleiga">
+                        <label for="renewalHljodfaraleiga">Ég óska eftir hljóðfæraleigu</label>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="form-group">
+                    <label for="renewalNotes">Athugasemdir <span class="optional">(valkvætt)</span></label>
+                    <textarea id="renewalNotes" name="renewalNotes" rows="3" placeholder="Ef þú vilt koma einhverju á framfæri..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="renewalEmail">Netfang fyrir staðfestingu <span class="required">*</span></label>
+                    <input type="email" id="renewalEmail" name="renewalEmail" placeholder="netfang@dæmi.is">
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" onclick="goToStep('renewal-2')">Til baka</button>
+                    <button type="button" class="btn btn-primary" onclick="submitRenewal()">Senda umsókn</button>
+                </div>
+            </div>
+
+            <!-- Renewal Step 3b: Request changes -->
+            <div class="form-step" data-step="renewal-changes">
+                <h2 class="step-title">Óska eftir breytingum</h2>
+                <p class="step-description">Hvaða breytingum óskar þú eftir?</p>
+
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="changeInstrument" name="changeInstrument">
+                        <label for="changeInstrument">Skipta um hljóðfæri / námsgrein</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="changeTeacher" name="changeTeacher">
+                        <label for="changeTeacher">Skipta um kennara</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="changeRatio" name="changeRatio">
+                        <label for="changeRatio">Breyta námshlutfalli (heilt/hálft nám)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="changeOther" name="changeOther">
+                        <label for="changeOther">Annað</label>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 24px;">
+                    <label for="changeNotes">Nánari lýsing á breytingum <span class="required">*</span></label>
+                    <textarea id="changeNotes" name="changeNotes" rows="4" placeholder="Vinsamlegast lýstu breytingunum sem þú óskar eftir..."></textarea>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="terms-box">
+                    <h4>Viðskiptaskilmálar</h4>
+                    <p>Gjaldskrá skólans er háð ákvörðunum bæjarsjóðs um gjaldskrárhækkanir. Tónlistarskólinn á Akureyri áskilur sér rétt til hækkunar skóla- og hljóðfæraleigugjalda á samningstímanum í samræmi við ákvarðanir bæjarsjóðs.</p>
+                    <p>Skólagjöld tónlistarskólans eru greidd fyrir eina önn í einu en til hagræðingar fyrir greiðendur dreifast greiðslur skólagjalda á 4 jafnar greiðslur fyrir hverja önn.</p>
+                    <p>Einungis er mögulegt að segja upp samningi einu sinni á ári, frá og með áramótum og rennur uppsagnarfrestur fyrir vorönn út 1. nóvember ár hvert.</p>
+                    <p>Með því að senda inn umsókn í Tónlistarskólann á Akureyri samþykkir umsækjandi þá skilmála sem birtast í skjali þessu sem og gjaldskrá skólans.</p>
+                </div>
+
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="changeSamthykkiSkilmala" name="changeSamthykkiSkilmala" required>
+                        <label for="changeSamthykkiSkilmala">Ég samþykki <strong>viðskiptaskilmála</strong> Tónlistarskólans á Akureyri <span class="required">*</span></label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="changeFristundastyrkur" name="changeFristundastyrkur">
+                        <label for="changeFristundastyrkur">Ég óska eftir að nota frístundastyrk</label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="changeMyndefni" name="changeMyndefni">
+                        <label for="changeMyndefni">Ég samþykki að myndefni sem tekið er upp af nemanda megi nota á upplýsingasíðum skólans</label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="changeHljodfaraleiga" name="changeHljodfaraleiga">
+                        <label for="changeHljodfaraleiga">Ég óska eftir hljóðfæraleigu</label>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 24px;">
+                    <label for="changeEmail">Netfang fyrir staðfestingu <span class="required">*</span></label>
+                    <input type="email" id="changeEmail" name="changeEmail" placeholder="netfang@dæmi.is">
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" onclick="goToStep('renewal-2')">Til baka</button>
+                    <button type="button" class="btn btn-primary" onclick="submitChangeRequest()">Senda umsókn</button>
+                </div>
+            </div>
+
+            <!-- Step 1: Kennitala (for new applications) -->
+            <div class="form-step" data-step="1">
+                <h2 class="step-title">Ný umsókn - Kennitala nemanda</h2>
+                <p class="step-description">Sláðu inn kennitölu nemanda til að hefja umsókn.</p>
+
+                <div class="form-group">
+                    <label for="kennitala">Kennitala <span class="required">*</span></label>
+                    <input type="text" id="kennitala" name="kennitala" placeholder="0000000000" maxlength="10" pattern="[0-9]{10}">
+                    <div class="error-message" id="kennitalaError">Kennitala verður að vera 10 tölustafir</div>
+                </div>
+
+                <div class="info-box hidden" id="ageInfo">
+                    <p>Fæðingardagur: <span id="birthDate"></span></p>
+                    <p>Aldur: <span class="age-display" id="ageDisplay"></span></p>
+                    <p>Aldursflokkur: <span class="age-display" id="ageGroup"></span></p>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" onclick="goToStart()">Til baka</button>
+                    <button type="button" class="btn btn-primary" id="btnNext1" disabled>Áfram</button>
+                </div>
+            </div>
+
+            <!-- Step 2: Upplýsingar nemanda -->
+            <div class="form-step" data-step="2">
+                <h2 class="step-title">Upplýsingar nemanda</h2>
+                <p class="step-description">Vinsamlegast fylltu út eftirfarandi upplýsingar.</p>
+
+                <div class="section-subtitle">Grunnupplýsingar</div>
+
+                <div class="form-group">
+                    <label for="nafn">Fullt nafn <span class="required">*</span></label>
+                    <input type="text" id="nafn" name="nafn" placeholder="Sótt úr Þjóðskrá..." disabled>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="logheimili">Lögheimili <span class="required">*</span></label>
+                        <input type="text" id="logheimili" name="logheimili" placeholder="Sótt úr Þjóðskrá..." disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="sveitarfelag">Sveitarfélag <span class="required">*</span></label>
+                        <input type="text" id="sveitarfelag" name="sveitarfelag" placeholder="Sótt úr Þjóðskrá..." disabled>
+                    </div>
+                </div>
+
+                <div class="section-subtitle">Samskiptaupplýsingar</div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="simi1">Símanúmer 1 <span class="required">*</span></label>
+                        <input type="tel" id="simi1" name="simi1" placeholder="000-0000">
+                    </div>
+                    <div class="form-group">
+                        <label for="simi2">Símanúmer 2 <span class="optional">(valkvætt)</span></label>
+                        <input type="tel" id="simi2" name="simi2" placeholder="000-0000">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="netfang">Netfang <span class="required">*</span></label>
+                    <input type="email" id="netfang" name="netfang" placeholder="netfang@dæmi.is">
+                </div>
+
+                <div class="section-subtitle">Annað heimili <span class="optional">(ef við á)</span></div>
+
+                <div class="form-group">
+                    <label for="annadHeimili">Heimilisfang</label>
+                    <input type="text" id="annadHeimili" name="annadHeimili" placeholder="Götuheiti og húsnúmer">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="postnumerAnnad">Póstnúmer</label>
+                        <input type="text" id="postnumerAnnad" name="postnumerAnnad" placeholder="000">
+                    </div>
+                    <div class="form-group">
+                        <label for="sveitarfelagAnnad">Sveitarfélag</label>
+                        <input type="text" id="sveitarfelagAnnad" name="sveitarfelagAnnad" placeholder="Sveitarfélag">
+                    </div>
+                </div>
+
+                <!-- Grunnskóli/Framhaldsskóli - sýnist eftir aldri -->
+                <div id="skoliSection" class="hidden">
+                    <div class="section-subtitle">Skóli</div>
+                    <div class="form-group">
+                        <label for="skoli" id="skoliLabel">Grunnskóli</label>
+                        <select id="skoli" name="skoli">
+                            <option value="">Veldu skóla...</option>
+                        </select>
+                    </div>
+                    <div class="form-group hidden" id="skoliAnnadGroup">
+                        <label for="skoliAnnad">Hvaða skóli? <span class="required">*</span></label>
+                        <input type="text" id="skoliAnnad" name="skoliAnnad" placeholder="Nafn skóla">
+                    </div>
+                    
+                    <!-- Stúdentsprófsbraut - bara fyrir framhaldsskólanemendur -->
+                    <div class="form-group hidden" id="studentsprofStep2Group" style="margin-top: 24px;">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="studentsprofStep2" name="studentsprofStep2">
+                            <label for="studentsprofStep2">Ég sæki um á stúdentsprófsbraut</label>
+                        </div>
+                        <div class="info-box" style="margin-top: 12px; font-size: 0.9rem;">
+                            <p><strong>Upplýsingar um stúdentsprófsbraut:</strong></p>
+                            <p>Nemendur sem hafa sótt um tónlistarkjörsvið, tónlistarbraut eða tónlistarsérfræðingu í sínum framhaldsskóla verða að haka við hér til að umsókn þeirra taki gildi.</p>
+                            <p style="margin-top: 8px;">Mikilvægt er að nemendur upplýsi sinn framhaldsskóla um að þeir hafi sótt um stúdentsprófsbraut í samstarfi við TonAk.</p>
+                            <p style="margin-top: 8px;"><em>Nemendur sem stunda nám við aðrar brautir/kjörsvið framhaldsskóla þurfa ekki að haka við hér.</em></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" onclick="goToStep(1)">Til baka</button>
+                    <button type="button" class="btn btn-primary" onclick="goToStep(3)">Áfram</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Tengiliðir -->
+            <div class="form-step" data-step="3">
+                <h2 class="step-title">Tengiliðir</h2>
+                <p class="step-description" id="contactDescription">Vinsamlegast skráðu upplýsingar um forráðamann/forráðamenn.</p>
+
+                <!-- For 18+ - nemandi er sjálfur tengiliður -->
+                <div id="selfContactInfo" class="hidden">
+                    <div class="info-box">
+                        <p>Þar sem nemandi er 18 ára eða eldri er hann/hún sjálfur tengiliður og greiðandi. Upplýsingarnar sem þú fylltir út í skrefi 2 verða notaðar.</p>
+                    </div>
+                </div>
+
+                <!-- For under 18 -->
+                <div id="contactsContainer">
+                    <!-- Forráðamaður 1 - alltaf sýnilegur fyrir börn -->
+                    <div class="contact-card" id="contact1">
+                        <div class="contact-card-header">
+                            <span class="contact-card-title">Forráðamaður 1</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tengilidur1_kennitala">Kennitala <span class="required">*</span></label>
+                            <input type="text" id="tengilidur1_kennitala" name="tengilidur1_kennitala" placeholder="0000000000" maxlength="10">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tengilidur1_nafn">Nafn <span class="required">*</span></label>
+                            <input type="text" id="tengilidur1_nafn" name="tengilidur1_nafn" placeholder="Sótt úr Þjóðskrá..." disabled>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="tengilidur1_simi1">Símanúmer 1 <span class="required">*</span></label>
+                                <input type="tel" id="tengilidur1_simi1" name="tengilidur1_simi1" placeholder="000-0000">
+                            </div>
+                            <div class="form-group">
+                                <label for="tengilidur1_simi2">Símanúmer 2 <span class="optional">(valkvætt)</span></label>
+                                <input type="tel" id="tengilidur1_simi2" name="tengilidur1_simi2" placeholder="000-0000">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tengilidur1_netfang">Netfang <span class="required">*</span></label>
+                            <input type="email" id="tengilidur1_netfang" name="tengilidur1_netfang" placeholder="netfang@dæmi.is">
+                        </div>
+
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="tengilidur1_greidandi" name="tengilidur1_greidandi" checked>
+                            <label for="tengilidur1_greidandi">Þessi tengiliður er greiðandi</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-add" id="btnAddContact" onclick="addContact()">+ Bæta við tengiliðar</button>
+
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" onclick="goToStep(2)">Til baka</button>
+                    <button type="button" class="btn btn-primary" onclick="goToStep(4)">Áfram</button>
+                </div>
+            </div>
+
+            <!-- Step 4: Námsgrein -->
+            <div class="form-step" data-step="4">
+                <h2 class="step-title">Námsgrein</h2>
+                <p class="step-description">Veldu námsgrein. Deild ákvarðast sjálfkrafa.</p>
+
+                <!-- Skilaboð fyrir 1-2 ára -->
+                <div class="info-box hidden" id="noCoursesMessage" style="border-left-color: var(--color-error);">
+                    <p><strong>Ekkert nám er í boði fyrir börn á þessum aldri.</strong></p>
+                    <p>Vinsamlegast hafðu samband við skrifstofu skólans á <a href="mailto:tonak@tonak.is">tonak@tonak.is</a> eða í síma 460-1000 til að fá frekari upplýsingar um biðlista fyrir Suzukinám.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="namsgrein">Námsgrein / Hljóðfæri <span class="required">*</span></label>
+                    <select id="namsgrein" name="namsgrein" onchange="updateDeild()">
+                        <option value="">Veldu námsgrein...</option>
+                        <!-- Options populated by JavaScript based on age -->
+                    </select>
+                </div>
+
+                <div class="form-group" id="deildGroup" style="display: none;">
+                    <label for="deild">Deild</label>
+                    <input type="text" id="deild" name="deild" readonly disabled>
+                </div>
+
+                <!-- Aðalfag - birtist aðeins þegar Skapandi tónlist er valið -->
+                <div class="form-group hidden" id="adafagGroup">
+                    <label for="adafag">Aðalfag <span class="required">*</span></label>
+                    <p class="field-description">Nemendur sem stunda nám í skapandi tónlist þurfa að velja sér aðalfag sem þau fá einkatíma í hjá umsjónarkennara/leiðbeinanda sínum. Hér getur þú valið það sem þú vilt leggja áherslu á í náminu.</p>
+                    <select id="adafag" name="adafag">
+                        <option value="">Veldu aðalfag...</option>
+                    </select>
+                </div>
+
+                <!-- Heilt/Hálft nám -->
+                <div class="form-group" id="namshlutiGroup">
+                    <label>Námshlutfall</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="heiltNam" name="namshlutfall" value="heilt" checked>
+                            <label for="heiltNam">Heilt nám</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="halftNam" name="namshlutfall" value="halft">
+                            <label for="halftNam">Hálft nám</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stúdentsprófsbraut - only for 15+ -->
+                <div class="form-group hidden" id="studentsprofGroup">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="studentsprof" name="studentsprof">
+                        <label for="studentsprof">Ég sæki um á stúdentsprófsbraut</label>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" onclick="goToStep(3)">Til baka</button>
+                    <button type="button" class="btn btn-primary" onclick="goToStep(5)">Áfram</button>
+                </div>
+            </div>
+
+            <!-- Step 5: Staðfesting -->
+            <div class="form-step" data-step="5">
+                <h2 class="step-title">Staðfesting</h2>
+                <p class="step-description">Vinsamlegast farðu yfir og samþykktu viðskiptaskilmála.</p>
+
+                <div class="terms-box">
+                    <h4>Viðskiptaskilmálar</h4>
+                    <p>Gjaldskrá skólans er háð ákvörðunum bæjarsjóðs um gjaldskrárhækkanir. Tónlistarskólinn á Akureyri áskilur sér rétt til hækkunar skóla- og hljóðfæraleigugjalda á samningstímanum í samræmi við ákvarðanir bæjarsjóðs.</p>
+                    <p>Skólagjöld tónlistarskólans eru greidd fyrir eina önn í einu en til hagræðingar fyrir greiðendur dreifast greiðslur skólagjalda á 4 jafnar greiðslur fyrir hverja önn með gjalddaga ca. 15. ág., 15.sept., 15. okt., 15. nóv. fyrir haustönn og gjalddaga 15. jan., 15. feb., 15. mars, 15. apríl fyrir vorönn.</p>
+                    <p>Einungis er mögulegt að segja upp samningi einu sinni á ári, frá og með áramótum og rennur uppsagnarfrestur fyrir vorönn út 1. nóvember ár hvert. Til þess að uppsögn sé gild verður að segja samningi upp skriflega með tölvupósti á netfangið tonak@tonak.is.</p>
+                    <p>Undantekning frá þessu eru nemendur í framhaldsnámi á hljóðfæri og nemendur í mið og framhaldsnámi í söng. Þessir nemendur geta ekki sagt upp námi og skólavist þeirra er bundin fyrir allt skólaárið með þessari umsókn.</p>
+                    <p>Tónlistarskólinn á Akureyri áskilur sér birtingar- og dreifingarrétt á öllu því hljóð- og myndefni sem tekið er upp af nemendum skólans á viðburðum sem skólinn stendur fyrir sem og í kennslustundum.</p>
+                    <p>Með því að senda inn umsókn í Tónlistarskólann á Akureyri samþykkir umsækjandi þá skilmála sem birtast í skjali þessu sem og gjaldskrá skólans og taka skilmálarnir gildi strax og umsækjandi hefur fengið staðfestingu á námsvist.</p>
+                </div>
+
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="samthykkiSkilmala" name="samthykkiSkilmala" required>
+                        <label for="samthykkiSkilmala">Ég samþykki <strong>viðskiptaskilmála</strong> Tónlistarskólans á Akureyri <span class="required">*</span></label>
+                    </div>
+
+                    <div class="checkbox-item" id="fristundastyrksGroup">
+                        <input type="checkbox" id="fristundastyrkur" name="fristundastyrkur">
+                        <label for="fristundastyrkur">Ég óska eftir að nota frístundastyrk <span class="optional">(6-18 ára)</span></label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="myndefni" name="myndefni">
+                        <label for="myndefni">Ég samþykki að myndefni sem tekið er upp af nemanda megi nota á upplýsingasíðum skólans</label>
+                    </div>
+
+                    <div class="checkbox-item hidden" id="hljodfaraleiguGroup">
+                        <input type="checkbox" id="hljodfaraleiga" name="hljodfaraleiga">
+                        <label for="hljodfaraleiga">Ég óska eftir hljóðfæraleigu</label>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" onclick="goToStep(4)">Til baka</button>
+                    <button type="button" class="btn btn-primary" id="btnSubmit" onclick="submitForm()">Senda umsókn</button>
+                </div>
+            </div>
+
+            <!-- Success -->
+            <div class="form-step" data-step="success">
+                <div class="success-message">
+                    <div class="success-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h2>Umsókn móttekin!</h2>
+                    <p>Takk fyrir umsóknina. Við munum hafa samband við þig fljótlega.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // =============================================
+        // GLOBAL STATE
+        // =============================================
+        let currentStep = 'start';
+        let applicationMode = null; // 'new' or 'renewal'
+        let studentAge = null;
+        let studentAgeGroup = null;
+        let studentBekkur = null;
+        let contactCount = 1;
+        let renewalStudentData = null; // Stores student data for renewal
+
+        // =============================================
+        // NÁMSGREINAR OG DEILDIR
+        // Hver námsgrein hefur ákveðna deild og aldurs-/bekkjarskilyrði
+        // hideNamshlutfall: true = ekki sýna heilt/hálft nám val
+        // needsDepartmentChoice: true = fag er í boði í bæði klassískri og rytmískri deild
+        // 
+        // Aldursreglur:
+        // - 0-1 árs: Krútt Tónó einungis
+        // - 1-2 ára: Ekkert í boði (biðlisti)
+        // - 3-5 ára: Suzuki einungis
+        // - 1. bekkur: Forskóli, Suzuki
+        // - 2. bekkur: Forskóli, Hringekja, Suzuki
+        // - 3.-4. bekkur: Hringekja, Suzuki, öll hljóðfæri (nema söngur og skapandi)
+        // - 5.-10. bekkur: Barna- og unglingasöngdeild (ef söngur), öll hljóðfæri (nema skapandi)
+        // - 15+ ára: Allt + Skapandi tónlist
+        // =============================================
+        
+        // Fög sem eru í báðum deildum - þarf að spyrja notanda
+        const dualDepartmentSubjects = {
+            'Söngur': {
+                question: 'Vilt þú sækja um klassískan söng eða jazz- og dægurlagasöng?',
+                infoLink: 'https://www.tonak.is/is/hljodfaeri#songur',
+                klassiskName: 'Klassískur söngur',
+                rytmiskName: 'Dægursöngur'
+            },
+            'Trommur': {
+                question: 'Vilt þú sækja um hefðbundið trommu-/slagverksnám eða trommur í djass- og dægurlagadeild?',
+                infoLink: 'https://www.tonak.is/is/hljodfaeri#slagverk',
+                klassiskName: 'Trommur og slagverk',
+                rytmiskName: 'Trommur - Jazz og dægurlagatónlist'
+            },
+            'Kontrabass': {
+                question: 'Vilt þú sækja um klassískt kontrabassanám eða kontrabassa í djass- og dægurlagatónlist?',
+                infoLink: 'https://www.tonak.is/is/namid/afanganam',
+                klassiskName: 'Kontrabass',
+                rytmiskName: 'Kontrabass - Jazz og dægurlagatónlist'
+            },
+            'Gítar': {
+                question: 'Vilt þú sækja um klassískt gítarnám eða rafgítarnám?',
+                infoLink: 'https://www.tonak.is/is/hljodfaeri#gitar',
+                klassiskName: 'Gítar',
+                rytmiskName: 'Gítar - Rafgítar'
+            },
+            'Saxófónn': {
+                question: 'Vilt þú sækja um klassískt saxófónnám eða nám í jazz- og dægurlagadeild?',
+                infoLink: 'https://www.tonak.is/is/namid/afanganam',
+                klassiskName: 'Saxófónn',
+                rytmiskName: 'Saxófónn - Jazz og dægurlagatónlist'
+            },
+            'Píanó': {
+                question: 'Vilt þú sækja um klassískt píanónám eða píanónám í djass- og dægurlagatónlist?',
+                infoLink: 'https://www.tonak.is/is/namid/afanganam',
+                klassiskName: 'Píanó',
+                rytmiskName: 'Píanó - dægurlagatónlist'
+            }
+        };
+        
+        const namsgreinar = [
+            // Krútt Tónó - Ungbarnatónlist (0-1 árs)
+            { name: 'Krútt Tónó - Ungbarnatónlist', deild: 'Forskóladeild', minAgeMonths: 0, maxAgeMonths: 23, useMonths: true, hideNamshlutfall: true },
+            
+            // Forskóli (1.-2. bekkur, þ.e. 6-7 ára)
+            { name: 'Forskóli', deild: 'Forskóladeild', minBekkur: 1, maxBekkur: 2, useBekkur: true, hideNamshlutfall: true },
+            
+            // Hringekja (2.-4. bekkur, þ.e. 7-9 ára)
+            { name: 'Hringekja', deild: 'Forskóladeild', minBekkur: 2, maxBekkur: 4, useBekkur: true, hideNamshlutfall: true },
+            
+            // Suzuki deild (3 ára og eldri)
+            { name: 'Suzukifiðla', deild: 'Suzuki deild', minAge: 3, maxAge: 99, hideNamshlutfall: true },
+            { name: 'Suzukikontrabass', deild: 'Suzuki deild', minAge: 3, maxAge: 99, hideNamshlutfall: true },
+            { name: 'Suzukípíanó', deild: 'Suzuki deild', minAge: 3, maxAge: 99, hideNamshlutfall: true },
+            { name: 'Suzukiselló', deild: 'Suzuki deild', minAge: 3, maxAge: 99, hideNamshlutfall: true },
+            { name: 'Suzukivióla', deild: 'Suzuki deild', minAge: 3, maxAge: 99, hideNamshlutfall: true },
+            
+            // Barna- og unglingasöngdeild (5.-10. bekkur fyrir söng)
+            { name: 'Barna- og unglingasöngdeild', deild: 'Barna- og unglingasöngdeild', minBekkur: 5, maxBekkur: 10, useBekkur: true, isSongur: true },
+            
+            // Fög sem eru í báðum deildum - sýna eitt nafn, spyrja um deild
+            { name: 'Söngur', deild: null, minAge: 15, maxAge: 99, needsDepartmentChoice: true },
+            { name: 'Trommur', deild: null, minBekkur: 3, maxBekkur: 99, useBekkur: true, needsDepartmentChoice: true },
+            { name: 'Kontrabass', deild: null, minBekkur: 3, maxBekkur: 99, useBekkur: true, needsDepartmentChoice: true },
+            { name: 'Gítar', deild: null, minBekkur: 3, maxBekkur: 99, useBekkur: true, needsDepartmentChoice: true },
+            { name: 'Saxófónn', deild: null, minBekkur: 3, maxBekkur: 99, useBekkur: true, needsDepartmentChoice: true },
+            { name: 'Píanó', deild: null, minBekkur: 3, maxBekkur: 99, useBekkur: true, needsDepartmentChoice: true },
+            
+            // Klassísk deild - hljóðfæri sem eru EINGÖNGU klassísk (frá 3. bekk / 8 ára)
+            { name: 'Alt horn', deild: 'Klassísk deild', minBekkur: 3, maxBekkur: 99, useBekkur: true },
+            { name: 'Altflauta', deild: 'Klassísk deild', minBekkur: 3, maxBekkur: 99, useBekkur: true },
+            { name: 'Barítónhorn', deild: 'Klassísk deild', minBekkur: 3, maxBekkur: 99, useBekkur: true },
+            { name: 'Básúna', deild: 'Klassísk deild', minBekkur: 3, maxBekkur: 99, useBekkur: true },
+            { name: 'Fiðla', deild: 'Klassísk deild', minBekkur: 3, maxBekkur: 99, useBekkur: true },
+            { name: 'Franskt horn', deild: 'Klassísk deild', minBekkur: 3, maxBekkur: 99, useBekkur: true },
+            { name: 'Harmónika', deild: 'Klassísk deild', minBekkur: 3, maxBekkur: 99, useBekkur: true },
+            { name: 'Klarinetta', deild: 'Klassísk deild', minBekkur: 3, maxBekkur: 99, useBekkur: true },
+            { name: 'Kornett', deild: 'Klassísk deild', minBekkur: 3, maxBekkur: 99, useBekkur: true },
+            { name: 'Orgel', deild: 'Klassísk deild', minBekkur: 3, maxBekkur: 99, useBekkur: true },
+            { name: 'Óbó', deild: 'Klassísk deild', minBekkur: 3, maxBekkur: 99, useBekkur: true },
+            { name: 'Selló', deild: 'Klassísk deild', minBekkur: 3, maxBekkur: 99, useBekkur: true },
+            { name: 'Trompet', deild: 'Klassísk deild', minBekkur: 3, maxBekkur: 99, useBekkur: true },
+            { name: 'Túba', deild: 'Klassísk deild', minBekkur: 3, maxBekkur: 99, useBekkur: true },
+            { name: 'Vióla', deild: 'Klassísk deild', minBekkur: 3, maxBekkur: 99, useBekkur: true },
+            { name: 'Þverflauta', deild: 'Klassísk deild', minBekkur: 3, maxBekkur: 99, useBekkur: true },
+            
+            // Rytmísk deild - hljóðfæri sem eru EINGÖNGU rytmísk (frá 3. bekk / 8 ára)
+            { name: 'Rafbassi', deild: 'Rytmísk deild', minBekkur: 3, maxBekkur: 99, useBekkur: true },
+            
+            // Skapandi tónlist (15 ára og eldri - framhaldsskólaaldur) - ein námsgrein
+            { name: 'Skapandi tónlist', deild: 'Skapandi tónlist', minAge: 15, maxAge: 99, hideNamshlutfall: true, needsAdafag: true }
+        ];
+        
+        // Aðalfög fyrir Skapandi tónlist
+        const adafogSkapandiTonlist = [
+            // Klassísk deild
+            'Alt horn',
+            'Altflauta',
+            'Barítónhorn',
+            'Básúna',
+            'Fiðla',
+            'Franskt horn',
+            'Gítar',
+            'Harmónika',
+            'Klarinetta',
+            'Klassískur söngur',
+            'Kontrabass',
+            'Kornett',
+            'Orgel',
+            'Óbó',
+            'Píanó',
+            'Saxófónn',
+            'Selló',
+            'Trommur og slagverk',
+            'Trompet',
+            'Túba',
+            'Vióla',
+            'Þverflauta',
+            // Rytmísk deild
+            'Dægursöngur',
+            'Gítar - Rafgítar',
+            'Píanó - dægurlagatónlist',
+            'Rafbassi',
+            'Trommur - Jazz og dægurlagatónlist',
+            'Saxófónn - Jazz og dægurlagatónlist',
+            'Kontrabass - Jazz og dægurlagatónlist',
+            // Sérstakt fyrir Skapandi tónlist
+            'Hljóðvinnsla og tónlistarsköpun'
+        ];
+        
+        // Hljóðfæri sem hægt er að leigja
+        const hljodfariFyrirLeigu = [
+            'Vióla',
+            'Alt horn',
+            'Altflauta',
+            'Barítónhorn',
+            'Básúna',
+            'Fiðla',
+            'Franskt horn',
+            'Harmónika',
+            'Klarinetta',
+            'Kornett',
+            'Óbó',
+            'Selló',
+            'Túba',
+            'Saxófónn',
+            'Þverflauta',
+            'Kontrabass',
+            'Rafbassi',
+            'Suzukifiðla',
+            'Suzukikontrabass',
+            'Suzukiselló',
+            'Suzukivióla',
+            // Einnig rytmísk útgáfa
+            'Saxófónn - Jazz og dægurlagatónlist',
+            'Kontrabass - Jazz og dægurlagatónlist'
+        ];
+        
+        // Skólalistar
+        const grunnskolar = [
+            'Lundarskóli',
+            'Giljaskóli',
+            'Brekkuskóli',
+            'Naustaskóli',
+            'Síðuskóli',
+            'Glerárskóli',
+            'Oddeyrarskóli',
+            'Hlíðarskóli',
+            'Annað'
+        ];
+        
+        const framhaldsskolar = [
+            'Menntaskólinn á Akureyri',
+            'Verkmenntaskólinn á Akureyri',
+            'Framhaldsskólinn á Húsavík',
+            'Framhaldsskólinn á Laugum',
+            'Menntaskólinn á Tröllaskaga',
+            'Er ekki í framhaldsskóla',
+            'Annað'
+        ];
+
+        // =============================================
+        // ALDURSÚTREIKNINGUR ÚR KENNITÖLU
+        // =============================================
+        function parseKennitala(kt) {
+            if (!kt || kt.length !== 10 || !/^\d{10}$/.test(kt)) {
+                return null;
+            }
+
+            const day = parseInt(kt.substring(0, 2));
+            const month = parseInt(kt.substring(2, 4));
+            const yearShort = parseInt(kt.substring(4, 6));
+            const centuryDigit = parseInt(kt.substring(9, 10));
+
+            let century;
+            if (centuryDigit === 0) {
+                century = 2000;
+            } else if (centuryDigit === 9) {
+                century = 1900;
+            } else if (centuryDigit === 8) {
+                century = 1800;
+            } else {
+                return null; // Ógild kennitala
+            }
+
+            const year = century + yearShort;
+            
+            // Athuga hvort dagsetning sé gild
+            const birthDate = new Date(year, month - 1, day);
+            if (birthDate.getDate() !== day || birthDate.getMonth() !== month - 1) {
+                return null;
+            }
+
+            return {
+                day,
+                month,
+                year,
+                birthDate
+            };
+        }
+
+        function calculateAge(birthDate) {
+            const today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const monthDiff = today.getMonth() - birthDate.getMonth();
+            
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            
+            return age;
+        }
+
+        function calculateAgeAtEndOfYear(birthDate) {
+            const currentYear = new Date().getFullYear();
+            return currentYear - birthDate.getFullYear();
+        }
+
+        function getAgeGroup(birthDate) {
+            const exactAge = calculateAge(birthDate);
+            const ageAtEndOfYear = calculateAgeAtEndOfYear(birthDate);
+            
+            // 18+ miðast við nákvæman aldur (frá afmælisdegi)
+            if (exactAge >= 18) {
+                return { group: '18+', label: '18 ára og eldri', minors: false };
+            }
+            
+            // Yngri aldurshópar miðast við almanaksár
+            if (ageAtEndOfYear >= 16) {
+                return { group: '16-17', label: '16-17 ára', minors: true };
+            }
+            
+            if (ageAtEndOfYear >= 6) {
+                return { group: '6-15', label: '6-15 ára (grunnskólaaldur)', minors: true };
+            }
+            
+            return { group: '0-5', label: '0-5 ára (forskólaaldur)', minors: true };
+        }
+        
+        // Reikna bekk út frá fæðingarári
+        // Börn fædd árið X hefja nám í 1. bekk þegar þau verða 6 ára á almanaksárinu
+        function calculateBekkur(birthDate) {
+            const currentYear = new Date().getFullYear();
+            const birthYear = birthDate.getFullYear();
+            const ageAtEndOfYear = currentYear - birthYear;
+            
+            // Ef yngri en 6 ára á árinu → ekki byrjað í grunnskóla
+            if (ageAtEndOfYear < 6) {
+                return 0; // Ekki í grunnskóla
+            }
+            
+            // Bekkur = aldur á árinu - 5
+            // 6 ára = 1. bekkur, 7 ára = 2. bekkur, osfrv.
+            const bekkur = ageAtEndOfYear - 5;
+            
+            // Ef eldri en 10. bekkur (15 ára+) → framhaldsskólaaldur
+            if (bekkur > 10) {
+                return 11; // Merkir framhaldsskólaaldur
+            }
+            
+            return bekkur;
+        }
+        
+        // Reikna aldur í mánuðum (fyrir ungbarnatónlist)
+        function calculateAgeInMonths(birthDate) {
+            const today = new Date();
+            const months = (today.getFullYear() - birthDate.getFullYear()) * 12;
+            return months + today.getMonth() - birthDate.getMonth();
+        }
+        
+        // Athuga hvort námsgrein sé í boði fyrir nemanda
+        function isNamsgreinAvailable(namsgrein, birthDate) {
+            const exactAge = calculateAge(birthDate);
+            const ageAtEndOfYear = calculateAgeAtEndOfYear(birthDate);
+            const bekkur = calculateBekkur(birthDate);
+            const ageInMonths = calculateAgeInMonths(birthDate);
+            
+            // Ef námsgrein notar mánaðaaldur (ungbarnatónlist)
+            if (namsgrein.useMonths) {
+                return ageInMonths >= namsgrein.minAgeMonths && ageInMonths <= namsgrein.maxAgeMonths;
+            }
+            
+            // Ef námsgrein notar bekk
+            if (namsgrein.useBekkur) {
+                return bekkur >= namsgrein.minBekkur && bekkur <= namsgrein.maxBekkur;
+            }
+            
+            // Annars notar aldur
+            return ageAtEndOfYear >= namsgrein.minAge && ageAtEndOfYear <= namsgrein.maxAge;
+        }
+        
+        // Athuga hvort ekkert nám sé í boði (1-2 ára)
+        function isNoCoursesAvailable(birthDate) {
+            const ageInMonths = calculateAgeInMonths(birthDate);
+            // 12-35 mánaða = 1-2 ára, ekkert í boði
+            return ageInMonths >= 12 && ageInMonths < 36;
+        }
+
+        // =============================================
+        // START SCREEN AND NAVIGATION
+        // =============================================
+        function goToStart() {
+            // Hide all steps
+            document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
+            
+            // Show start screen
+            document.querySelector('.form-step[data-step="start"]').classList.add('active');
+            
+            // Hide progress
+            document.getElementById('progressContainer').style.display = 'none';
+            
+            currentStep = 'start';
+            applicationMode = null;
+        }
+
+        function startNewApplication() {
+            applicationMode = 'new';
+            
+            // Show progress
+            document.getElementById('progressContainer').style.display = 'block';
+            
+            // Go to step 1
+            goToStep(1);
+        }
+
+        function startRenewal() {
+            applicationMode = 'renewal';
+            
+            // Hide progress for renewal flow
+            document.getElementById('progressContainer').style.display = 'none';
+            
+            // Go to renewal step 1
+            goToStep('renewal-1');
+        }
+
+        function searchForRenewal() {
+            const kt = document.getElementById('renewalKennitala').value;
+            const notFoundMessage = document.getElementById('renewalNotFound');
+            const searchBtn = document.getElementById('btnSearchRenewal');
+            
+            // Disable button while searching
+            searchBtn.disabled = true;
+            searchBtn.textContent = 'Leita...';
+            
+            // Power Automate URL for TA-CheckKennitala
+            const checkKennitalaUrl = 'https://121760ab7a04ebae8bbd23b81b7a3b.4e.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/769a62a47d8247ae88a1b24a50650bfd/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=0Zj9fqOg6hOHJ29j-VQTQIZRntS7NBEyBf7Qn9-Ni2w';
+            
+            fetch(checkKennitalaUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ kennitala: kt })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Check kennitala response:', data);
+                
+                if (data.exists && data.student) {
+                    // Student found - store data
+                    renewalStudentData = {
+                        id: data.student.ID || data.student.Id,
+                        kennitala: kt,
+                        nafn: data.student.Nafn || data.student.Title || 'Óþekkt',
+                        namsgrein: data.student.Namsgrein || 'Óþekkt'
+                    };
+                    
+                    // Update display
+                    document.getElementById('renewalStudentName').textContent = renewalStudentData.nafn;
+                    document.getElementById('renewalStudentSubject').textContent = renewalStudentData.namsgrein;
+                    
+                    notFoundMessage.classList.add('hidden');
+                    goToStep('renewal-2');
+                } else {
+                    // Student not found
+                    notFoundMessage.classList.remove('hidden');
+                }
+                
+                // Re-enable button
+                searchBtn.disabled = false;
+                searchBtn.textContent = 'Leita';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showValidationError('Villa kom upp við leit. Vinsamlegast reyndu aftur.');
+                
+                // Re-enable button
+                searchBtn.disabled = false;
+                searchBtn.textContent = 'Leita';
+            });
+        }
+
+        function confirmRenewal() {
+            goToStep('renewal-confirm');
+        }
+
+        function requestChanges() {
+            goToStep('renewal-changes');
+        }
+
+        function submitRenewal() {
+            const email = document.getElementById('renewalEmail').value;
+            const notes = document.getElementById('renewalNotes').value;
+            const terms = document.getElementById('renewalSamthykkiSkilmala').checked;
+            
+            let errors = [];
+            
+            if (!terms) {
+                errors.push('• Þú verður að samþykkja viðskiptaskilmála');
+            }
+            if (!email.trim()) {
+                errors.push('• Netfang fyrir staðfestingu er nauðsynlegt');
+            } else if (!isValidEmail(email)) {
+                errors.push('• Netfang er ekki á réttu formi (dæmi: nafn@dæmi.is)');
+            }
+            
+            if (errors.length > 0) {
+                showValidationError('Vinsamlegast lagfærðu eftirfarandi:\n\n' + errors.join('\n'));
+                return;
+            }
+            
+            // Disable button
+            const submitBtn = document.querySelector('.form-step[data-step="renewal-confirm"] .btn-primary');
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sendi umsókn...';
+            }
+            
+            const formData = {
+                kennitala: renewalStudentData.kennitala,
+                nafn: renewalStudentData.nafn,
+                tegund: 'Endurnýjun',
+                namsgrein: renewalStudentData.namsgrein || '',
+                deild: '',
+                namshlutfall: '',
+                studentsprof: false,
+                skoli: '',
+                fristundastyrkur: document.getElementById('renewalFristundastyrkur')?.checked || false,
+                hljodfaraleiga: document.getElementById('renewalHljodfaraleiga')?.checked || false,
+                myndefni: document.getElementById('renewalMyndefni')?.checked || false,
+                netfangNemanda: email,
+                simiNemanda: '',
+                athugasemdNemanda: notes,
+                adafagSkapandi: '',
+                tengiliður1Nafn: '',
+                tengiliður1Kennitala: '',
+                tengiliður1Simi: '',
+                tengiliður1Netfang: '',
+                tengiliður1Greidandi: false,
+                tengiliður2Nafn: '',
+                tengiliður2Kennitala: '',
+                tengiliður2Simi: '',
+                tengiliður2Netfang: '',
+                tengiliður2Greidandi: false
+            };
+            
+            // Power Automate URL
+            const powerAutomateUrl = 'https://121760ab7a04ebae8bbd23b81b7a3b.4e.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/1b59cccd3fd64e189663b60d6d1697a1/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=9mYPS9IyuTu1fncoIQt1ZR-ErOOV_SWAE5fWZshW1xc';
+            
+            fetch(powerAutomateUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Villa við að senda umsókn');
+                return response.json();
+            })
+            .then(data => {
+                console.log('Renewal success:', data);
+                goToStep('success');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showValidationError('Villa kom upp við að senda umsókn. Vinsamlegast reyndu aftur.');
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Senda umsókn';
+                }
+            });
+        }
+
+        function submitChangeRequest() {
+            const email = document.getElementById('changeEmail').value;
+            const notes = document.getElementById('changeNotes').value;
+            const terms = document.getElementById('changeSamthykkiSkilmala').checked;
+            
+            const changes = [];
+            if (document.getElementById('changeInstrument').checked) changes.push('Skipta um hljóðfæri');
+            if (document.getElementById('changeTeacher').checked) changes.push('Skipta um kennara');
+            if (document.getElementById('changeRatio').checked) changes.push('Breyta námshlutfalli');
+            if (document.getElementById('changeOther').checked) changes.push('Annað');
+            
+            // Validation with specific messages
+            let errors = [];
+            
+            if (changes.length === 0) {
+                errors.push('• Veldu að minnsta kosti eina tegund breytingar');
+            }
+            if (!notes.trim()) {
+                errors.push('• Lýsing á breytingum er nauðsynleg');
+            }
+            if (!terms) {
+                errors.push('• Þú verður að samþykkja viðskiptaskilmála');
+            }
+            if (!email.trim()) {
+                errors.push('• Netfang fyrir staðfestingu er nauðsynlegt');
+            } else if (!isValidEmail(email)) {
+                errors.push('• Netfang er ekki á réttu formi (dæmi: nafn@dæmi.is)');
+            }
+            
+            if (errors.length > 0) {
+                showValidationError('Vinsamlegast lagfærðu eftirfarandi:\n\n' + errors.join('\n'));
+                return;
+            }
+            
+            // Disable button
+            const submitBtn = document.querySelector('.form-step[data-step="renewal-changes"] .btn-primary');
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sendi umsókn...';
+            }
+            
+            // Combine changes and notes
+            const fullNotes = 'Óskað eftir breytingum: ' + changes.join(', ') + '\n\nLýsing: ' + notes;
+            
+            const formData = {
+                kennitala: renewalStudentData.kennitala,
+                nafn: renewalStudentData.nafn,
+                tegund: 'Breyting',
+                namsgrein: renewalStudentData.namsgrein || '',
+                deild: '',
+                namshlutfall: '',
+                studentsprof: false,
+                skoli: '',
+                fristundastyrkur: document.getElementById('changeFristundastyrkur')?.checked || false,
+                hljodfaraleiga: document.getElementById('changeHljodfaraleiga')?.checked || false,
+                myndefni: document.getElementById('changeMyndefni')?.checked || false,
+                netfangNemanda: email,
+                simiNemanda: '',
+                athugasemdNemanda: fullNotes,
+                adafagSkapandi: '',
+                tengiliður1Nafn: '',
+                tengiliður1Kennitala: '',
+                tengiliður1Simi: '',
+                tengiliður1Netfang: '',
+                tengiliður1Greidandi: false,
+                tengiliður2Nafn: '',
+                tengiliður2Kennitala: '',
+                tengiliður2Simi: '',
+                tengiliður2Netfang: '',
+                tengiliður2Greidandi: false
+            };
+            
+            // Power Automate URL
+            const powerAutomateUrl = 'https://121760ab7a04ebae8bbd23b81b7a3b.4e.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/1b59cccd3fd64e189663b60d6d1697a1/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=9mYPS9IyuTu1fncoIQt1ZR-ErOOV_SWAE5fWZshW1xc';
+            
+            fetch(powerAutomateUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Villa við að senda umsókn');
+                return response.json();
+            })
+            .then(data => {
+                console.log('Change request success:', data);
+                goToStep('success');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showValidationError('Villa kom upp við að senda umsókn. Vinsamlegast reyndu aftur.');
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Senda umsókn';
+                }
+            });
+        }
+
+        // =============================================
+        // FORM NAVIGATION
+        // =============================================
+        function goToStep(step) {
+            // Handle renewal steps (strings) vs new application steps (numbers)
+            const isRenewalStep = typeof step === 'string' && step.startsWith('renewal');
+            const isSuccessStep = step === 'success';
+            
+            // Validate current step before moving forward (only for new applications)
+            if (applicationMode === 'new' && typeof step === 'number' && typeof currentStep === 'number') {
+                if (step > currentStep && !validateStep(currentStep)) {
+                    return;
+                }
+            }
+
+            // Hide current step
+            document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+            
+            // Show new step
+            const newStepEl = document.querySelector(`.form-step[data-step="${step}"]`);
+            if (newStepEl) {
+                newStepEl.classList.add('active');
+            }
+            
+            currentStep = step;
+            
+            // Update progress (only for new applications)
+            if (applicationMode === 'new' && typeof step === 'number') {
+                updateProgress();
+                updateStepContent();
+            }
+            
+            // Show/hide progress container
+            if (isRenewalStep || step === 'start') {
+                document.getElementById('progressContainer').style.display = 'none';
+            } else if (applicationMode === 'new' && typeof step === 'number') {
+                document.getElementById('progressContainer').style.display = 'block';
+            }
+            
+            // Handle success step
+            if (isSuccessStep) {
+                document.getElementById('progressContainer').style.display = 'none';
+            }
+        }
+
+        function updateProgress() {
+            const indicators = document.querySelectorAll('.step-indicator');
+            const labels = document.querySelectorAll('.step-label');
+            const progressLine = document.getElementById('progressLine');
+            
+            indicators.forEach((ind, idx) => {
+                const stepNum = idx + 1;
+                ind.classList.remove('active', 'completed');
+                labels[idx].classList.remove('active');
+                
+                if (stepNum < currentStep) {
+                    ind.classList.add('completed');
+                    ind.innerHTML = '✓';
+                } else if (stepNum === currentStep) {
+                    ind.classList.add('active');
+                    ind.innerHTML = stepNum;
+                    labels[idx].classList.add('active');
+                } else {
+                    ind.innerHTML = stepNum;
+                }
+            });
+
+            // Update progress line
+            const progress = ((currentStep - 1) / 4) * 100;
+            progressLine.style.width = `${progress}%`;
+        }
+
+        function updateStepContent() {
+            // Update step 2: Show/hide school field based on age and populate dropdown
+            const skoliSection = document.getElementById('skoliSection');
+            const skoliLabel = document.getElementById('skoliLabel');
+            const studentsprofInStep2 = document.getElementById('studentsprofStep2Group');
+            
+            if (studentBekkur !== null || studentAge !== null) {
+                if (studentBekkur >= 1 && studentBekkur <= 10) {
+                    // Grunnskólaaldur (6-15 ára)
+                    skoliSection.classList.remove('hidden');
+                    skoliLabel.textContent = 'Grunnskóli';
+                    if (studentsprofInStep2) studentsprofInStep2.classList.add('hidden');
+                    populateSkolar();
+                } else if (studentAge >= 15 && studentAge <= 24) {
+                    // Framhaldsskólaaldur (15-24 ára)
+                    skoliSection.classList.remove('hidden');
+                    skoliLabel.textContent = 'Framhaldsskóli';
+                    if (studentsprofInStep2) studentsprofInStep2.classList.remove('hidden');
+                    populateSkolar();
+                } else {
+                    // Yngri en 6 ára eða eldri en 24 ára
+                    skoliSection.classList.add('hidden');
+                    if (studentsprofInStep2) studentsprofInStep2.classList.add('hidden');
+                }
+            }
+
+            // Update step 3: Show appropriate contact section
+            const selfContactInfo = document.getElementById('selfContactInfo');
+            const contactsContainer = document.getElementById('contactsContainer');
+            const btnAddContact = document.getElementById('btnAddContact');
+            const contactDescription = document.getElementById('contactDescription');
+
+            if (studentAgeGroup && !studentAgeGroup.minors) {
+                // 18+ - nemandi er sjálfur tengiliður
+                selfContactInfo.classList.remove('hidden');
+                contactsContainer.classList.add('hidden');
+                btnAddContact.classList.add('hidden');
+                contactDescription.textContent = 'Þar sem þú ert 18 ára eða eldri ertu sjálfur tengiliður og greiðandi.';
+            } else {
+                selfContactInfo.classList.add('hidden');
+                contactsContainer.classList.remove('hidden');
+                btnAddContact.classList.remove('hidden');
+                contactDescription.textContent = 'Vinsamlegast skráðu upplýsingar um forráðamann/forráðamenn.';
+            }
+
+            // Update step 4: Populate námsgreinar based on age
+            if (currentStep === 4) {
+                populateNamsgreinar();
+            }
+
+            // Hide stúdentsprófsbraut in step 4 (moved to step 2)
+            const studentsprofGroup = document.getElementById('studentsprofGroup');
+            if (studentsprofGroup) {
+                studentsprofGroup.classList.add('hidden');
+            }
+            
+            // Update step 5: Show/hide frístundastyrk based on age (6-18 ára)
+            const fristundastyrksGroup = document.getElementById('fristundastyrksGroup');
+            if (fristundastyrksGroup) {
+                if (studentAge >= 6 && studentAge < 18) {
+                    fristundastyrksGroup.classList.remove('hidden');
+                } else {
+                    fristundastyrksGroup.classList.add('hidden');
+                    // Uncheck if hidden
+                    document.getElementById('fristundastyrkur').checked = false;
+                }
+            }
+        }
+
+        // =============================================
+        // DEILDIR OG NÁMSGREINAR
+        // =============================================
+        function populateNamsgreinar() {
+            const namsgreinSelect = document.getElementById('namsgrein');
+            const ktValue = document.getElementById('kennitala').value;
+            const parsed = parseKennitala(ktValue);
+            const noCoursesMessage = document.getElementById('noCoursesMessage');
+            const namshlutiGroup = document.getElementById('namshlutiGroup');
+            
+            if (!parsed) return;
+            
+            namsgreinSelect.innerHTML = '<option value="">Veldu námsgrein...</option>';
+            
+            // Athuga hvort ekkert nám sé í boði (1-2 ára)
+            if (isNoCoursesAvailable(parsed.birthDate)) {
+                namsgreinSelect.innerHTML = '<option value="">Ekkert nám í boði</option>';
+                namsgreinSelect.disabled = true;
+                if (noCoursesMessage) {
+                    noCoursesMessage.classList.remove('hidden');
+                }
+                document.getElementById('deild').value = '';
+                document.getElementById('deildGroup').style.display = 'none';
+                namshlutiGroup.classList.add('hidden');
+                return;
+            }
+            
+            namsgreinSelect.disabled = false;
+            if (noCoursesMessage) {
+                noCoursesMessage.classList.add('hidden');
+            }
+            
+            // Filter námsgreinar by age/bekkur
+            const filtered = namsgreinar
+                .filter(n => isNamsgreinAvailable(n, parsed.birthDate))
+                .sort((a, b) => a.name.localeCompare(b.name, 'is'));
+            
+            filtered.forEach(namsgrein => {
+                const option = document.createElement('option');
+                option.value = namsgrein.name;
+                option.textContent = namsgrein.name;
+                option.dataset.deild = namsgrein.deild || '';
+                option.dataset.hideNamshlutfall = namsgrein.hideNamshlutfall ? 'true' : 'false';
+                option.dataset.needsDepartmentChoice = namsgrein.needsDepartmentChoice ? 'true' : 'false';
+                namsgreinSelect.appendChild(option);
+            });
+            
+            // Athuga hvort öll fög í boði eru með hideNamshlutfall
+            const allHideNamshlutfall = filtered.every(n => n.hideNamshlutfall === true);
+            if (allHideNamshlutfall) {
+                namshlutiGroup.classList.add('hidden');
+            } else {
+                namshlutiGroup.classList.remove('hidden');
+            }
+            
+            // Reset deild
+            document.getElementById('deild').value = '';
+            document.getElementById('deildGroup').style.display = 'none';
+        }
+
+        function updateDeild() {
+            const namsgreinSelect = document.getElementById('namsgrein');
+            const selectedOption = namsgreinSelect.options[namsgreinSelect.selectedIndex];
+            const deildInput = document.getElementById('deild');
+            const deildGroup = document.getElementById('deildGroup');
+            const namshlutiGroup = document.getElementById('namshlutiGroup');
+            const adafagGroup = document.getElementById('adafagGroup');
+            const selectedName = selectedOption ? selectedOption.value : '';
+            
+            // Athuga hvort þetta fag þurfi deildarval
+            if (selectedName && dualDepartmentSubjects[selectedName]) {
+                showDepartmentChoiceModal(selectedName);
+                // Fela aðalfagsval
+                adafagGroup.classList.add('hidden');
+                return;
+            }
+            
+            // Athuga hvort þetta er Skapandi tónlist (þarf aðalfagsval)
+            if (selectedName === 'Skapandi tónlist') {
+                deildInput.value = 'Skapandi tónlist';
+                deildGroup.style.display = 'block';
+                namshlutiGroup.classList.add('hidden');
+                
+                // Sýna og fylla aðalfagsval
+                adafagGroup.classList.remove('hidden');
+                populateAdafagSelect();
+            } else {
+                // Fela aðalfagsval
+                adafagGroup.classList.add('hidden');
+                
+                if (selectedOption && selectedOption.dataset.deild) {
+                    deildInput.value = selectedOption.dataset.deild;
+                    deildGroup.style.display = 'block';
+                    
+                    // Sýna/fela námshlutfall eftir námsgrein
+                    if (selectedOption.dataset.hideNamshlutfall === 'true') {
+                        namshlutiGroup.classList.add('hidden');
+                    } else {
+                        namshlutiGroup.classList.remove('hidden');
+                    }
+                } else {
+                    deildInput.value = '';
+                    deildGroup.style.display = 'none';
+                    namshlutiGroup.classList.remove('hidden');
+                }
+            }
+            
+            // Uppfæra hljóðfæraleigu sýnileika
+            updateHljodfaraleigaVisibility();
+        }
+        
+        function populateAdafagSelect() {
+            const adafagSelect = document.getElementById('adafag');
+            adafagSelect.innerHTML = '<option value="">Veldu aðalfag...</option>';
+            
+            adafogSkapandiTonlist.forEach(fag => {
+                const option = document.createElement('option');
+                option.value = fag;
+                option.textContent = fag;
+                adafagSelect.appendChild(option);
+            });
+        }
+        
+        function updateHljodfaraleigaVisibility() {
+            const namsgreinSelect = document.getElementById('namsgrein');
+            const selectedOption = namsgreinSelect.options[namsgreinSelect.selectedIndex];
+            const hljodfaraleiguGroup = document.getElementById('hljodfaraleiguGroup');
+            const hljodfaraleigaCheckbox = document.getElementById('hljodfaraleiga');
+            
+            if (!hljodfaraleiguGroup) return;
+            
+            // Sækja valið hljóðfæri (nota actualName ef við á)
+            let selectedInstrument = selectedOption ? (selectedOption.dataset.actualName || selectedOption.value) : '';
+            
+            // Athuga hvort hljóðfærið er á listanum fyrir leigu
+            if (selectedInstrument && hljodfariFyrirLeigu.includes(selectedInstrument)) {
+                hljodfaraleiguGroup.classList.remove('hidden');
+            } else {
+                hljodfaraleiguGroup.classList.add('hidden');
+                // Afvelja ef falið
+                if (hljodfaraleigaCheckbox) {
+                    hljodfaraleigaCheckbox.checked = false;
+                }
+            }
+        }
+        
+        // Global til að halda utan um valda námsgrein og deild
+        let selectedSubjectName = null;
+        let selectedDepartment = null;
+        
+        function showDepartmentChoiceModal(subjectName) {
+            const subjectInfo = dualDepartmentSubjects[subjectName];
+            
+            let modal = document.getElementById('departmentModal');
+            
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.id = 'departmentModal';
+                modal.className = 'validation-modal';
+                document.body.appendChild(modal);
+            }
+            
+            modal.innerHTML = `
+                <div class="validation-modal-content" style="max-width: 500px;">
+                    <h3 style="font-family: var(--font-display); color: var(--color-primary); margin-bottom: 16px;">${subjectName}</h3>
+                    <p style="margin-bottom: 20px; color: var(--color-text);">${subjectInfo.question}</p>
+                    <p style="margin-bottom: 24px;">
+                        <a href="${subjectInfo.infoLink}" target="_blank" style="color: var(--color-primary);">
+                            ℹ️ Frekari upplýsingar um námið
+                        </a>
+                    </p>
+                    <div class="choice-buttons" style="flex-direction: column; gap: 12px;">
+                        <button type="button" class="btn btn-primary" style="width: 100%;" onclick="selectDepartment('${subjectName}', 'klassisk')">
+                            Klassísk deild
+                        </button>
+                        <button type="button" class="btn btn-secondary" style="width: 100%;" onclick="selectDepartment('${subjectName}', 'rytmisk')">
+                            Rytmísk deild
+                        </button>
+                    </div>
+                    <button type="button" class="btn btn-secondary" style="margin-top: 16px; width: 100%;" onclick="closeDepartmentModal()">
+                        Hætta við
+                    </button>
+                </div>
+            `;
+            
+            modal.classList.add('visible');
+        }
+        
+        function selectDepartment(subjectName, department) {
+            const subjectInfo = dualDepartmentSubjects[subjectName];
+            const deildInput = document.getElementById('deild');
+            const deildGroup = document.getElementById('deildGroup');
+            const namsgreinSelect = document.getElementById('namsgrein');
+            
+            selectedSubjectName = subjectName;
+            selectedDepartment = department;
+            
+            if (department === 'klassisk') {
+                // Uppfæra select til að sýna klassíska nafnið
+                const selectedOption = namsgreinSelect.options[namsgreinSelect.selectedIndex];
+                selectedOption.dataset.deild = 'Klassísk deild';
+                selectedOption.dataset.actualName = subjectInfo.klassiskName;
+                deildInput.value = 'Klassísk deild';
+            } else {
+                // Uppfæra select til að sýna rytmíska nafnið
+                const selectedOption = namsgreinSelect.options[namsgreinSelect.selectedIndex];
+                selectedOption.dataset.deild = 'Rytmísk deild';
+                selectedOption.dataset.actualName = subjectInfo.rytmiskName;
+                deildInput.value = 'Rytmísk deild';
+            }
+            
+            deildGroup.style.display = 'block';
+            
+            // Sýna námshlutfall fyrir þessi fög
+            document.getElementById('namshlutiGroup').classList.remove('hidden');
+            
+            // Uppfæra hljóðfæraleigu sýnileika
+            updateHljodfaraleigaVisibility();
+            
+            closeDepartmentModal();
+        }
+        
+        function closeDepartmentModal() {
+            const modal = document.getElementById('departmentModal');
+            if (modal) {
+                modal.classList.remove('visible');
+            }
+            
+            // Ef notandi hættir við, hreinsa valið
+            const namsgreinSelect = document.getElementById('namsgrein');
+            const selectedOption = namsgreinSelect.options[namsgreinSelect.selectedIndex];
+            
+            if (selectedOption && !selectedOption.dataset.deild) {
+                namsgreinSelect.value = '';
+                document.getElementById('deild').value = '';
+                document.getElementById('deildGroup').style.display = 'none';
+            }
+        }
+        
+        // Fylla inn skólalista
+        function populateSkolar() {
+            const bekkur = studentBekkur || 0;
+            const age = studentAge || 0;
+            const skoliSelect = document.getElementById('skoli');
+            const skoliAnnadGroup = document.getElementById('skoliAnnadGroup');
+            
+            if (!skoliSelect) return;
+            
+            skoliSelect.innerHTML = '<option value="">Veldu skóla...</option>';
+            
+            let skolar = [];
+            
+            if (bekkur >= 1 && bekkur <= 10) {
+                // Grunnskólaaldur
+                skolar = grunnskolar;
+            } else if (age >= 15 && age <= 24) {
+                // Framhaldsskólaaldur (15-24 ára)
+                skolar = framhaldsskolar;
+            }
+            
+            skolar.forEach(skoli => {
+                const option = document.createElement('option');
+                option.value = skoli;
+                option.textContent = skoli;
+                skoliSelect.appendChild(option);
+            });
+            
+            // Sýna/fela "Annað" skýringarreit
+            skoliSelect.addEventListener('change', function() {
+                if (this.value === 'Annað') {
+                    skoliAnnadGroup.classList.remove('hidden');
+                } else {
+                    skoliAnnadGroup.classList.add('hidden');
+                }
+            });
+        }
+
+        // =============================================
+        // TENGILIÐIR
+        // =============================================
+        function addContact() {
+            contactCount++;
+            const container = document.getElementById('contactsContainer');
+            
+            const types = ['Forráðamaður 2', 'Velunnari', 'Annar tengiliður'];
+            const typeIndex = Math.min(contactCount - 2, types.length - 1);
+            const contactType = types[typeIndex];
+            
+            const contactHtml = `
+                <div class="contact-card" id="contact${contactCount}">
+                    <div class="contact-card-header">
+                        <span class="contact-card-title">${contactType}</span>
+                        <button type="button" class="btn-remove" onclick="removeContact(${contactCount})">Fjarlægja</button>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tengilidur${contactCount}_kennitala">Kennitala</label>
+                        <input type="text" id="tengilidur${contactCount}_kennitala" name="tengilidur${contactCount}_kennitala" placeholder="0000000000" maxlength="10">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tengilidur${contactCount}_nafn">Nafn</label>
+                        <input type="text" id="tengilidur${contactCount}_nafn" name="tengilidur${contactCount}_nafn" placeholder="Sótt úr Þjóðskrá..." disabled>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="tengilidur${contactCount}_simi1">Símanúmer 1</label>
+                            <input type="tel" id="tengilidur${contactCount}_simi1" name="tengilidur${contactCount}_simi1" placeholder="000-0000">
+                        </div>
+                        <div class="form-group">
+                            <label for="tengilidur${contactCount}_simi2">Símanúmer 2 <span class="optional">(valkvætt)</span></label>
+                            <input type="tel" id="tengilidur${contactCount}_simi2" name="tengilidur${contactCount}_simi2" placeholder="000-0000">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tengilidur${contactCount}_netfang">Netfang</label>
+                        <input type="email" id="tengilidur${contactCount}_netfang" name="tengilidur${contactCount}_netfang" placeholder="netfang@dæmi.is">
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="tengilidur${contactCount}_greidandi" name="tengilidur${contactCount}_greidandi">
+                        <label for="tengilidur${contactCount}_greidandi">Þessi tengiliður er greiðandi</label>
+                    </div>
+                </div>
+            `;
+            
+            container.insertAdjacentHTML('beforeend', contactHtml);
+            
+            // Hide add button if max contacts reached
+            if (contactCount >= 4) {
+                document.getElementById('btnAddContact').classList.add('hidden');
+            }
+        }
+
+        function removeContact(id) {
+            const contact = document.getElementById(`contact${id}`);
+            if (contact) {
+                contact.remove();
+                document.getElementById('btnAddContact').classList.remove('hidden');
+            }
+        }
+
+        // =============================================
+        // VALIDATION
+        // =============================================
+        function validateStep(step) {
+            switch(step) {
+                case 1:
+                    return validateKennitala();
+                case 2:
+                    return validateStudentInfo();
+                case 3:
+                    return validateContacts();
+                case 4:
+                    return validateSubject();
+                case 5:
+                    return validateTerms();
+                default:
+                    return true;
+            }
+        }
+
+        function validateKennitala() {
+            const kt = document.getElementById('kennitala').value;
+            const parsed = parseKennitala(kt);
+            
+            if (!parsed) {
+                document.getElementById('kennitalaError').classList.add('visible');
+                document.getElementById('kennitala').classList.add('error');
+                return false;
+            }
+            
+            return true;
+        }
+
+        function validateStudentInfo() {
+            const simi1 = document.getElementById('simi1').value;
+            const netfang = document.getElementById('netfang').value;
+            const skoli = document.getElementById('skoli').value;
+            const studentsprofStep2 = document.getElementById('studentsprofStep2');
+            const studentsprofChecked = studentsprofStep2 && studentsprofStep2.checked;
+            
+            let errors = [];
+            
+            if (!simi1.trim()) {
+                errors.push('• Símanúmer 1 er nauðsynlegt');
+            }
+            if (!netfang.trim()) {
+                errors.push('• Netfang er nauðsynlegt');
+            } else if (!isValidEmail(netfang)) {
+                errors.push('• Netfang er ekki á réttu formi (dæmi: nafn@dæmi.is)');
+            }
+            
+            // Ef stúdentsprófsbraut er valin, verður að velja raunverulegan framhaldsskóla
+            if (studentsprofChecked) {
+                if (!skoli || skoli === 'Er ekki í framhaldsskóla' || skoli === 'Annað') {
+                    errors.push('• Mögulegt er að stunda nám á stúdentsprófsbraut við þessa skóla: Menntaskólann á Akureyri, Verkmenntaskólann á Akureyri, Framhaldsskólann á Laugum, Framhaldsskólann á Húsavík og Menntaskólann á Tröllaskaga. Vinsamlegast veljið eitt af ofangreindu.\n\nAth: Nemendur á Tröllaskaga þurfa að hafa samband við sinn framhaldsskóla til að fá nánari upplýsingar.');
+                }
+            }
+            
+            if (errors.length > 0) {
+                showValidationError('Vinsamlegast lagfærðu eftirfarandi:\n\n' + errors.join('\n'));
+                return false;
+            }
+            
+            return true;
+        }
+
+        function validateContacts() {
+            // Skip validation if 18+
+            if (studentAgeGroup && !studentAgeGroup.minors) {
+                return true;
+            }
+            
+            const kt = document.getElementById('tengilidur1_kennitala').value;
+            const simi = document.getElementById('tengilidur1_simi1').value;
+            const netfang = document.getElementById('tengilidur1_netfang').value;
+            
+            let errors = [];
+            
+            if (!kt.trim()) {
+                errors.push('• Kennitala forráðamanns er nauðsynleg');
+            }
+            if (!simi.trim()) {
+                errors.push('• Símanúmer forráðamanns er nauðsynlegt');
+            }
+            if (!netfang.trim()) {
+                errors.push('• Netfang forráðamanns er nauðsynlegt');
+            } else if (!isValidEmail(netfang)) {
+                errors.push('• Netfang forráðamanns er ekki á réttu formi (dæmi: nafn@dæmi.is)');
+            }
+            
+            if (errors.length > 0) {
+                showValidationError('Vinsamlegast lagfærðu eftirfarandi:\n\n' + errors.join('\n'));
+                return false;
+            }
+            
+            return true;
+        }
+
+        function validateSubject() {
+            const namsgrein = document.getElementById('namsgrein').value;
+            
+            if (!namsgrein) {
+                showValidationError('Vinsamlegast veldu námsgrein.');
+                return false;
+            }
+            
+            // Athuga hvort aðalfag sé valið ef Skapandi tónlist
+            if (namsgrein === 'Skapandi tónlist') {
+                const adafag = document.getElementById('adafag').value;
+                if (!adafag) {
+                    showValidationError('Vinsamlegast veldu aðalfag.\n\nNemendur í Skapandi tónlist þurfa að velja aðalfag sem þau fá einkatíma í.');
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+
+        function validateTerms() {
+            const terms = document.getElementById('samthykkiSkilmala').checked;
+            
+            if (!terms) {
+                showValidationError('Þú verður að samþykkja viðskiptaskilmála til að senda umsókn.\n\nVinsamlegast hakaðu við "Ég samþykki viðskiptaskilmála" til að halda áfram.');
+                return false;
+            }
+            
+            return true;
+        }
+        
+        // =============================================
+        // VALIDATION ERROR DISPLAY
+        // =============================================
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+        
+        function showValidationError(message) {
+            // Create or get error modal
+            let modal = document.getElementById('validationModal');
+            
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.id = 'validationModal';
+                modal.className = 'validation-modal';
+                modal.innerHTML = `
+                    <div class="validation-modal-content">
+                        <div class="validation-modal-icon">⚠️</div>
+                        <div class="validation-modal-message"></div>
+                        <button type="button" class="btn btn-primary" onclick="closeValidationModal()">Í lagi</button>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+            }
+            
+            modal.querySelector('.validation-modal-message').textContent = message;
+            modal.classList.add('visible');
+        }
+        
+        function closeValidationModal() {
+            const modal = document.getElementById('validationModal');
+            if (modal) {
+                modal.classList.remove('visible');
+            }
+        }
+
+        // =============================================
+        // FORM SUBMISSION
+        // =============================================
+        function submitForm() {
+            if (!validateStep(5)) {
+                return;
+            }
+            
+            // Disable submit button to prevent double submission
+            const submitBtn = document.getElementById('btnSubmit');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sendi umsókn...';
+            
+            // Collect all form data
+            const formData = {
+                // Student info
+                kennitala: document.getElementById('kennitala').value,
+                nafn: document.getElementById('nafn').value,
+                tegund: 'Ný umsókn',
+                namsgrein: (function() {
+                    const sel = document.getElementById('namsgrein');
+                    const opt = sel.options[sel.selectedIndex];
+                    return opt.dataset.actualName || opt.value;
+                })(),
+                deild: document.getElementById('deild').value,
+                namshlutfall: document.querySelector('input[name="namshlutfall"]:checked')?.value || 'Heilt',
+                studentsprof: document.getElementById('studentsprofStep2')?.checked || false,
+                skoli: document.getElementById('skoli')?.value || '',
+                fristundastyrkur: document.getElementById('fristundastyrkur')?.checked || false,
+                hljodfaraleiga: document.getElementById('hljodfaraleiga')?.checked || false,
+                myndefni: document.getElementById('myndefni')?.checked || false,
+                netfangNemanda: document.getElementById('netfang').value,
+                simiNemanda: document.getElementById('simi1').value,
+                athugasemdNemanda: '', // Engin athugasemd í nýrri umsókn
+                adafagSkapandi: document.getElementById('adafag')?.value || '',
+                
+                // Tengiliður 1
+                tengiliður1Nafn: document.getElementById('tengilidur1_nafn')?.value || '',
+                tengiliður1Kennitala: document.getElementById('tengilidur1_kennitala')?.value || '',
+                tengiliður1Simi: document.getElementById('tengilidur1_simi1')?.value || '',
+                tengiliður1Netfang: document.getElementById('tengilidur1_netfang')?.value || '',
+                tengiliður1Greidandi: document.getElementById('tengilidur1_greidandi')?.checked || false,
+                
+                // Tengiliður 2
+                tengiliður2Nafn: document.getElementById('tengilidur2_nafn')?.value || '',
+                tengiliður2Kennitala: document.getElementById('tengilidur2_kennitala')?.value || '',
+                tengiliður2Simi: document.getElementById('tengilidur2_simi1')?.value || '',
+                tengiliður2Netfang: document.getElementById('tengilidur2_netfang')?.value || '',
+                tengiliður2Greidandi: document.getElementById('tengilidur2_greidandi')?.checked || false
+            };
+            
+            console.log('Form data:', formData);
+            
+            // Power Automate URL
+            const powerAutomateUrl = 'https://121760ab7a04ebae8bbd23b81b7a3b.4e.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/1b59cccd3fd64e189663b60d6d1697a1/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=9mYPS9IyuTu1fncoIQt1ZR-ErOOV_SWAE5fWZshW1xc';
+            
+            // Send to Power Automate
+            fetch(powerAutomateUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Villa við að senda umsókn');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Success:', data);
+                
+                // Hide current step
+                document.querySelector(`.form-step[data-step="5"]`).classList.remove('active');
+                
+                // Show success
+                document.querySelector(`.form-step[data-step="success"]`).classList.add('active');
+                
+                // Update progress to complete
+                document.querySelectorAll('.step-indicator').forEach(ind => {
+                    ind.classList.add('completed');
+                    ind.innerHTML = '✓';
+                });
+                document.getElementById('progressLine').style.width = '100%';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showValidationError('Villa kom upp við að senda umsókn. Vinsamlegast reyndu aftur eða hafðu samband við skólann.');
+                
+                // Re-enable submit button
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Senda umsókn';
+            });
+        }
+
+        // =============================================
+        // EVENT LISTENERS
+        // =============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            // New application kennitala input
+            const kennitalaInput = document.getElementById('kennitala');
+            const btnNext1 = document.getElementById('btnNext1');
+            const ageInfo = document.getElementById('ageInfo');
+            
+            kennitalaInput.addEventListener('input', function(e) {
+                // Only allow numbers
+                this.value = this.value.replace(/[^0-9]/g, '');
+                
+                const kt = this.value;
+                const errorEl = document.getElementById('kennitalaError');
+                
+                if (kt.length === 10) {
+                    const parsed = parseKennitala(kt);
+                    
+                    if (parsed) {
+                        // Valid kennitala
+                        errorEl.classList.remove('visible');
+                        this.classList.remove('error');
+                        btnNext1.disabled = false;
+                        
+                        // Calculate and display age
+                        studentAge = calculateAge(parsed.birthDate);
+                        studentAgeGroup = getAgeGroup(parsed.birthDate);
+                        studentBekkur = calculateBekkur(parsed.birthDate);
+                        
+                        const months = ['janúar', 'febrúar', 'mars', 'apríl', 'maí', 'júní', 
+                                       'júlí', 'ágúst', 'september', 'október', 'nóvember', 'desember'];
+                        
+                        document.getElementById('birthDate').textContent = 
+                            `${parsed.day}. ${months[parsed.month - 1]} ${parsed.year}`;
+                        document.getElementById('ageDisplay').textContent = `${studentAge} ára`;
+                        
+                        // Sýna bekk ef við á
+                        let ageGroupText = studentAgeGroup.label;
+                        if (studentBekkur >= 1 && studentBekkur <= 10) {
+                            ageGroupText += ` — ${studentBekkur}. bekkur`;
+                        }
+                        document.getElementById('ageGroup').textContent = ageGroupText;
+                        
+                        ageInfo.classList.remove('hidden');
+                        
+                        // TODO: Check if student exists in SharePoint
+                        // TODO: Fetch from Þjóðskrá
+                        
+                    } else {
+                        // Invalid kennitala
+                        errorEl.classList.add('visible');
+                        this.classList.add('error');
+                        btnNext1.disabled = true;
+                        ageInfo.classList.add('hidden');
+                        studentAge = null;
+                        studentAgeGroup = null;
+                        studentBekkur = null;
+                    }
+                } else {
+                    errorEl.classList.remove('visible');
+                    this.classList.remove('error');
+                    btnNext1.disabled = true;
+                    ageInfo.classList.add('hidden');
+                    studentAge = null;
+                    studentAgeGroup = null;
+                    studentBekkur = null;
+                }
+            });
+            
+            btnNext1.addEventListener('click', function() {
+                if (validateKennitala()) {
+                    goToStep(2);
+                }
+            });
+
+            // Renewal kennitala input
+            const renewalKennitalaInput = document.getElementById('renewalKennitala');
+            const btnSearchRenewal = document.getElementById('btnSearchRenewal');
+            
+            renewalKennitalaInput.addEventListener('input', function(e) {
+                // Only allow numbers
+                this.value = this.value.replace(/[^0-9]/g, '');
+                
+                const kt = this.value;
+                const errorEl = document.getElementById('renewalKennitalaError');
+                const notFoundEl = document.getElementById('renewalNotFound');
+                
+                // Hide not found message when typing
+                notFoundEl.classList.add('hidden');
+                
+                if (kt.length === 10) {
+                    const parsed = parseKennitala(kt);
+                    
+                    if (parsed) {
+                        errorEl.classList.remove('visible');
+                        this.classList.remove('error');
+                        btnSearchRenewal.disabled = false;
+                    } else {
+                        errorEl.classList.add('visible');
+                        this.classList.add('error');
+                        btnSearchRenewal.disabled = true;
+                    }
+                } else {
+                    errorEl.classList.remove('visible');
+                    this.classList.remove('error');
+                    btnSearchRenewal.disabled = true;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
