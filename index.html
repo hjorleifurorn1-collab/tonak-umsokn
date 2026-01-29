@@ -1274,6 +1274,11 @@
                     </div>
                 </div>
 
+                <div class="form-group" style="margin-top: 24px;">
+                    <label for="athugasemd">Athugasemdir <span class="optional">(valkvætt)</span></label>
+                    <textarea id="athugasemd" name="athugasemd" rows="3" placeholder="Hér getur þú skrifað athugasemdir við umsóknina ef þú vilt..."></textarea>
+                </div>
+
                 <div class="button-group">
                     <button type="button" class="btn btn-secondary" onclick="goToStep(4)">Til baka</button>
                     <button type="button" class="btn btn-primary" id="btnSubmit" onclick="submitForm()">Senda umsókn</button>
@@ -2754,7 +2759,7 @@
                 myndefni: document.getElementById('myndefni')?.checked || false,
                 netfangNemanda: document.getElementById('netfang').value,
                 simiNemanda: document.getElementById('simi1').value,
-                athugasemdNemanda: '', // Engin athugasemd í nýrri umsókn
+                athugasemdNemanda: document.getElementById('athugasemd')?.value || '',
                 adafagSkapandi: document.getElementById('adafag')?.value || '',
                 
                 // Heimilisfang nemanda (úr Þjóðskrá - lögheimili)
