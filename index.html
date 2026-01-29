@@ -2419,6 +2419,9 @@
             
             if (!skoliSelect) return;
             
+            // Vista núverandi val
+            const currentValue = skoliSelect.value;
+            
             skoliSelect.innerHTML = '<option value="">Veldu skóla...</option>';
             
             let skolar = [];
@@ -2437,6 +2440,11 @@
                 option.textContent = skoli;
                 skoliSelect.appendChild(option);
             });
+            
+            // Endurheimta val ef það var til
+            if (currentValue && skolar.includes(currentValue)) {
+                skoliSelect.value = currentValue;
+            }
             
             // Sýna/fela "Annað" skýringarreit
             skoliSelect.addEventListener('change', function() {
