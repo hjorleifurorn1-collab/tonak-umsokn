@@ -1663,6 +1663,55 @@
             goToStep('renewal-1');
         }
 
+        // =============================================
+        // ÞJÓÐSKRÁ INTEGRATION
+        // =============================================
+        function fetchFromThjodskra(kennitala) {
+            const thjodskraUrl = 'https://121760ab7a04ebae8bbd23b81b7a3b.4e.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/18399dc2b5994d608dcdbe6fcdd77bf9/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Nd7sld9BgrFbjqkrX5JziBDTfVN8aKi2DNn-SB3e8nc';
+            
+            // Sýna loading
+            const nafnInput = document.getElementById('nafn');
+            const logheimiliInput = document.getElementById('logheimili');
+            const sveitarfelagInput = document.getElementById('sveitarfelag');
+            
+            if (nafnInput) nafnInput.placeholder = 'Sæki úr Þjóðskrá...';
+            
+            fetch(thjodskraUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ kennitala: kennitala })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Þjóðskrá response:', data);
+                
+                if (data.retkod === '0' || data.retkod === 0) {
+                    // Tókst - fylla inn upplýsingar
+                    if (nafnInput && data.nafn) {
+                        nafnInput.value = data.nafn;
+                    }
+                    if (logheimiliInput && data.heimili) {
+                        logheimiliInput.value = data.heimili;
+                    }
+                    if (sveitarfelagInput && data.sveitarfelag) {
+                        // Sameina postnúmer og sveitarfélag
+                        const postnr = data.postnr || '';
+                        const sveitarfelag = data.sveitarfelag || '';
+                        sveitarfelagInput.value = postnr ? `${postnr} ${sveitarfelag}` : sveitarfelag;
+                    }
+                } else {
+                    console.log('Þjóðskrá villa:', data.retlys);
+                    if (nafnInput) nafnInput.placeholder = 'Nafn';
+                }
+            })
+            .catch(error => {
+                console.error('Þjóðskrá error:', error);
+                if (nafnInput) nafnInput.placeholder = 'Nafn';
+            });
+        }
+
         function searchForRenewal() {
             const kt = document.getElementById('renewalKennitala').value;
             const notFoundMessage = document.getElementById('renewalNotFound');
@@ -2701,8 +2750,8 @@
                         
                         ageInfo.classList.remove('hidden');
                         
-                        // TODO: Check if student exists in SharePoint
-                        // TODO: Fetch from Þjóðskrá
+                        // Sækja upplýsingar úr Þjóðskrá
+                        fetchFromThjodskra(kt);
                         
                     } else {
                         // Invalid kennitala
