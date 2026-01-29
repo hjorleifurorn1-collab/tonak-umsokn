@@ -1085,7 +1085,7 @@
                         </div>
                         <div class="info-box" style="margin-top: 12px; font-size: 0.9rem;">
                             <p><strong>Upplýsingar um stúdentsprófsbraut:</strong></p>
-                            <p>Nemendur sem hafa sótt um tónlistarkjörsvið, tónlistarbraut eða tónlistarsérfræðingu í sínum framhaldsskóla verða að haka við hér til að umsókn þeirra taki gildi.</p>
+                            <p>Nemendur sem hafa sótt um tónlistarkjörsvið, tónlistarbraut eða tónlistarsérhæfingu í sínum framhaldsskóla verða að haka við hér til að umsókn þeirra taki gildi.</p>
                             <p style="margin-top: 8px;">Mikilvægt er að nemendur upplýsi sinn framhaldsskóla um að þeir hafi sótt um stúdentsprófsbraut í samstarfi við TonAk.</p>
                             <p style="margin-top: 8px;"><em>Nemendur sem stunda nám við aðrar brautir/kjörsvið framhaldsskóla þurfa ekki að haka við hér.</em></p>
                         </div>
@@ -1126,6 +1126,22 @@
                         <div class="form-group">
                             <label for="tengilidur1_nafn">Nafn <span class="required">*</span></label>
                             <input type="text" id="tengilidur1_nafn" name="tengilidur1_nafn" placeholder="Sótt úr Þjóðskrá..." disabled>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tengilidur1_heimili">Heimilisfang</label>
+                            <input type="text" id="tengilidur1_heimili" name="tengilidur1_heimili" placeholder="Sótt úr Þjóðskrá..." disabled>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="tengilidur1_postnumer">Póstnúmer</label>
+                                <input type="text" id="tengilidur1_postnumer" name="tengilidur1_postnumer" placeholder="000" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="tengilidur1_sveitarfelag">Sveitarfélag</label>
+                                <input type="text" id="tengilidur1_sveitarfelag" name="tengilidur1_sveitarfelag" placeholder="Sótt úr Þjóðskrá..." disabled>
+                            </div>
                         </div>
 
                         <div class="form-row">
@@ -1322,11 +1338,11 @@
                 klassiskName: 'Trommur og slagverk',
                 rytmiskName: 'Trommur - Jazz og dægurlagatónlist'
             },
-            'Kontrabass': {
+            'Kontrabassi': {
                 question: 'Vilt þú sækja um klassískt kontrabassanám eða kontrabassa í djass- og dægurlagatónlist?',
                 infoLink: 'https://www.tonak.is/is/namid/afanganam',
-                klassiskName: 'Kontrabass',
-                rytmiskName: 'Kontrabass - Jazz og dægurlagatónlist'
+                klassiskName: 'Kontrabassi',
+                rytmiskName: 'Kontrabassi - Jazz og dægurlagatónlist'
             },
             'Gítar': {
                 question: 'Vilt þú sækja um klassískt gítarnám eða rafgítarnám?',
@@ -1371,7 +1387,7 @@
             // Fög sem eru í báðum deildum - sýna eitt nafn, spyrja um deild
             { name: 'Söngur', deild: null, minAge: 15, maxAge: 99, needsDepartmentChoice: true },
             { name: 'Trommur', deild: null, minBekkur: 3, maxBekkur: 99, useBekkur: true, needsDepartmentChoice: true },
-            { name: 'Kontrabass', deild: null, minBekkur: 3, maxBekkur: 99, useBekkur: true, needsDepartmentChoice: true },
+            { name: 'Kontrabassi', deild: null, minBekkur: 3, maxBekkur: 99, useBekkur: true, needsDepartmentChoice: true },
             { name: 'Gítar', deild: null, minBekkur: 3, maxBekkur: 99, useBekkur: true, needsDepartmentChoice: true },
             { name: 'Saxófónn', deild: null, minBekkur: 3, maxBekkur: 99, useBekkur: true, needsDepartmentChoice: true },
             { name: 'Píanó', deild: null, minBekkur: 3, maxBekkur: 99, useBekkur: true, needsDepartmentChoice: true },
@@ -1391,7 +1407,7 @@
             { name: 'Selló', deild: 'Klassísk deild', minBekkur: 3, maxBekkur: 99, useBekkur: true },
             { name: 'Trompet', deild: 'Klassísk deild', minBekkur: 3, maxBekkur: 99, useBekkur: true },
             { name: 'Túba', deild: 'Klassísk deild', minBekkur: 3, maxBekkur: 99, useBekkur: true },
-            { name: 'Vióla', deild: 'Klassísk deild', minBekkur: 3, maxBekkur: 99, useBekkur: true },
+            { name: 'Víóla', deild: 'Klassísk deild', minBekkur: 3, maxBekkur: 99, useBekkur: true },
             { name: 'Þverflauta', deild: 'Klassísk deild', minBekkur: 3, maxBekkur: 99, useBekkur: true },
             
             // Rytmísk deild - hljóðfæri sem eru EINGÖNGU rytmísk (frá 3. bekk / 8 ára)
@@ -1414,7 +1430,7 @@
             'Harmónika',
             'Klarinetta',
             'Klassískur söngur',
-            'Kontrabass',
+            'Kontrabassi',
             'Kornett',
             'Orgel',
             'Óbó',
@@ -1424,7 +1440,7 @@
             'Trommur og slagverk',
             'Trompet',
             'Túba',
-            'Vióla',
+            'Víóla',
             'Þverflauta',
             // Rytmísk deild
             'Dægursöngur',
@@ -1433,14 +1449,14 @@
             'Rafbassi',
             'Trommur - Jazz og dægurlagatónlist',
             'Saxófónn - Jazz og dægurlagatónlist',
-            'Kontrabass - Jazz og dægurlagatónlist',
+            'Kontrabassi - Jazz og dægurlagatónlist',
             // Sérstakt fyrir Skapandi tónlist
             'Hljóðvinnsla og tónlistarsköpun'
         ];
         
         // Hljóðfæri sem hægt er að leigja
         const hljodfariFyrirLeigu = [
-            'Vióla',
+            'Víóla',
             'Alt horn',
             'Altflauta',
             'Barítónhorn',
@@ -1455,7 +1471,7 @@
             'Túba',
             'Saxófónn',
             'Þverflauta',
-            'Kontrabass',
+            'Kontrabassi',
             'Rafbassi',
             'Suzukifiðla',
             'Suzukikontrabass',
@@ -1463,7 +1479,7 @@
             'Suzukivióla',
             // Einnig rytmísk útgáfa
             'Saxófónn - Jazz og dægurlagatónlist',
-            'Kontrabass - Jazz og dægurlagatónlist'
+            'Kontrabassi - Jazz og dægurlagatónlist'
         ];
         
         // Skólalistar
@@ -1701,6 +1717,12 @@
                         const sveitarfelag = data.sveitarfelag || '';
                         sveitarfelagInput.value = postnr ? `${postnr} ${sveitarfelag}` : sveitarfelag;
                     }
+                    
+                    // Fylla líka í postnumer reit ef hann er til
+                    const postnumerInput = document.getElementById('postnumer');
+                    if (postnumerInput && data.postnr) {
+                        postnumerInput.value = data.postnr;
+                    }
                 } else {
                     console.log('Þjóðskrá villa:', data.retlys);
                     if (nafnInput) nafnInput.placeholder = 'Nafn';
@@ -1709,6 +1731,57 @@
             .catch(error => {
                 console.error('Þjóðskrá error:', error);
                 if (nafnInput) nafnInput.placeholder = 'Nafn';
+            });
+        }
+        
+        function fetchTengilidarFromThjodskra(kennitala, tengilidarNumer) {
+            const thjodskraUrl = 'https://121760ab7a04ebae8bbd23b81b7a3b.4e.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/18399dc2b5994d608dcdbe6fcdd77bf9/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Nd7sld9BgrFbjqkrX5JziBDTfVN8aKi2DNn-SB3e8nc';
+            
+            const prefix = `tengilidur${tengilidarNumer}_`;
+            
+            // Sýna loading
+            const nafnInput = document.getElementById(prefix + 'nafn');
+            if (nafnInput) nafnInput.placeholder = 'Sæki úr Þjóðskrá...';
+            
+            fetch(thjodskraUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ kennitala: kennitala })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(`Þjóðskrá response (tengiliður ${tengilidarNumer}):`, data);
+                
+                if (data.retkod === '0' || data.retkod === 0) {
+                    // Tókst - fylla inn upplýsingar
+                    if (nafnInput && data.nafn) {
+                        nafnInput.value = data.nafn;
+                    }
+                    
+                    const heimiliInput = document.getElementById(prefix + 'heimili');
+                    if (heimiliInput && data.heimili) {
+                        heimiliInput.value = data.heimili;
+                    }
+                    
+                    const postnumerInput = document.getElementById(prefix + 'postnumer');
+                    if (postnumerInput && data.postnr) {
+                        postnumerInput.value = data.postnr;
+                    }
+                    
+                    const sveitarfelagInput = document.getElementById(prefix + 'sveitarfelag');
+                    if (sveitarfelagInput && data.sveitarfelag) {
+                        sveitarfelagInput.value = data.sveitarfelag;
+                    }
+                } else {
+                    console.log(`Þjóðskrá villa (tengiliður ${tengilidarNumer}):`, data.retlys);
+                    if (nafnInput) nafnInput.placeholder = 'Nafn fannst ekki';
+                }
+            })
+            .catch(error => {
+                console.error(`Þjóðskrá error (tengiliður ${tengilidarNumer}):`, error);
+                if (nafnInput) nafnInput.placeholder = 'Villa við leit';
             });
         }
 
@@ -2403,6 +2476,22 @@
                         <input type="text" id="tengilidur${contactCount}_nafn" name="tengilidur${contactCount}_nafn" placeholder="Sótt úr Þjóðskrá..." disabled>
                     </div>
 
+                    <div class="form-group">
+                        <label for="tengilidur${contactCount}_heimili">Heimilisfang</label>
+                        <input type="text" id="tengilidur${contactCount}_heimili" name="tengilidur${contactCount}_heimili" placeholder="Sótt úr Þjóðskrá..." disabled>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="tengilidur${contactCount}_postnumer">Póstnúmer</label>
+                            <input type="text" id="tengilidur${contactCount}_postnumer" name="tengilidur${contactCount}_postnumer" placeholder="000" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="tengilidur${contactCount}_sveitarfelag">Sveitarfélag</label>
+                            <input type="text" id="tengilidur${contactCount}_sveitarfelag" name="tengilidur${contactCount}_sveitarfelag" placeholder="Sótt úr Þjóðskrá..." disabled>
+                        </div>
+                    </div>
+
                     <div class="form-row">
                         <div class="form-group">
                             <label for="tengilidur${contactCount}_simi1">Símanúmer 1</label>
@@ -2427,6 +2516,22 @@
             `;
             
             container.insertAdjacentHTML('beforeend', contactHtml);
+            
+            // Bæta við event listener fyrir nýja tengiliðinn
+            const newKtInput = document.getElementById(`tengilidur${contactCount}_kennitala`);
+            const currentContactNum = contactCount; // Capture value for closure
+            if (newKtInput) {
+                newKtInput.addEventListener('input', function(e) {
+                    this.value = this.value.replace(/[^0-9]/g, '');
+                    
+                    if (this.value.length === 10) {
+                        const parsed = parseKennitala(this.value);
+                        if (parsed) {
+                            fetchTengilidarFromThjodskra(this.value, currentContactNum);
+                        }
+                    }
+                });
+            }
             
             // Hide add button if max contacts reached
             if (contactCount >= 4) {
@@ -2644,19 +2749,35 @@
                 athugasemdNemanda: '', // Engin athugasemd í nýrri umsókn
                 adafagSkapandi: document.getElementById('adafag')?.value || '',
                 
+                // Heimilisfang nemanda (úr Þjóðskrá - lögheimili)
+                logheimiliNemanda: document.getElementById('logheimili')?.value || '',
+                postnumerLogheimiliNemanda: document.getElementById('postnumer')?.value || '',
+                sveitarfelagLogheimiliNemanda: document.getElementById('sveitarfelag')?.value || '',
+                
+                // Annað heimili nemanda
+                heimiliNemanda: document.getElementById('annadHeimili')?.value || '',
+                postnumerHeimiliNemanda: document.getElementById('postnumerAnnad')?.value || '',
+                sveitarfelagHeimiliNemanda: document.getElementById('sveitarfelagAnnad')?.value || '',
+                
                 // Tengiliður 1
                 tengiliður1Nafn: document.getElementById('tengilidur1_nafn')?.value || '',
                 tengiliður1Kennitala: document.getElementById('tengilidur1_kennitala')?.value || '',
                 tengiliður1Simi: document.getElementById('tengilidur1_simi1')?.value || '',
                 tengiliður1Netfang: document.getElementById('tengilidur1_netfang')?.value || '',
                 tengiliður1Greidandi: document.getElementById('tengilidur1_greidandi')?.checked || false,
+                tengiliður1Heimili: document.getElementById('tengilidur1_heimili')?.value || '',
+                tengiliður1Postnumer: document.getElementById('tengilidur1_postnumer')?.value || '',
+                tengiliður1Sveitarfelag: document.getElementById('tengilidur1_sveitarfelag')?.value || '',
                 
                 // Tengiliður 2
                 tengiliður2Nafn: document.getElementById('tengilidur2_nafn')?.value || '',
                 tengiliður2Kennitala: document.getElementById('tengilidur2_kennitala')?.value || '',
                 tengiliður2Simi: document.getElementById('tengilidur2_simi1')?.value || '',
                 tengiliður2Netfang: document.getElementById('tengilidur2_netfang')?.value || '',
-                tengiliður2Greidandi: document.getElementById('tengilidur2_greidandi')?.checked || false
+                tengiliður2Greidandi: document.getElementById('tengilidur2_greidandi')?.checked || false,
+                tengiliður2Heimili: document.getElementById('tengilidur2_heimili')?.value || '',
+                tengiliður2Postnumer: document.getElementById('tengilidur2_postnumer')?.value || '',
+                tengiliður2Sveitarfelag: document.getElementById('tengilidur2_sveitarfelag')?.value || ''
             };
             
             console.log('Form data:', formData);
@@ -2813,6 +2934,36 @@
                     btnSearchRenewal.disabled = true;
                 }
             });
+            
+            // Tengiliður 1 kennitala - sækja úr Þjóðskrá
+            const tengilidur1KtInput = document.getElementById('tengilidur1_kennitala');
+            if (tengilidur1KtInput) {
+                tengilidur1KtInput.addEventListener('input', function(e) {
+                    this.value = this.value.replace(/[^0-9]/g, '');
+                    
+                    if (this.value.length === 10) {
+                        const parsed = parseKennitala(this.value);
+                        if (parsed) {
+                            fetchTengilidarFromThjodskra(this.value, 1);
+                        }
+                    }
+                });
+            }
+            
+            // Tengiliður 2 kennitala - sækja úr Þjóðskrá
+            const tengilidur2KtInput = document.getElementById('tengilidur2_kennitala');
+            if (tengilidur2KtInput) {
+                tengilidur2KtInput.addEventListener('input', function(e) {
+                    this.value = this.value.replace(/[^0-9]/g, '');
+                    
+                    if (this.value.length === 10) {
+                        const parsed = parseKennitala(this.value);
+                        if (parsed) {
+                            fetchTengilidarFromThjodskra(this.value, 2);
+                        }
+                    }
+                });
+            }
         });
     </script>
 </body>
