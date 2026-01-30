@@ -909,33 +909,77 @@
                 </div>
             </div>
 
-            <!-- Renewal Step 3b: Request changes -->
+            <!-- Renewal Step 3b: Choose change type -->
             <div class="form-step" data-step="renewal-changes">
                 <h2 class="step-title">Óska eftir breytingum</h2>
                 <p class="step-description">Hvaða breytingum óskar þú eftir?</p>
 
-                <div class="checkbox-group">
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="changeInstrument" name="changeInstrument">
-                        <label for="changeInstrument">Skipta um hljóðfæri / námsgrein</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="changeTeacher" name="changeTeacher">
-                        <label for="changeTeacher">Skipta um kennara</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="changeRatio" name="changeRatio">
-                        <label for="changeRatio">Breyta námshlutfalli (heilt/hálft nám)</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="changeOther" name="changeOther">
-                        <label for="changeOther">Annað</label>
+                <div class="choice-buttons">
+                    <button type="button" class="choice-btn" onclick="goToStep('change-instrument')">
+                        <span class="choice-icon">🎸</span>
+                        <span class="choice-title">Skipta um hljóðfæri / námsgrein</span>
+                        <span class="choice-desc">Ég vil læra á annað hljóðfæri eða skipta um námsgrein</span>
+                    </button>
+                    <button type="button" class="choice-btn" onclick="goToStep('change-teacher')">
+                        <span class="choice-icon">👩‍🏫</span>
+                        <span class="choice-title">Skipta um kennara</span>
+                        <span class="choice-desc">Ég vil halda áfram á sama hljóðfæri en óska eftir öðrum kennara</span>
+                    </button>
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" onclick="goToStep('renewal-2')">Til baka</button>
+                </div>
+            </div>
+
+            <!-- Change Instrument: Goes through subject selection like new application -->
+            <div class="form-step" data-step="change-instrument">
+                <h2 class="step-title">Skipta um hljóðfæri / námsgrein</h2>
+                <p class="step-description">Veldu nýja námsgrein. Þetta er eins og ný umsókn á nýtt hljóðfæri.</p>
+
+                <div class="info-box" style="margin-bottom: 24px;">
+                    <p><strong>Nemandi:</strong> <span id="changeInstrumentNafn"></span></p>
+                    <p><strong>Kennitala:</strong> <span id="changeInstrumentKt"></span></p>
+                    <p><strong>Núverandi námsgrein:</strong> <span id="changeInstrumentCurrent"></span></p>
+                </div>
+
+                <!-- Same subject selection as new application -->
+                <div class="form-group">
+                    <label for="changeInstrumentNamsgrein">Ný námsgrein <span class="required">*</span></label>
+                    <select id="changeInstrumentNamsgrein" name="changeInstrumentNamsgrein" onchange="updateChangeInstrumentDeild()">
+                        <option value="">Veldu námsgrein...</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="changeInstrumentDeildGroup" style="display: none;">
+                    <label for="changeInstrumentDeild">Deild</label>
+                    <input type="text" id="changeInstrumentDeild" name="changeInstrumentDeild" disabled>
+                </div>
+
+                <div class="form-group" id="changeInstrumentAdafagGroup" class="hidden">
+                    <label for="changeInstrumentAdafag">Aðalfag í Skapandi tónlist <span class="required">*</span></label>
+                    <select id="changeInstrumentAdafag" name="changeInstrumentAdafag">
+                        <option value="">Veldu aðalfag...</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="changeInstrumentNamshlutiGroup">
+                    <label>Námshlutfall</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="changeInstrumentHeilt" name="changeInstrumentNamshlutfall" value="Heilt" checked>
+                            <label for="changeInstrumentHeilt">Heilt nám</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="changeInstrumentHalft" name="changeInstrumentNamshlutfall" value="Hálft">
+                            <label for="changeInstrumentHalft">Hálft nám</label>
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-group" style="margin-top: 24px;">
-                    <label for="changeNotes">Nánari lýsing á breytingum <span class="required">*</span></label>
-                    <textarea id="changeNotes" name="changeNotes" rows="4" placeholder="Vinsamlegast lýstu breytingunum sem þú óskar eftir..."></textarea>
+                <div class="form-group">
+                    <label for="changeInstrumentAthugasemd">Athugasemdir <span class="optional">(valkvætt)</span></label>
+                    <textarea id="changeInstrumentAthugasemd" name="changeInstrumentAthugasemd" rows="3" placeholder="Óskir eða athugasemdir við umsóknina..."></textarea>
                 </div>
 
                 <div class="divider"></div>
@@ -950,34 +994,93 @@
 
                 <div class="checkbox-group">
                     <div class="checkbox-item">
-                        <input type="checkbox" id="changeSamthykkiSkilmala" name="changeSamthykkiSkilmala" required>
-                        <label for="changeSamthykkiSkilmala">Ég samþykki <strong>viðskiptaskilmála</strong> Tónlistarskólans á Akureyri <span class="required">*</span></label>
+                        <input type="checkbox" id="changeInstrumentSkilmalar" name="changeInstrumentSkilmalar" required>
+                        <label for="changeInstrumentSkilmalar">Ég samþykki <strong>viðskiptaskilmála</strong> Tónlistarskólans á Akureyri <span class="required">*</span></label>
+                    </div>
+
+                    <div class="checkbox-item" id="changeInstrumentFristundaGroup">
+                        <input type="checkbox" id="changeInstrumentFristunda" name="changeInstrumentFristunda">
+                        <label for="changeInstrumentFristunda">Ég óska eftir að nota frístundastyrk <span class="optional">(6-18 ára)</span></label>
                     </div>
 
                     <div class="checkbox-item">
-                        <input type="checkbox" id="changeFristundastyrkur" name="changeFristundastyrkur">
-                        <label for="changeFristundastyrkur">Ég óska eftir að nota frístundastyrk</label>
+                        <input type="checkbox" id="changeInstrumentMyndefni" name="changeInstrumentMyndefni">
+                        <label for="changeInstrumentMyndefni">Ég samþykki að myndefni sem tekið er upp af nemanda megi nota á upplýsingasíðum skólans</label>
                     </div>
 
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="changeMyndefni" name="changeMyndefni">
-                        <label for="changeMyndefni">Ég samþykki að myndefni sem tekið er upp af nemanda megi nota á upplýsingasíðum skólans</label>
-                    </div>
-
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="changeHljodfaraleiga" name="changeHljodfaraleiga">
-                        <label for="changeHljodfaraleiga">Ég óska eftir hljóðfæraleigu</label>
+                    <div class="checkbox-item hidden" id="changeInstrumentHljodfaraGroup">
+                        <input type="checkbox" id="changeInstrumentHljodfaraleiga" name="changeInstrumentHljodfaraleiga">
+                        <label for="changeInstrumentHljodfaraleiga">Ég óska eftir hljóðfæraleigu</label>
                     </div>
                 </div>
 
                 <div class="form-group" style="margin-top: 24px;">
-                    <label for="changeEmail">Netfang fyrir staðfestingu <span class="required">*</span></label>
-                    <input type="email" id="changeEmail" name="changeEmail" placeholder="netfang@dæmi.is">
+                    <label for="changeInstrumentEmail">Netfang fyrir staðfestingu <span class="required">*</span></label>
+                    <input type="email" id="changeInstrumentEmail" name="changeInstrumentEmail" placeholder="netfang@dæmi.is">
                 </div>
 
                 <div class="button-group">
-                    <button type="button" class="btn btn-secondary" onclick="goToStep('renewal-2')">Til baka</button>
-                    <button type="button" class="btn btn-primary" onclick="submitChangeRequest()">Senda umsókn</button>
+                    <button type="button" class="btn btn-secondary" onclick="goToStep('renewal-changes')">Til baka</button>
+                    <button type="button" class="btn btn-primary" id="btnSubmitChangeInstrument" onclick="submitChangeInstrument()">Senda umsókn</button>
+                </div>
+            </div>
+
+            <!-- Change Teacher: Simple form -->
+            <div class="form-step" data-step="change-teacher">
+                <h2 class="step-title">Skipta um kennara</h2>
+                <p class="step-description">Þú heldur áfram á sama hljóðfæri en óskar eftir öðrum kennara.</p>
+
+                <div class="info-box" style="margin-bottom: 24px;">
+                    <p><strong>Nemandi:</strong> <span id="changeTeacherNafn"></span></p>
+                    <p><strong>Kennitala:</strong> <span id="changeTeacherKt"></span></p>
+                    <p><strong>Námsgrein:</strong> <span id="changeTeacherNamsgrein"></span></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="changeTeacherOskir">Óskir nemanda <span class="optional">(valkvætt)</span></label>
+                    <textarea id="changeTeacherOskir" name="changeTeacherOskir" rows="4" placeholder="Hér getur þú skrifað óskir eða athugasemdir varðandi kennaraskipti..."></textarea>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="terms-box">
+                    <h4>Viðskiptaskilmálar</h4>
+                    <p>Gjaldskrá skólans er háð ákvörðunum bæjarsjóðs um gjaldskrárhækkanir. Tónlistarskólinn á Akureyri áskilur sér rétt til hækkunar skóla- og hljóðfæraleigugjalda á samningstímanum í samræmi við ákvarðanir bæjarsjóðs.</p>
+                    <p>Skólagjöld tónlistarskólans eru greidd fyrir eina önn í einu en til hagræðingar fyrir greiðendur dreifast greiðslur skólagjalda á 4 jafnar greiðslur fyrir hverja önn.</p>
+                    <p>Einungis er mögulegt að segja upp samningi einu sinni á ári, frá og með áramótum og rennur uppsagnarfrestur fyrir vorönn út 1. nóvember ár hvert.</p>
+                    <p>Með því að senda inn umsókn í Tónlistarskólann á Akureyri samþykkir umsækjandi þá skilmála sem birtast í skjali þessu sem og gjaldskrá skólans.</p>
+                </div>
+
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="changeTeacherSkilmalar" name="changeTeacherSkilmalar" required>
+                        <label for="changeTeacherSkilmalar">Ég samþykki <strong>viðskiptaskilmála</strong> Tónlistarskólans á Akureyri <span class="required">*</span></label>
+                    </div>
+
+                    <div class="checkbox-item" id="changeTeacherFristundaGroup">
+                        <input type="checkbox" id="changeTeacherFristunda" name="changeTeacherFristunda">
+                        <label for="changeTeacherFristunda">Ég óska eftir að nota frístundastyrk <span class="optional">(6-18 ára)</span></label>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="changeTeacherMyndefni" name="changeTeacherMyndefni">
+                        <label for="changeTeacherMyndefni">Ég samþykki að myndefni sem tekið er upp af nemanda megi nota á upplýsingasíðum skólans</label>
+                    </div>
+
+                    <div class="checkbox-item hidden" id="changeTeacherHljodfaraGroup">
+                        <input type="checkbox" id="changeTeacherHljodfaraleiga" name="changeTeacherHljodfaraleiga">
+                        <label for="changeTeacherHljodfaraleiga">Ég óska eftir hljóðfæraleigu</label>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 24px;">
+                    <label for="changeTeacherEmail">Netfang fyrir staðfestingu <span class="required">*</span></label>
+                    <input type="email" id="changeTeacherEmail" name="changeTeacherEmail" placeholder="netfang@dæmi.is">
+                </div>
+
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" onclick="goToStep('renewal-changes')">Til baka</button>
+                    <button type="button" class="btn btn-primary" id="btnSubmitChangeTeacher" onclick="submitChangeTeacher()">Senda umsókn</button>
                 </div>
             </div>
 
@@ -1937,26 +2040,127 @@
             });
         }
 
-        function submitChangeRequest() {
-            const email = document.getElementById('changeEmail').value;
-            const notes = document.getElementById('changeNotes').value;
-            const terms = document.getElementById('changeSamthykkiSkilmala').checked;
+        // Submit Change Instrument - like new application but for existing student
+        function submitChangeInstrument() {
+            const namsgrein = document.getElementById('changeInstrumentNamsgrein').value;
+            const deild = document.getElementById('changeInstrumentDeild').value;
+            const namshlutfall = document.querySelector('input[name="changeInstrumentNamshlutfall"]:checked')?.value || 'Heilt';
+            const adafag = document.getElementById('changeInstrumentAdafag')?.value || '';
+            const athugasemd = document.getElementById('changeInstrumentAthugasemd')?.value || '';
+            const email = document.getElementById('changeInstrumentEmail').value;
+            const terms = document.getElementById('changeInstrumentSkilmalar').checked;
             
-            const changes = [];
-            if (document.getElementById('changeInstrument').checked) changes.push('Skipta um hljóðfæri');
-            if (document.getElementById('changeTeacher').checked) changes.push('Skipta um kennara');
-            if (document.getElementById('changeRatio').checked) changes.push('Breyta námshlutfalli');
-            if (document.getElementById('changeOther').checked) changes.push('Annað');
-            
-            // Validation with specific messages
             let errors = [];
             
-            if (changes.length === 0) {
-                errors.push('• Veldu að minnsta kosti eina tegund breytingar');
+            if (!namsgrein) {
+                errors.push('• Veldu námsgrein');
             }
-            if (!notes.trim()) {
-                errors.push('• Lýsing á breytingum er nauðsynleg');
+            if (!terms) {
+                errors.push('• Þú verður að samþykkja viðskiptaskilmála');
             }
+            if (!email.trim()) {
+                errors.push('• Netfang fyrir staðfestingu er nauðsynlegt');
+            } else if (!isValidEmail(email)) {
+                errors.push('• Netfang er ekki á réttu formi (dæmi: nafn@dæmi.is)');
+            }
+            
+            // Check if Skapandi tónlist needs aðalfag
+            if (namsgrein === 'Skapandi tónlist' && !adafag) {
+                errors.push('• Veldu aðalfag fyrir Skapandi tónlist');
+            }
+            
+            if (errors.length > 0) {
+                showValidationError('Vinsamlegast lagfærðu eftirfarandi:\n\n' + errors.join('\n'));
+                return;
+            }
+            
+            // Disable button
+            const submitBtn = document.getElementById('btnSubmitChangeInstrument');
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sendi umsókn...';
+            }
+            
+            const fullNotes = 'SKIPTA UM HLJÓÐFÆRI - Fyrri námsgrein: ' + (renewalStudentData.namsgrein || 'Óþekkt') + '\n\n' + (athugasemd ? 'Athugasemd: ' + athugasemd : '');
+            
+            const formData = {
+                kennitala: renewalStudentData.kennitala,
+                nafn: renewalStudentData.nafn,
+                tegund: 'Breyting',
+                namsgrein: namsgrein,
+                deild: deild,
+                namshlutfall: namshlutfall,
+                studentsprof: false,
+                skoli: '',
+                fristundastyrkur: document.getElementById('changeInstrumentFristunda')?.checked || false,
+                hljodfaraleiga: document.getElementById('changeInstrumentHljodfaraleiga')?.checked || false,
+                myndefni: document.getElementById('changeInstrumentMyndefni')?.checked || false,
+                netfangNemanda: email,
+                simiNemanda: '',
+                athugasemdNemanda: fullNotes,
+                adafagSkapandi: adafag,
+                // Heimilisfang - ekki breytt
+                logheimiliNemanda: '',
+                postnumerLogheimiliNemanda: '',
+                sveitarfelagLogheimiliNemanda: '',
+                heimiliNemanda: '',
+                postnumerHeimiliNemanda: '',
+                sveitarfelagHeimiliNemanda: '',
+                // Tengiliðir - ekki breytt
+                tengiliður1Nafn: '',
+                tengiliður1Kennitala: '',
+                tengiliður1Simi: '',
+                tengiliður1Netfang: '',
+                tengiliður1Greidandi: false,
+                tengiliður1Heimili: '',
+                tengiliður1Postnumer: '',
+                tengiliður1Sveitarfelag: '',
+                tengiliður2Nafn: '',
+                tengiliður2Kennitala: '',
+                tengiliður2Simi: '',
+                tengiliður2Netfang: '',
+                tengiliður2Greidandi: false,
+                tengiliður2Heimili: '',
+                tengiliður2Postnumer: '',
+                tengiliður2Sveitarfelag: ''
+            };
+            
+            console.log('Change instrument data:', formData);
+            
+            const powerAutomateUrl = 'https://121760ab7a04ebae8bbd23b81b7a3b.4e.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/1b59cccd3fd64e189663b60d6d1697a1/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=9mYPS9IyuTu1fncoIQt1ZR-ErOOV_SWAE5fWZshW1xc';
+            
+            fetch(powerAutomateUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Villa við að senda umsókn');
+                return response.json();
+            })
+            .then(data => {
+                console.log('Success:', data);
+                document.querySelector('.form-step[data-step="change-instrument"]').classList.remove('active');
+                document.querySelector('.form-step[data-step="success"]').classList.add('active');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showValidationError('Villa kom upp við að senda umsókn. Vinsamlegast reyndu aftur.');
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Senda umsókn';
+                }
+            });
+        }
+        
+        // Submit Change Teacher - simple form
+        function submitChangeTeacher() {
+            const oskir = document.getElementById('changeTeacherOskir')?.value || '';
+            const email = document.getElementById('changeTeacherEmail').value;
+            const terms = document.getElementById('changeTeacherSkilmalar').checked;
+            
+            let errors = [];
+            
             if (!terms) {
                 errors.push('• Þú verður að samþykkja viðskiptaskilmála');
             }
@@ -1972,14 +2176,13 @@
             }
             
             // Disable button
-            const submitBtn = document.querySelector('.form-step[data-step="renewal-changes"] .btn-primary');
+            const submitBtn = document.getElementById('btnSubmitChangeTeacher');
             if (submitBtn) {
                 submitBtn.disabled = true;
                 submitBtn.textContent = 'Sendi umsókn...';
             }
             
-            // Combine changes and notes
-            const fullNotes = 'Óskað eftir breytingum: ' + changes.join(', ') + '\n\nLýsing: ' + notes;
+            const fullNotes = 'SKIPTA UM KENNARA - Sama námsgrein: ' + (renewalStudentData.namsgrein || 'Óþekkt') + '\n\n' + (oskir ? 'Óskir nemanda: ' + oskir : '');
             
             const formData = {
                 kennitala: renewalStudentData.kennitala,
@@ -1990,26 +2193,41 @@
                 namshlutfall: '',
                 studentsprof: false,
                 skoli: '',
-                fristundastyrkur: document.getElementById('changeFristundastyrkur')?.checked || false,
-                hljodfaraleiga: document.getElementById('changeHljodfaraleiga')?.checked || false,
-                myndefni: document.getElementById('changeMyndefni')?.checked || false,
+                fristundastyrkur: document.getElementById('changeTeacherFristunda')?.checked || false,
+                hljodfaraleiga: document.getElementById('changeTeacherHljodfaraleiga')?.checked || false,
+                myndefni: document.getElementById('changeTeacherMyndefni')?.checked || false,
                 netfangNemanda: email,
                 simiNemanda: '',
                 athugasemdNemanda: fullNotes,
                 adafagSkapandi: '',
+                // Heimilisfang - ekki breytt
+                logheimiliNemanda: '',
+                postnumerLogheimiliNemanda: '',
+                sveitarfelagLogheimiliNemanda: '',
+                heimiliNemanda: '',
+                postnumerHeimiliNemanda: '',
+                sveitarfelagHeimiliNemanda: '',
+                // Tengiliðir - ekki breytt
                 tengiliður1Nafn: '',
                 tengiliður1Kennitala: '',
                 tengiliður1Simi: '',
                 tengiliður1Netfang: '',
                 tengiliður1Greidandi: false,
+                tengiliður1Heimili: '',
+                tengiliður1Postnumer: '',
+                tengiliður1Sveitarfelag: '',
                 tengiliður2Nafn: '',
                 tengiliður2Kennitala: '',
                 tengiliður2Simi: '',
                 tengiliður2Netfang: '',
-                tengiliður2Greidandi: false
+                tengiliður2Greidandi: false,
+                tengiliður2Heimili: '',
+                tengiliður2Postnumer: '',
+                tengiliður2Sveitarfelag: ''
             };
             
-            // Power Automate URL
+            console.log('Change teacher data:', formData);
+            
             const powerAutomateUrl = 'https://121760ab7a04ebae8bbd23b81b7a3b.4e.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/1b59cccd3fd64e189663b60d6d1697a1/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=9mYPS9IyuTu1fncoIQt1ZR-ErOOV_SWAE5fWZshW1xc';
             
             fetch(powerAutomateUrl, {
@@ -2022,8 +2240,9 @@
                 return response.json();
             })
             .then(data => {
-                console.log('Change request success:', data);
-                goToStep('success');
+                console.log('Success:', data);
+                document.querySelector('.form-step[data-step="change-teacher"]').classList.remove('active');
+                document.querySelector('.form-step[data-step="success"]').classList.add('active');
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -2034,13 +2253,87 @@
                 }
             });
         }
+        
+        // Populate change instrument dropdown and update deild
+        function populateChangeInstrumentDropdown() {
+            const select = document.getElementById('changeInstrumentNamsgrein');
+            if (!select) return;
+            
+            // Get student age from renewalStudentData kennitala
+            const kt = renewalStudentData.kennitala;
+            if (!kt) return;
+            
+            const parsed = parseKennitala(kt);
+            if (!parsed) return;
+            
+            select.innerHTML = '<option value="">Veldu námsgrein...</option>';
+            
+            // Filter námsgreinar by age/bekkur (sama og í populateNamsgreinar)
+            const filtered = namsgreinar
+                .filter(n => isNamsgreinAvailable(n, parsed.birthDate))
+                .sort((a, b) => a.name.localeCompare(b.name, 'is'));
+            
+            filtered.forEach(namsgrein => {
+                const option = document.createElement('option');
+                option.value = namsgrein.name;
+                option.textContent = namsgrein.name;
+                option.dataset.deild = namsgrein.deild || '';
+                option.dataset.needsDepartmentChoice = namsgrein.needsDepartmentChoice ? 'true' : 'false';
+                select.appendChild(option);
+            });
+        }
+        
+        function updateChangeInstrumentDeild() {
+            const select = document.getElementById('changeInstrumentNamsgrein');
+            const deildInput = document.getElementById('changeInstrumentDeild');
+            const deildGroup = document.getElementById('changeInstrumentDeildGroup');
+            const adafagGroup = document.getElementById('changeInstrumentAdafagGroup');
+            const adafagSelect = document.getElementById('changeInstrumentAdafag');
+            
+            if (!select || !deildInput) return;
+            
+            const selectedOption = select.options[select.selectedIndex];
+            const namsgrein = select.value;
+            
+            // Handle deild
+            if (selectedOption && selectedOption.dataset.deild) {
+                deildInput.value = selectedOption.dataset.deild;
+                deildGroup.style.display = 'block';
+            } else if (selectedOption && selectedOption.dataset.needsDepartmentChoice === 'true') {
+                // Needs department choice - show dropdown instead
+                deildInput.value = '';
+                deildGroup.style.display = 'none';
+                // TODO: Show department choice dropdown
+            } else {
+                deildInput.value = '';
+                deildGroup.style.display = 'none';
+            }
+            
+            // Handle Skapandi tónlist aðalfag
+            if (namsgrein === 'Skapandi tónlist') {
+                adafagGroup.classList.remove('hidden');
+                // Populate aðalfag dropdown
+                if (adafagSelect) {
+                    adafagSelect.innerHTML = '<option value="">Veldu aðalfag...</option>';
+                    const adafogOptions = ['Gítar', 'Píanó', 'Rafgítar', 'Rafbassi', 'Trommusett', 'Söngur'];
+                    adafogOptions.forEach(af => {
+                        const opt = document.createElement('option');
+                        opt.value = af;
+                        opt.textContent = af;
+                        adafagSelect.appendChild(opt);
+                    });
+                }
+            } else {
+                adafagGroup.classList.add('hidden');
+            }
+        }
 
         // =============================================
         // FORM NAVIGATION
         // =============================================
         function goToStep(step) {
             // Handle renewal steps (strings) vs new application steps (numbers)
-            const isRenewalStep = typeof step === 'string' && step.startsWith('renewal');
+            const isRenewalStep = typeof step === 'string' && (step.startsWith('renewal') || step.startsWith('change'));
             const isSuccessStep = step === 'success';
             
             // Validate current step before moving forward (only for new applications)
@@ -2060,6 +2353,20 @@
             }
             
             currentStep = step;
+            
+            // Populate change forms with student data
+            if (step === 'change-instrument') {
+                document.getElementById('changeInstrumentNafn').textContent = renewalStudentData.nafn || '';
+                document.getElementById('changeInstrumentKt').textContent = renewalStudentData.kennitala || '';
+                document.getElementById('changeInstrumentCurrent').textContent = renewalStudentData.namsgrein || 'Óþekkt';
+                populateChangeInstrumentDropdown();
+            }
+            
+            if (step === 'change-teacher') {
+                document.getElementById('changeTeacherNafn').textContent = renewalStudentData.nafn || '';
+                document.getElementById('changeTeacherKt').textContent = renewalStudentData.kennitala || '';
+                document.getElementById('changeTeacherNamsgrein').textContent = renewalStudentData.namsgrein || 'Óþekkt';
+            }
             
             // Update progress (only for new applications)
             if (applicationMode === 'new' && typeof step === 'number') {
