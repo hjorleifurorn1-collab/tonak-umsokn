@@ -1986,10 +1986,15 @@
                 submitBtn.textContent = 'Sendi umsókn...';
             }
             
+            // Reikna aldursflokk úr kennitölu
+            const renewalParsed = parseKennitala(renewalStudentData.kennitala);
+            const renewalAgeGroup = renewalParsed ? getAgeGroup(renewalParsed.birthDate) : null;
+            
             const formData = {
                 kennitala: renewalStudentData.kennitala,
                 nafn: renewalStudentData.nafn,
                 tegund: 'Endurnýjun',
+                aldursflokkur: renewalAgeGroup ? renewalAgeGroup.group : '',
                 namsgrein: renewalStudentData.namsgrein || '',
                 deild: '',
                 namshlutfall: '',
@@ -2083,10 +2088,15 @@
             
             const fullNotes = 'SKIPTA UM HLJÓÐFÆRI - Fyrri námsgrein: ' + (renewalStudentData.namsgrein || 'Óþekkt') + '\n\n' + (athugasemd ? 'Athugasemd: ' + athugasemd : '');
             
+            // Reikna aldursflokk úr kennitölu
+            const changeInstParsed = parseKennitala(renewalStudentData.kennitala);
+            const changeInstAgeGroup = changeInstParsed ? getAgeGroup(changeInstParsed.birthDate) : null;
+            
             const formData = {
                 kennitala: renewalStudentData.kennitala,
                 nafn: renewalStudentData.nafn,
                 tegund: 'Breyting',
+                aldursflokkur: changeInstAgeGroup ? changeInstAgeGroup.group : '',
                 namsgrein: namsgrein,
                 deild: deild,
                 namshlutfall: namshlutfall,
@@ -2184,10 +2194,15 @@
             
             const fullNotes = 'SKIPTA UM KENNARA - Sama námsgrein: ' + (renewalStudentData.namsgrein || 'Óþekkt') + '\n\n' + (oskir ? 'Óskir nemanda: ' + oskir : '');
             
+            // Reikna aldursflokk úr kennitölu
+            const changeTeacherParsed = parseKennitala(renewalStudentData.kennitala);
+            const changeTeacherAgeGroup = changeTeacherParsed ? getAgeGroup(changeTeacherParsed.birthDate) : null;
+            
             const formData = {
                 kennitala: renewalStudentData.kennitala,
                 nafn: renewalStudentData.nafn,
                 tegund: 'Breyting',
+                aldursflokkur: changeTeacherAgeGroup ? changeTeacherAgeGroup.group : '',
                 namsgrein: renewalStudentData.namsgrein || '',
                 deild: '',
                 namshlutfall: '',
@@ -3052,6 +3067,7 @@
                 kennitala: document.getElementById('kennitala').value,
                 nafn: document.getElementById('nafn').value,
                 tegund: 'Ný umsókn',
+                aldursflokkur: studentAgeGroup ? studentAgeGroup.group : '',
                 namsgrein: (function() {
                     const sel = document.getElementById('namsgrein');
                     const opt = sel.options[sel.selectedIndex];
