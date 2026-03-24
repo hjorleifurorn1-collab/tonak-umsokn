@@ -1791,7 +1791,7 @@
         // ÞJÓÐSKRÁ INTEGRATION
         // =============================================
         function fetchFromThjodskra(kennitala) {
-            const thjodskraUrl = 'https://121760ab7a04ebae8bbd23b81b7a3b.4e.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/18399dc2b5994d608dcdbe6fcdd77bf9/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Nd7sld9BgrFbjqkrX5JziBDTfVN8aKi2DNn-SB3e8nc';
+           const thjodskraUrl = 'https://defaultfce2332bf493407ea472f173f9a0af.ea.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/7f53c0340a0542e58b450bde5340be5b/triggers/manual/paths/invoke?api-version=1';
             
             // Sýna loading
             const nafnInput = document.getElementById('nafn');
@@ -1843,7 +1843,7 @@
         }
         
         function fetchTengilidarFromThjodskra(kennitala, tengilidarNumer) {
-            const thjodskraUrl = 'https://121760ab7a04ebae8bbd23b81b7a3b.4e.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/18399dc2b5994d608dcdbe6fcdd77bf9/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Nd7sld9BgrFbjqkrX5JziBDTfVN8aKi2DNn-SB3e8nc';
+            const thjodskraUrl = 'https://defaultfce2332bf493407ea472f173f9a0af.ea.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/7f53c0340a0542e58b450bde5340be5b/triggers/manual/paths/invoke?api-version=1';
             
             const prefix = `tengilidur${tengilidarNumer}_`;
             
@@ -1903,7 +1903,7 @@
             searchBtn.textContent = 'Leita...';
             
             // Power Automate URL for TA-CheckKennitala
-            const checkKennitalaUrl = 'https://121760ab7a04ebae8bbd23b81b7a3b.4e.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/769a62a47d8247ae88a1b24a50650bfd/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=0Zj9fqOg6hOHJ29j-VQTQIZRntS7NBEyBf7Qn9-Ni2w';
+            const checkKennitalaUrl = 'https://defaultfce2332bf493407ea472f173f9a0af.ea.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/ff4fe5e26f494f75a4fcc8dd1961e916/triggers/manual/paths/invoke?api-version=1';
             
             fetch(checkKennitalaUrl, {
                 method: 'POST',
@@ -2020,7 +2020,7 @@
             };
             
             // Power Automate URL
-            const powerAutomateUrl = 'https://121760ab7a04ebae8bbd23b81b7a3b.4e.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/1b59cccd3fd64e189663b60d6d1697a1/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=9mYPS9IyuTu1fncoIQt1ZR-ErOOV_SWAE5fWZshW1xc';
+            const powerAutomateUrl = 'https://defaultfce2332bf493407ea472f173f9a0af.ea.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/1b25b90edcdd4f39940422d05d5ea0cf/triggers/manual/paths/invoke?api-version=1';
             
             fetch(powerAutomateUrl, {
                 method: 'POST',
@@ -2137,7 +2137,7 @@
             
             console.log('Change instrument data:', formData);
             
-            const powerAutomateUrl = 'https://121760ab7a04ebae8bbd23b81b7a3b.4e.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/1b59cccd3fd64e189663b60d6d1697a1/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=9mYPS9IyuTu1fncoIQt1ZR-ErOOV_SWAE5fWZshW1xc';
+            const powerAutomateUrl = 'https://defaultfce2332bf493407ea472f173f9a0af.ea.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/1b25b90edcdd4f39940422d05d5ea0cf/triggers/manual/paths/invoke?api-version=1';
             
             fetch(powerAutomateUrl, {
                 method: 'POST',
@@ -2243,7 +2243,7 @@
             
             console.log('Change teacher data:', formData);
             
-            const powerAutomateUrl = 'https://121760ab7a04ebae8bbd23b81b7a3b.4e.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/1b59cccd3fd64e189663b60d6d1697a1/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=9mYPS9IyuTu1fncoIQt1ZR-ErOOV_SWAE5fWZshW1xc';
+            const powerAutomateUrl = 'https://defaultfce2332bf493407ea472f173f9a0af.ea.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/1b25b90edcdd4f39940422d05d5ea0cf/triggers/manual/paths/invoke?api-version=1';
             
             fetch(powerAutomateUrl, {
                 method: 'POST',
@@ -3119,7 +3119,7 @@
             console.log('Form data:', formData);
             
             // Power Automate URL
-            const powerAutomateUrl = 'https://121760ab7a04ebae8bbd23b81b7a3b.4e.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/1b59cccd3fd64e189663b60d6d1697a1/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=9mYPS9IyuTu1fncoIQt1ZR-ErOOV_SWAE5fWZshW1xc';
+            const powerAutomateUrl = 'https://defaultfce2332bf493407ea472f173f9a0af.ea.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/1b25b90edcdd4f39940422d05d5ea0cf/triggers/manual/paths/invoke?api-version=1';
             
             // Send to Power Automate
             fetch(powerAutomateUrl, {
