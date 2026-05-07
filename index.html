@@ -1921,26 +1921,34 @@
                     renewalStudentData = {
                         if (data.exists && data.student) {
                     // Helper: SharePoint Lookup dálkar koma sem object með Value, ekki bara streng
-                    const getLookupValue = (field) => {
+                    function getLookupValue(field) {
                         if (!field) return '';
                         if (typeof field === 'string') return field;
                         return field.Value || field.value || '';
-                    };
+                    }
                     
-                    const enrollments = data.enrollments || [];
-                    const firstEnrollment = enrollments[0] || null;
+                    var enrollments = data.enrollments || [];
+                    var firstEnrollment = enrollments.length > 0 ? enrollments[0] : null;
                     
-                    // Aðalnámsgrein (fyrir endurnýjun og notkun í flæðum)
-                    const primaryNamsgrein = firstEnrollment 
-                        ? getLookupValue(firstEnrollment.Namsgrein) 
-                        : '';
+                    // Aðalnámsgrein
+                    var primaryNamsgrein = '';
+                    if (firstEnrollment) {
+                        primaryNamsgrein = getLookupValue(firstEnrollment.Namsgrein);
+                    }
                     
-                    // Birtingarstrengur — ef nemandi hefur fleiri en eina virka skráningu, sýnum allar
-                    const namsgreinDisplay = enrollments.length === 0
-                        ? 'Engar virkar skráningar fundust'
-                        : enrollments.length === 1
-                        ? primaryNamsgrein
-                        : enrollments.map(e => getLookupValue(e.Namsgrein)).join(', ');
+                    // Birtingarstrengur
+                    var namsgreinDisplay;
+                    if (enrollments.length === 0) {
+                        namsgreinDisplay = 'Engar virkar skráningar fundust';
+                    } else if (enrollments.length === 1) {
+                        namsgreinDisplay = primaryNamsgrein;
+                    } else {
+                        var allNames = [];
+                        for (var i = 0; i < enrollments.length; i++) {
+                            allNames.push(getLookupValue(enrollments[i].Namsgrein));
+                        }
+                        namsgreinDisplay = allNames.join(', ');
+                    }
                     
                     // Vista nemandagögn
                     renewalStudentData = {
@@ -1949,9 +1957,9 @@
                         nafn: data.student.Title || 'Óþekkt',
                         namsgrein: primaryNamsgrein,
                         namsgreinDisplay: namsgreinDisplay,
-                        deild: firstEnrollment?.Deild || '',
-                        namshlutfall: firstEnrollment?.Namshlutfall || '',
-                        afangi: firstEnrollment?.Afangi || '',
+                        deild: firstEnrollment ? (firstEnrollment.Deild || '') : '',
+                        namshlutfall: firstEnrollment ? (firstEnrollment.Namshlutfall || '') : '',
+                        afangi: firstEnrollment ? (firstEnrollment.Afangi || '') : '',
                         teacher: firstEnrollment ? getLookupValue(firstEnrollment.Teacher) : '',
                         enrollments: enrollments
                     };
@@ -1965,6 +1973,7 @@
                 } else {
                     // Student not found
                     notFoundMessage.classList.remove('hidden');
+                }
                 }
                 
                 // Re-enable button
