@@ -1919,15 +1919,46 @@
                 if (data.exists && data.student) {
                     // Student found - store data
                     renewalStudentData = {
+                        if (data.exists && data.student) {
+                    // Helper: SharePoint Lookup dálkar koma sem object með Value, ekki bara streng
+                    const getLookupValue = (field) => {
+                        if (!field) return '';
+                        if (typeof field === 'string') return field;
+                        return field.Value || field.value || '';
+                    };
+                    
+                    const enrollments = data.enrollments || [];
+                    const firstEnrollment = enrollments[0] || null;
+                    
+                    // Aðalnámsgrein (fyrir endurnýjun og notkun í flæðum)
+                    const primaryNamsgrein = firstEnrollment 
+                        ? getLookupValue(firstEnrollment.Namsgrein) 
+                        : '';
+                    
+                    // Birtingarstrengur — ef nemandi hefur fleiri en eina virka skráningu, sýnum allar
+                    const namsgreinDisplay = enrollments.length === 0
+                        ? 'Engar virkar skráningar fundust'
+                        : enrollments.length === 1
+                        ? primaryNamsgrein
+                        : enrollments.map(e => getLookupValue(e.Namsgrein)).join(', ');
+                    
+                    // Vista nemandagögn
+                    renewalStudentData = {
                         id: data.student.ID || data.student.Id,
                         kennitala: kt,
-                        nafn: data.student.Nafn || data.student.Title || 'Óþekkt',
-                        namsgrein: data.student.Namsgrein || 'Óþekkt'
+                        nafn: data.student.Title || 'Óþekkt',
+                        namsgrein: primaryNamsgrein,
+                        namsgreinDisplay: namsgreinDisplay,
+                        deild: firstEnrollment?.Deild || '',
+                        namshlutfall: firstEnrollment?.Namshlutfall || '',
+                        afangi: firstEnrollment?.Afangi || '',
+                        teacher: firstEnrollment ? getLookupValue(firstEnrollment.Teacher) : '',
+                        enrollments: enrollments
                     };
                     
                     // Update display
                     document.getElementById('renewalStudentName').textContent = renewalStudentData.nafn;
-                    document.getElementById('renewalStudentSubject').textContent = renewalStudentData.namsgrein;
+                    document.getElementById('renewalStudentSubject').textContent = renewalStudentData.namsgreinDisplay;
                     
                     notFoundMessage.classList.add('hidden');
                     goToStep('renewal-2');
