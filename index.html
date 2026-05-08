@@ -1742,17 +1742,31 @@
                         namsgreinDisplay = allNames.join(', ');
                     }
                     
+                    function asString(val) {
+                        if (!val) return '';
+                        if (typeof val === 'string') return val;
+                        if (typeof val === 'object') return val.Value || val.value || '';
+                        return String(val);
+                    }
+                    
                     renewalStudentData = {
                         id: data.student.ID || data.student.Id,
                         kennitala: kt,
                         nafn: data.student.Title || 'Óþekkt',
                         namsgrein: primaryNamsgrein,
                         namsgreinDisplay: namsgreinDisplay,
-                        deild: firstEnrollment ? (firstEnrollment.Deild || '') : '',
-                        namshlutfall: firstEnrollment ? (firstEnrollment.Namshlutfall || '') : '',
-                        afangi: firstEnrollment ? (firstEnrollment.Afangi || '') : '',
+                        deild: firstEnrollment ? asString(firstEnrollment.Deild) : '',
+                        namshlutfall: firstEnrollment ? asString(firstEnrollment.Namshlutfall) : '',
+                        afangi: firstEnrollment ? asString(firstEnrollment.Afangi) : '',
                         teacher: firstEnrollment ? getLookupValue(firstEnrollment.Teacher) : '',
-                        enrollments: enrollments
+                        enrollments: enrollments,
+                        // Reitir úr Students lista
+                        logheimili: data.student.Logheimili || '',
+                        sveitarfelagLogheimili: data.student.Sveitarfelag_Logheimili || '',
+                        simanumer: data.student.Simanumer || '',
+                        tolvupostfang: data.student.Tolvupostfang || '',
+                        grunnFramhSkoli: data.student.GrunnFramhSkoli || '',
+                        saekjaUmStudentsprof: data.student.SaekjaUmStudentsprof || false
                     };
                     
                     document.getElementById('renewalStudentName').textContent = renewalStudentData.nafn;
@@ -1823,17 +1837,23 @@
                 tegund: 'Endurnýjun',
                 aldursflokkur: renewalAgeGroup ? renewalAgeGroup.group : '',
                 namsgrein: renewalStudentData.namsgrein || '',
-                deild: '',
-                namshlutfall: '',
-                studentsprof: false,
-                skoli: '',
+                deild: renewalStudentData.deild || '',
+                namshlutfall: renewalStudentData.namshlutfall || '',
+                studentsprof: renewalStudentData.saekjaUmStudentsprof || false,
+                skoli: renewalStudentData.grunnFramhSkoli || '',
                 fristundastyrkur: fristundaEl ? fristundaEl.checked : false,
                 hljodfaraleiga: hljodfaraEl ? hljodfaraEl.checked : false,
                 myndefni: myndefniEl ? myndefniEl.checked : false,
                 netfangNemanda: email,
-                simiNemanda: '',
+                simiNemanda: renewalStudentData.simanumer || '',
                 athugasemdNemanda: notes,
                 adafagSkapandi: '',
+                logheimiliNemanda: renewalStudentData.logheimili || '',
+                sveitarfelagLogheimiliNemanda: renewalStudentData.sveitarfelagLogheimili || '',
+                postnumerLogheimiliNemanda: '',
+                heimiliNemanda: '',
+                postnumerHeimiliNemanda: '',
+                sveitarfelagHeimiliNemanda: '',
                 tengiliður1Nafn: '',
                 tengiliður1Kennitala: '',
                 tengiliður1Simi: '',
@@ -2033,8 +2053,8 @@
                 tegund: 'Breyting',
                 aldursflokkur: changeTeacherAgeGroup ? changeTeacherAgeGroup.group : '',
                 namsgrein: renewalStudentData.namsgrein || '',
-                deild: '',
-                namshlutfall: '',
+                deild: renewalStudentData.deild || '',
+                namshlutfall: renewalStudentData.namshlutfall || '',
                 studentsprof: false,
                 skoli: '',
                 fristundastyrkur: fristundaEl ? fristundaEl.checked : false,
