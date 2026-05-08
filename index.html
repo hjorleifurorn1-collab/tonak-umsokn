@@ -46,14 +46,12 @@
             min-height: 100vh;
         }
 
-        /* Container */
         .form-container {
             max-width: 720px;
             margin: 0 auto;
             padding: 40px 20px;
         }
 
-        /* Header */
         .form-header {
             text-align: center;
             margin-bottom: 40px;
@@ -74,7 +72,6 @@
             font-weight: 300;
         }
 
-        /* Progress indicator */
         .progress-container {
             margin-bottom: 40px;
         }
@@ -156,7 +153,6 @@
             font-weight: 500;
         }
 
-        /* Form card */
         .form-card {
             background: var(--color-white);
             border-radius: var(--radius-large);
@@ -165,7 +161,6 @@
             margin-bottom: 24px;
         }
 
-        /* Step sections */
         .form-step {
             display: none;
             animation: fadeIn 0.4s ease;
@@ -194,7 +189,6 @@
             font-size: 0.95rem;
         }
 
-        /* Form elements */
         .form-group {
             margin-bottom: 24px;
         }
@@ -282,7 +276,6 @@
             display: block;
         }
 
-        /* Info box */
         .info-box {
             background: var(--color-background-light);
             border-left: 3px solid var(--color-primary);
@@ -302,7 +295,6 @@
             color: var(--color-primary);
         }
 
-        /* Checkboxes */
         .checkbox-group {
             display: flex;
             flex-direction: column;
@@ -336,7 +328,6 @@
             text-decoration: underline;
         }
 
-        /* Radio buttons */
         .radio-group {
             display: flex;
             gap: 24px;
@@ -362,7 +353,6 @@
             cursor: pointer;
         }
 
-        /* Buttons */
         .button-group {
             display: flex;
             justify-content: space-between;
@@ -422,7 +412,6 @@
             border-style: solid;
         }
 
-        /* Tengiliður card */
         .contact-card {
             background: var(--color-background-light);
             border-radius: var(--radius-medium);
@@ -458,7 +447,6 @@
             text-decoration: underline;
         }
 
-        /* Subject selection */
         .subject-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -501,7 +489,6 @@
             margin-top: 4px;
         }
 
-        /* Terms box */
         .terms-box {
             background: var(--color-background-light);
             border-radius: var(--radius-medium);
@@ -525,7 +512,6 @@
             margin-bottom: 12px;
         }
 
-        /* Success message */
         .success-message {
             text-align: center;
             padding: 40px 20px;
@@ -561,12 +547,10 @@
             font-size: 1.1rem;
         }
 
-        /* Hidden elements */
         .hidden {
             display: none !important;
         }
 
-        /* Choice buttons for start screen */
         .choice-buttons {
             display: flex;
             gap: 20px;
@@ -635,7 +619,6 @@
             }
         }
 
-        /* Textarea */
         textarea {
             width: 100%;
             padding: 12px 16px;
@@ -656,14 +639,12 @@
             box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.1);
         }
 
-        /* Divider */
         .divider {
             height: 1px;
             background: var(--color-border);
             margin: 32px 0;
         }
 
-        /* Section subtitle */
         .section-subtitle {
             font-family: var(--font-display);
             font-size: 1.2rem;
@@ -677,7 +658,6 @@
             margin-top: 0;
         }
 
-        /* Responsive */
         @media (max-width: 600px) {
             .form-container {
                 padding: 20px 16px;
@@ -709,7 +689,6 @@
             }
         }
 
-        /* Validation Modal */
         .validation-modal {
             position: fixed;
             top: 0;
@@ -762,13 +741,11 @@
 </head>
 <body>
     <div class="form-container">
-        <!-- Header -->
         <div class="form-header">
             <h1>Umsókn um námsvist</h1>
             <p>Tónlistarskólinn á Akureyri</p>
         </div>
 
-        <!-- Progress - hidden on start screen -->
         <div class="progress-container" id="progressContainer" style="display: none;">
             <div class="progress-steps">
                 <div class="progress-line" id="progressLine"></div>
@@ -787,9 +764,7 @@
             </div>
         </div>
 
-        <!-- Form Card -->
         <div class="form-card">
-            <!-- Start Screen: Choose path -->
             <div class="form-step active" data-step="start">
                 <h2 class="step-title">Umsókn um námsvist</h2>
                 <p class="step-description">Er nemandinn að endurnýja skólavist eða sækja um í fyrsta skipti?</p>
@@ -808,7 +783,6 @@
                 </div>
             </div>
 
-            <!-- Renewal Step 1: Enter kennitala -->
             <div class="form-step" data-step="renewal-1">
                 <h2 class="step-title">Endurnýja skólavist</h2>
                 <p class="step-description">Sláðu inn kennitölu nemanda til að leita að skráningu.</p>
@@ -830,7 +804,6 @@
                 </div>
             </div>
 
-            <!-- Renewal Step 2: Confirm or request changes -->
             <div class="form-step" data-step="renewal-2">
                 <h2 class="step-title">Skráning fannst</h2>
                 <p class="step-description">Við fundum skráningu fyrir þessa kennitölu frá fyrra skólaári. Viltu endurnýja skólavist?</p>
@@ -854,7 +827,6 @@
                 </div>
             </div>
 
-            <!-- Renewal Step 3a: Simple renewal confirmation -->
             <div class="form-step" data-step="renewal-confirm">
                 <h2 class="step-title">Staðfesta endurnýjun</h2>
                 <p class="step-description">Nemandinn verður skráður áfram í sama námi. Vinsamlegast farðu yfir og samþykktu viðskiptaskilmála.</p>
@@ -909,7 +881,6 @@
                 </div>
             </div>
 
-            <!-- Renewal Step 3b: Choose change type -->
             <div class="form-step" data-step="renewal-changes">
                 <h2 class="step-title">Óska eftir breytingum</h2>
                 <p class="step-description">Hvaða breytingum óskar þú eftir?</p>
@@ -932,7 +903,6 @@
                 </div>
             </div>
 
-            <!-- Change Instrument: Goes through subject selection like new application -->
             <div class="form-step" data-step="change-instrument">
                 <h2 class="step-title">Skipta um hljóðfæri / námsgrein</h2>
                 <p class="step-description">Veldu nýja námsgrein. Þetta er eins og ný umsókn á nýtt hljóðfæri.</p>
@@ -943,7 +913,6 @@
                     <p><strong>Núverandi námsgrein:</strong> <span id="changeInstrumentCurrent"></span></p>
                 </div>
 
-                <!-- Same subject selection as new application -->
                 <div class="form-group">
                     <label for="changeInstrumentNamsgrein">Ný námsgrein <span class="required">*</span></label>
                     <select id="changeInstrumentNamsgrein" name="changeInstrumentNamsgrein" onchange="updateChangeInstrumentDeild()">
@@ -1025,7 +994,6 @@
                 </div>
             </div>
 
-            <!-- Change Teacher: Simple form -->
             <div class="form-step" data-step="change-teacher">
                 <h2 class="step-title">Skipta um kennara</h2>
                 <p class="step-description">Þú heldur áfram á sama hljóðfæri en óskar eftir öðrum kennara.</p>
@@ -1084,7 +1052,6 @@
                 </div>
             </div>
 
-            <!-- Step 1: Kennitala (for new applications) -->
             <div class="form-step" data-step="1">
                 <h2 class="step-title">Ný umsókn - Kennitala nemanda</h2>
                 <p class="step-description">Sláðu inn kennitölu nemanda til að hefja umsókn.</p>
@@ -1107,7 +1074,6 @@
                 </div>
             </div>
 
-            <!-- Step 2: Upplýsingar nemanda -->
             <div class="form-step" data-step="2">
                 <h2 class="step-title">Upplýsingar nemanda</h2>
                 <p class="step-description">Vinsamlegast fylltu út eftirfarandi upplýsingar.</p>
@@ -1166,7 +1132,6 @@
                     </div>
                 </div>
 
-                <!-- Grunnskóli/Framhaldsskóli - sýnist eftir aldri -->
                 <div id="skoliSection" class="hidden">
                     <div class="section-subtitle">Skóli</div>
                     <div class="form-group">
@@ -1180,7 +1145,6 @@
                         <input type="text" id="skoliAnnad" name="skoliAnnad" placeholder="Nafn skóla">
                     </div>
                     
-                    <!-- Stúdentsprófsbraut - bara fyrir framhaldsskólanemendur -->
                     <div class="form-group hidden" id="studentsprofStep2Group" style="margin-top: 24px;">
                         <div class="checkbox-item">
                             <input type="checkbox" id="studentsprofStep2" name="studentsprofStep2">
@@ -1201,21 +1165,17 @@
                 </div>
             </div>
 
-            <!-- Step 3: Tengiliðir -->
             <div class="form-step" data-step="3">
                 <h2 class="step-title">Tengiliðir</h2>
                 <p class="step-description" id="contactDescription">Vinsamlegast skráðu upplýsingar um forráðamann/forráðamenn.</p>
 
-                <!-- For 18+ - nemandi er sjálfur tengiliður -->
                 <div id="selfContactInfo" class="hidden">
                     <div class="info-box">
                         <p>Þar sem nemandi er 18 ára eða eldri er hann/hún sjálfur tengiliður og greiðandi. Upplýsingarnar sem þú fylltir út í skrefi 2 verða notaðar.</p>
                     </div>
                 </div>
 
-                <!-- For under 18 -->
                 <div id="contactsContainer">
-                    <!-- Forráðamaður 1 - alltaf sýnilegur fyrir börn -->
                     <div class="contact-card" id="contact1">
                         <div class="contact-card-header">
                             <span class="contact-card-title">Forráðamaður 1</span>
@@ -1278,12 +1238,10 @@
                 </div>
             </div>
 
-            <!-- Step 4: Námsgrein -->
             <div class="form-step" data-step="4">
                 <h2 class="step-title">Námsgrein</h2>
                 <p class="step-description">Veldu námsgrein. Deild ákvarðast sjálfkrafa.</p>
 
-                <!-- Skilaboð fyrir 1-2 ára -->
                 <div class="info-box hidden" id="noCoursesMessage" style="border-left-color: var(--color-error);">
                     <p><strong>Ekkert nám er í boði fyrir börn á þessum aldri.</strong></p>
                     <p>Vinsamlegast hafðu samband við skrifstofu skólans á <a href="mailto:tonak@tonak.is">tonak@tonak.is</a> eða í síma 460-1000 til að fá frekari upplýsingar um biðlista fyrir Suzukinám.</p>
@@ -1293,7 +1251,6 @@
                     <label for="namsgrein">Námsgrein / Hljóðfæri <span class="required">*</span></label>
                     <select id="namsgrein" name="namsgrein" onchange="updateDeild()">
                         <option value="">Veldu námsgrein...</option>
-                        <!-- Options populated by JavaScript based on age -->
                     </select>
                 </div>
 
@@ -1302,7 +1259,6 @@
                     <input type="text" id="deild" name="deild" readonly disabled>
                 </div>
 
-                <!-- Aðalfag - birtist aðeins þegar Skapandi tónlist er valið -->
                 <div class="form-group hidden" id="adafagGroup">
                     <label for="adafag">Aðalfag <span class="required">*</span></label>
                     <p class="field-description">Nemendur sem stunda nám í skapandi tónlist þurfa að velja sér aðalfag sem þau fá einkatíma í hjá umsjónarkennara/leiðbeinanda sínum. Hér getur þú valið það sem þú vilt leggja áherslu á í náminu.</p>
@@ -1311,7 +1267,6 @@
                     </select>
                 </div>
 
-                <!-- Heilt/Hálft nám -->
                 <div class="form-group" id="namshlutiGroup">
                     <label>Námshlutfall</label>
                     <div class="radio-group">
@@ -1326,7 +1281,6 @@
                     </div>
                 </div>
 
-                <!-- Stúdentsprófsbraut - only for 15+ -->
                 <div class="form-group hidden" id="studentsprofGroup">
                     <div class="checkbox-item">
                         <input type="checkbox" id="studentsprof" name="studentsprof">
@@ -1340,7 +1294,6 @@
                 </div>
             </div>
 
-            <!-- Step 5: Staðfesting -->
             <div class="form-step" data-step="5">
                 <h2 class="step-title">Staðfesting</h2>
                 <p class="step-description">Vinsamlegast farðu yfir og samþykktu viðskiptaskilmála.</p>
@@ -1388,7 +1341,6 @@
                 </div>
             </div>
 
-            <!-- Success -->
             <div class="form-step" data-step="success">
                 <div class="success-message">
                     <div class="success-icon">
@@ -1404,35 +1356,15 @@
     </div>
 
     <script>
-        // =============================================
         // GLOBAL STATE
-        // =============================================
         let currentStep = 'start';
-        let applicationMode = null; // 'new' or 'renewal'
+        let applicationMode = null;
         let studentAge = null;
         let studentAgeGroup = null;
         let studentBekkur = null;
         let contactCount = 1;
-        let renewalStudentData = null; // Stores student data for renewal
+        let renewalStudentData = null;
 
-        // =============================================
-        // NÁMSGREINAR OG DEILDIR
-        // Hver námsgrein hefur ákveðna deild og aldurs-/bekkjarskilyrði
-        // hideNamshlutfall: true = ekki sýna heilt/hálft nám val
-        // needsDepartmentChoice: true = fag er í boði í bæði klassískri og rytmískri deild
-        // 
-        // Aldursreglur:
-        // - 0-1 árs: Krútt Tónó einungis
-        // - 1-2 ára: Ekkert í boði (biðlisti)
-        // - 3-5 ára: Suzuki einungis
-        // - 1. bekkur: Forskóli, Suzuki
-        // - 2. bekkur: Forskóli, Hringekja, Suzuki
-        // - 3.-4. bekkur: Hringekja, Suzuki, öll hljóðfæri (nema söngur og skapandi)
-        // - 5.-10. bekkur: Barna- og unglingasöngdeild (ef söngur), öll hljóðfæri (nema skapandi)
-        // - 15+ ára: Allt + Skapandi tónlist
-        // =============================================
-        
-        // Fög sem eru í báðum deildum - þarf að spyrja notanda
         const dualDepartmentSubjects = {
             'Söngur': {
                 question: 'Vilt þú sækja um klassískan söng eða jazz- og dægurlagasöng?',
@@ -1473,34 +1405,21 @@
         };
         
         const namsgreinar = [
-            // Krútt Tónó - Ungbarnatónlist (0-1 árs)
             { name: 'Krútt Tónó - Ungbarnatónlist', deild: 'Forskóladeild', minAgeMonths: 0, maxAgeMonths: 23, useMonths: true, hideNamshlutfall: true },
-            
-            // Forskóli (1.-2. bekkur, þ.e. 6-7 ára)
             { name: 'Forskóli', deild: 'Forskóladeild', minBekkur: 1, maxBekkur: 2, useBekkur: true, hideNamshlutfall: true },
-            
-            // Hringekja (2.-4. bekkur, þ.e. 7-9 ára)
             { name: 'Hringekja', deild: 'Forskóladeild', minBekkur: 2, maxBekkur: 4, useBekkur: true, hideNamshlutfall: true },
-            
-            // Suzuki deild (3 ára og eldri)
             { name: 'Suzukifiðla', deild: 'Suzuki deild', minAge: 3, maxAge: 99, hideNamshlutfall: true },
             { name: 'Suzukikontrabass', deild: 'Suzuki deild', minAge: 3, maxAge: 99, hideNamshlutfall: true },
             { name: 'Suzukípíanó', deild: 'Suzuki deild', minAge: 3, maxAge: 99, hideNamshlutfall: true },
             { name: 'Suzukiselló', deild: 'Suzuki deild', minAge: 3, maxAge: 99, hideNamshlutfall: true },
             { name: 'Suzukivióla', deild: 'Suzuki deild', minAge: 3, maxAge: 99, hideNamshlutfall: true },
-            
-            // Barna- og unglingasöngdeild (5.-10. bekkur fyrir söng)
             { name: 'Barna- og unglingasöngdeild', deild: 'Barna- og unglingasöngdeild', minBekkur: 5, maxBekkur: 10, useBekkur: true, isSongur: true },
-            
-            // Fög sem eru í báðum deildum - sýna eitt nafn, spyrja um deild
             { name: 'Söngur', deild: null, minAge: 15, maxAge: 99, needsDepartmentChoice: true },
             { name: 'Trommur', deild: null, minBekkur: 3, maxBekkur: 99, useBekkur: true, needsDepartmentChoice: true },
             { name: 'Kontrabassi', deild: null, minBekkur: 3, maxBekkur: 99, useBekkur: true, needsDepartmentChoice: true },
             { name: 'Gítar', deild: null, minBekkur: 3, maxBekkur: 99, useBekkur: true, needsDepartmentChoice: true },
             { name: 'Saxófónn', deild: null, minBekkur: 3, maxBekkur: 99, useBekkur: true, needsDepartmentChoice: true },
             { name: 'Píanó', deild: null, minBekkur: 3, maxBekkur: 99, useBekkur: true, needsDepartmentChoice: true },
-            
-            // Klassísk deild - hljóðfæri sem eru EINGÖNGU klassísk (frá 3. bekk / 8 ára)
             { name: 'Alt horn', deild: 'Klassísk deild', minBekkur: 3, maxBekkur: 99, useBekkur: true },
             { name: 'Altflauta', deild: 'Klassísk deild', minBekkur: 3, maxBekkur: 99, useBekkur: true },
             { name: 'Barítónhorn', deild: 'Klassísk deild', minBekkur: 3, maxBekkur: 99, useBekkur: true },
@@ -1517,105 +1436,39 @@
             { name: 'Túba', deild: 'Klassísk deild', minBekkur: 3, maxBekkur: 99, useBekkur: true },
             { name: 'Víóla', deild: 'Klassísk deild', minBekkur: 3, maxBekkur: 99, useBekkur: true },
             { name: 'Þverflauta', deild: 'Klassísk deild', minBekkur: 3, maxBekkur: 99, useBekkur: true },
-            
-            // Rytmísk deild - hljóðfæri sem eru EINGÖNGU rytmísk (frá 3. bekk / 8 ára)
             { name: 'Rafbassi', deild: 'Rytmísk deild', minBekkur: 3, maxBekkur: 99, useBekkur: true },
-            
-            // Skapandi tónlist (15 ára og eldri - framhaldsskólaaldur) - ein námsgrein
             { name: 'Skapandi tónlist', deild: 'Skapandi tónlist', minAge: 15, maxAge: 99, hideNamshlutfall: true, needsAdafag: true }
         ];
         
-        // Aðalfög fyrir Skapandi tónlist
         const adafogSkapandiTonlist = [
-            // Klassísk deild
-            'Alt horn',
-            'Altflauta',
-            'Barítónhorn',
-            'Básúna',
-            'Fiðla',
-            'Franskt horn',
-            'Gítar',
-            'Harmónika',
-            'Klarinetta',
-            'Klassískur söngur',
-            'Kontrabassi',
-            'Kornett',
-            'Orgel',
-            'Óbó',
-            'Píanó',
-            'Saxófónn',
-            'Selló',
-            'Trommur og slagverk',
-            'Trompet',
-            'Túba',
-            'Víóla',
-            'Þverflauta',
-            // Rytmísk deild
-            'Dægursöngur',
-            'Gítar - Rafgítar',
-            'Píanó - dægurlagatónlist',
-            'Rafbassi',
-            'Trommur - Jazz og dægurlagatónlist',
-            'Saxófónn - Jazz og dægurlagatónlist',
-            'Kontrabassi - Jazz og dægurlagatónlist',
-            // Sérstakt fyrir Skapandi tónlist
-            'Hljóðvinnsla og tónlistarsköpun'
+            'Alt horn', 'Altflauta', 'Barítónhorn', 'Básúna', 'Fiðla',
+            'Franskt horn', 'Gítar', 'Harmónika', 'Klarinetta', 'Klassískur söngur',
+            'Kontrabassi', 'Kornett', 'Orgel', 'Óbó', 'Píanó', 'Saxófónn',
+            'Selló', 'Trommur og slagverk', 'Trompet', 'Túba', 'Víóla', 'Þverflauta',
+            'Dægursöngur', 'Gítar - Rafgítar', 'Píanó - dægurlagatónlist', 'Rafbassi',
+            'Trommur - Jazz og dægurlagatónlist', 'Saxófónn - Jazz og dægurlagatónlist',
+            'Kontrabassi - Jazz og dægurlagatónlist', 'Hljóðvinnsla og tónlistarsköpun'
         ];
         
-        // Hljóðfæri sem hægt er að leigja
         const hljodfariFyrirLeigu = [
-            'Víóla',
-            'Alt horn',
-            'Altflauta',
-            'Barítónhorn',
-            'Básúna',
-            'Fiðla',
-            'Franskt horn',
-            'Harmónika',
-            'Klarinetta',
-            'Kornett',
-            'Óbó',
-            'Selló',
-            'Túba',
-            'Saxófónn',
-            'Þverflauta',
-            'Kontrabassi',
-            'Rafbassi',
-            'Suzukifiðla',
-            'Suzukikontrabass',
-            'Suzukiselló',
-            'Suzukivióla',
-            // Einnig rytmísk útgáfa
-            'Saxófónn - Jazz og dægurlagatónlist',
-            'Kontrabassi - Jazz og dægurlagatónlist'
+            'Víóla', 'Alt horn', 'Altflauta', 'Barítónhorn', 'Básúna', 'Fiðla',
+            'Franskt horn', 'Harmónika', 'Klarinetta', 'Kornett', 'Óbó', 'Selló',
+            'Túba', 'Saxófónn', 'Þverflauta', 'Kontrabassi', 'Rafbassi',
+            'Suzukifiðla', 'Suzukikontrabass', 'Suzukiselló', 'Suzukivióla',
+            'Saxófónn - Jazz og dægurlagatónlist', 'Kontrabassi - Jazz og dægurlagatónlist'
         ];
         
-        // Skólalistar
         const grunnskolar = [
-            'Lundarskóli',
-            'Giljaskóli',
-            'Brekkuskóli',
-            'Naustaskóli',
-            'Síðuskóli',
-            'Glerárskóli',
-            'Oddeyrarskóli',
-            'Hlíðarskóli',
-            'Annað'
+            'Lundarskóli', 'Giljaskóli', 'Brekkuskóli', 'Naustaskóli', 'Síðuskóli',
+            'Glerárskóli', 'Oddeyrarskóli', 'Hlíðarskóli', 'Annað'
         ];
         
         const framhaldsskolar = [
-            'Menntaskólinn á Akureyri',
-            'Verkmenntaskólinn á Akureyri',
-            'Framhaldsskólinn á Húsavík',
-            'Framhaldsskólinn á Laugum',
-            'Menntaskólinn á Tröllaskaga',
-            'Er ekki í framhaldsskóla',
-            'Annað'
+            'Menntaskólinn á Akureyri', 'Verkmenntaskólinn á Akureyri',
+            'Framhaldsskólinn á Húsavík', 'Framhaldsskólinn á Laugum',
+            'Menntaskólinn á Tröllaskaga', 'Er ekki í framhaldsskóla', 'Annað'
         ];
 
-        // =============================================
-        // ALDURSÚTREIKNINGUR ÚR KENNITÖLU
-        // =============================================
         function parseKennitala(kt) {
             if (!kt || kt.length !== 10 || !/^\d{10}$/.test(kt)) {
                 return null;
@@ -1634,23 +1487,17 @@
             } else if (centuryDigit === 8) {
                 century = 1800;
             } else {
-                return null; // Ógild kennitala
+                return null;
             }
 
             const year = century + yearShort;
             
-            // Athuga hvort dagsetning sé gild
             const birthDate = new Date(year, month - 1, day);
             if (birthDate.getDate() !== day || birthDate.getMonth() !== month - 1) {
                 return null;
             }
 
-            return {
-                day,
-                month,
-                year,
-                birthDate
-            };
+            return { day, month, year, birthDate };
         }
 
         function calculateAge(birthDate) {
@@ -1674,12 +1521,10 @@
             const exactAge = calculateAge(birthDate);
             const ageAtEndOfYear = calculateAgeAtEndOfYear(birthDate);
             
-            // 18+ miðast við nákvæman aldur (frá afmælisdegi)
             if (exactAge >= 18) {
                 return { group: '18+', label: '18 ára og eldri', minors: false };
             }
             
-            // Yngri aldurshópar miðast við almanaksár
             if (ageAtEndOfYear >= 16) {
                 return { group: '16-17', label: '16-17 ára', minors: true };
             }
@@ -1691,109 +1536,75 @@
             return { group: '0-5', label: '0-5 ára (forskólaaldur)', minors: true };
         }
         
-        // Reikna bekk út frá fæðingarári
-        // Börn fædd árið X hefja nám í 1. bekk þegar þau verða 6 ára á almanaksárinu
         function calculateBekkur(birthDate) {
             const currentYear = new Date().getFullYear();
             const birthYear = birthDate.getFullYear();
             const ageAtEndOfYear = currentYear - birthYear;
             
-            // Ef yngri en 6 ára á árinu → ekki byrjað í grunnskóla
             if (ageAtEndOfYear < 6) {
-                return 0; // Ekki í grunnskóla
+                return 0;
             }
             
-            // Bekkur = aldur á árinu - 5
-            // 6 ára = 1. bekkur, 7 ára = 2. bekkur, osfrv.
             const bekkur = ageAtEndOfYear - 5;
             
-            // Ef eldri en 10. bekkur (15 ára+) → framhaldsskólaaldur
             if (bekkur > 10) {
-                return 11; // Merkir framhaldsskólaaldur
+                return 11;
             }
             
             return bekkur;
         }
         
-        // Reikna aldur í mánuðum (fyrir ungbarnatónlist)
         function calculateAgeInMonths(birthDate) {
             const today = new Date();
             const months = (today.getFullYear() - birthDate.getFullYear()) * 12;
             return months + today.getMonth() - birthDate.getMonth();
         }
         
-        // Athuga hvort námsgrein sé í boði fyrir nemanda
         function isNamsgreinAvailable(namsgrein, birthDate) {
             const exactAge = calculateAge(birthDate);
             const ageAtEndOfYear = calculateAgeAtEndOfYear(birthDate);
             const bekkur = calculateBekkur(birthDate);
             const ageInMonths = calculateAgeInMonths(birthDate);
             
-            // Ef námsgrein notar mánaðaaldur (ungbarnatónlist)
             if (namsgrein.useMonths) {
                 return ageInMonths >= namsgrein.minAgeMonths && ageInMonths <= namsgrein.maxAgeMonths;
             }
             
-            // Ef námsgrein notar bekk
             if (namsgrein.useBekkur) {
                 return bekkur >= namsgrein.minBekkur && bekkur <= namsgrein.maxBekkur;
             }
             
-            // Annars notar aldur
             return ageAtEndOfYear >= namsgrein.minAge && ageAtEndOfYear <= namsgrein.maxAge;
         }
         
-        // Athuga hvort ekkert nám sé í boði (1-2 ára)
         function isNoCoursesAvailable(birthDate) {
             const ageInMonths = calculateAgeInMonths(birthDate);
-            // 12-35 mánaða = 1-2 ára, ekkert í boði
             return ageInMonths >= 12 && ageInMonths < 36;
         }
 
-        // =============================================
-        // START SCREEN AND NAVIGATION
-        // =============================================
         function goToStart() {
-            // Hide all steps
             document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
-            
-            // Show start screen
             document.querySelector('.form-step[data-step="start"]').classList.add('active');
-            
-            // Hide progress
             document.getElementById('progressContainer').style.display = 'none';
-            
             currentStep = 'start';
             applicationMode = null;
         }
 
         function startNewApplication() {
             applicationMode = 'new';
-            
-            // Show progress
             document.getElementById('progressContainer').style.display = 'block';
-            
-            // Go to step 1
             goToStep(1);
         }
 
         function startRenewal() {
             applicationMode = 'renewal';
-            
-            // Hide progress for renewal flow
             document.getElementById('progressContainer').style.display = 'none';
-            
-            // Go to renewal step 1
             goToStep('renewal-1');
         }
 
-        // =============================================
-        // ÞJÓÐSKRÁ INTEGRATION
-        // =============================================
         function fetchFromThjodskra(kennitala) {
            const thjodskraUrl = 'https://defaultfce2332bf493407ea472f173f9a0af.ea.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/7f53c0340a0542e58b450bde5340be5b/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=vmuq7A_Xpm9sESnm4A3hrosPjlXjdjuzgBZEllThlUA';
             
-            // Sýna loading
             const nafnInput = document.getElementById('nafn');
             const logheimiliInput = document.getElementById('logheimili');
             const sveitarfelagInput = document.getElementById('sveitarfelag');
@@ -1802,9 +1613,7 @@
             
             fetch(thjodskraUrl, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ kennitala: kennitala })
             })
             .then(response => response.json())
@@ -1812,7 +1621,6 @@
                 console.log('Þjóðskrá response:', data);
                 
                 if (data.retkod === '0' || data.retkod === 0) {
-                    // Tókst - fylla inn upplýsingar
                     if (nafnInput && data.nafn) {
                         nafnInput.value = data.nafn;
                     }
@@ -1820,13 +1628,11 @@
                         logheimiliInput.value = data.heimili;
                     }
                     if (sveitarfelagInput && data.sveitarfelag) {
-                        // Sameina postnúmer og sveitarfélag
                         const postnr = data.postnr || '';
                         const sveitarfelag = data.sveitarfelag || '';
-                        sveitarfelagInput.value = postnr ? `${postnr} ${sveitarfelag}` : sveitarfelag;
+                        sveitarfelagInput.value = postnr ? (postnr + ' ' + sveitarfelag) : sveitarfelag;
                     }
                     
-                    // Fylla líka í postnumer reit ef hann er til
                     const postnumerInput = document.getElementById('postnumer');
                     if (postnumerInput && data.postnr) {
                         postnumerInput.value = data.postnr;
@@ -1845,25 +1651,21 @@
         function fetchTengilidarFromThjodskra(kennitala, tengilidarNumer) {
             const thjodskraUrl = 'https://defaultfce2332bf493407ea472f173f9a0af.ea.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/7f53c0340a0542e58b450bde5340be5b/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=vmuq7A_Xpm9sESnm4A3hrosPjlXjdjuzgBZEllThlUA';
             
-            const prefix = `tengilidur${tengilidarNumer}_`;
+            const prefix = 'tengilidur' + tengilidarNumer + '_';
             
-            // Sýna loading
             const nafnInput = document.getElementById(prefix + 'nafn');
             if (nafnInput) nafnInput.placeholder = 'Sæki úr Þjóðskrá...';
             
             fetch(thjodskraUrl, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ kennitala: kennitala })
             })
             .then(response => response.json())
             .then(data => {
-                console.log(`Þjóðskrá response (tengiliður ${tengilidarNumer}):`, data);
+                console.log('Þjóðskrá response (tengiliður ' + tengilidarNumer + '):', data);
                 
                 if (data.retkod === '0' || data.retkod === 0) {
-                    // Tókst - fylla inn upplýsingar
                     if (nafnInput && data.nafn) {
                         nafnInput.value = data.nafn;
                     }
@@ -1883,12 +1685,12 @@
                         sveitarfelagInput.value = data.sveitarfelag;
                     }
                 } else {
-                    console.log(`Þjóðskrá villa (tengiliður ${tengilidarNumer}):`, data.retlys);
+                    console.log('Þjóðskrá villa (tengiliður ' + tengilidarNumer + '):', data.retlys);
                     if (nafnInput) nafnInput.placeholder = 'Nafn fannst ekki';
                 }
             })
             .catch(error => {
-                console.error(`Þjóðskrá error (tengiliður ${tengilidarNumer}):`, error);
+                console.error('Þjóðskrá error (tengiliður ' + tengilidarNumer + '):', error);
                 if (nafnInput) nafnInput.placeholder = 'Villa við leit';
             });
         }
@@ -1898,29 +1700,21 @@
             const notFoundMessage = document.getElementById('renewalNotFound');
             const searchBtn = document.getElementById('btnSearchRenewal');
             
-            // Disable button while searching
             searchBtn.disabled = true;
             searchBtn.textContent = 'Leita...';
             
-            // Power Automate URL for TA-CheckKennitala
             const checkKennitalaUrl = 'https://defaultfce2332bf493407ea472f173f9a0af.ea.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/ff4fe5e26f494f75a4fcc8dd1961e916/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=bAxPJGzTwRAHFiBvbCJceUfAASkbu8SST8rdiEpkFPk';
             
             fetch(checkKennitalaUrl, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ kennitala: kt })
             })
-            .then(response => response.json())
-            .then(data => {
+            .then(function(response) { return response.json(); })
+            .then(function(data) {
                 console.log('Check kennitala response:', data);
                 
                 if (data.exists && data.student) {
-                    // Student found - store data
-                    renewalStudentData = {
-                        if (data.exists && data.student) {
-                    // Helper: SharePoint Lookup dálkar koma sem object með Value, ekki bara streng
                     function getLookupValue(field) {
                         if (!field) return '';
                         if (typeof field === 'string') return field;
@@ -1930,13 +1724,11 @@
                     var enrollments = data.enrollments || [];
                     var firstEnrollment = enrollments.length > 0 ? enrollments[0] : null;
                     
-                    // Aðalnámsgrein
                     var primaryNamsgrein = '';
                     if (firstEnrollment) {
                         primaryNamsgrein = getLookupValue(firstEnrollment.Namsgrein);
                     }
                     
-                    // Birtingarstrengur
                     var namsgreinDisplay;
                     if (enrollments.length === 0) {
                         namsgreinDisplay = 'Engar virkar skráningar fundust';
@@ -1950,7 +1742,6 @@
                         namsgreinDisplay = allNames.join(', ');
                     }
                     
-                    // Vista nemandagögn
                     renewalStudentData = {
                         id: data.student.ID || data.student.Id,
                         kennitala: kt,
@@ -1964,27 +1755,21 @@
                         enrollments: enrollments
                     };
                     
-                    // Update display
                     document.getElementById('renewalStudentName').textContent = renewalStudentData.nafn;
                     document.getElementById('renewalStudentSubject').textContent = renewalStudentData.namsgreinDisplay;
                     
                     notFoundMessage.classList.add('hidden');
                     goToStep('renewal-2');
                 } else {
-                    // Student not found
                     notFoundMessage.classList.remove('hidden');
                 }
-                }
                 
-                // Re-enable button
                 searchBtn.disabled = false;
                 searchBtn.textContent = 'Leita';
             })
-            .catch(error => {
+            .catch(function(error) {
                 console.error('Error:', error);
                 showValidationError('Villa kom upp við leit. Vinsamlegast reyndu aftur.');
-                
-                // Re-enable button
                 searchBtn.disabled = false;
                 searchBtn.textContent = 'Leita';
             });
@@ -2019,16 +1804,18 @@
                 return;
             }
             
-            // Disable button
             const submitBtn = document.querySelector('.form-step[data-step="renewal-confirm"] .btn-primary');
             if (submitBtn) {
                 submitBtn.disabled = true;
                 submitBtn.textContent = 'Sendi umsókn...';
             }
             
-            // Reikna aldursflokk úr kennitölu
             const renewalParsed = parseKennitala(renewalStudentData.kennitala);
             const renewalAgeGroup = renewalParsed ? getAgeGroup(renewalParsed.birthDate) : null;
+            
+            const fristundaEl = document.getElementById('renewalFristundastyrkur');
+            const hljodfaraEl = document.getElementById('renewalHljodfaraleiga');
+            const myndefniEl = document.getElementById('renewalMyndefni');
             
             const formData = {
                 kennitala: renewalStudentData.kennitala,
@@ -2036,13 +1823,13 @@
                 tegund: 'Endurnýjun',
                 aldursflokkur: renewalAgeGroup ? renewalAgeGroup.group : '',
                 namsgrein: renewalStudentData.namsgrein || '',
-                deild: '',
-                namshlutfall: '',
+                deild: renewalStudentData.deild || '',
+                namshlutfall: renewalStudentData.namshlutfall || '',
                 studentsprof: false,
                 skoli: '',
-                fristundastyrkur: document.getElementById('renewalFristundastyrkur')?.checked || false,
-                hljodfaraleiga: document.getElementById('renewalHljodfaraleiga')?.checked || false,
-                myndefni: document.getElementById('renewalMyndefni')?.checked || false,
+                fristundastyrkur: fristundaEl ? fristundaEl.checked : false,
+                hljodfaraleiga: hljodfaraEl ? hljodfaraEl.checked : false,
+                myndefni: myndefniEl ? myndefniEl.checked : false,
                 netfangNemanda: email,
                 simiNemanda: '',
                 athugasemdNemanda: notes,
@@ -2059,7 +1846,6 @@
                 tengiliður2Greidandi: false
             };
             
-            // Power Automate URL
             const powerAutomateUrl = 'https://defaultfce2332bf493407ea472f173f9a0af.ea.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/1b25b90edcdd4f39940422d05d5ea0cf/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=54LdP4gKfBerBICVzlp7RovI6Pwqxo7m3Gxk7XkoYRo';
             
             fetch(powerAutomateUrl, {
@@ -2067,15 +1853,15 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
             })
-            .then(response => {
+            .then(function(response) {
                 if (!response.ok) throw new Error('Villa við að senda umsókn');
                 return response.json();
             })
-            .then(data => {
+            .then(function(data) {
                 console.log('Renewal success:', data);
                 goToStep('success');
             })
-            .catch(error => {
+            .catch(function(error) {
                 console.error('Error:', error);
                 showValidationError('Villa kom upp við að senda umsókn. Vinsamlegast reyndu aftur.');
                 if (submitBtn) {
@@ -2085,13 +1871,15 @@
             });
         }
 
-        // Submit Change Instrument - like new application but for existing student
         function submitChangeInstrument() {
             const namsgrein = document.getElementById('changeInstrumentNamsgrein').value;
             const deild = document.getElementById('changeInstrumentDeild').value;
-            const namshlutfall = document.querySelector('input[name="changeInstrumentNamshlutfall"]:checked')?.value || 'Heilt';
-            const adafag = document.getElementById('changeInstrumentAdafag')?.value || '';
-            const athugasemd = document.getElementById('changeInstrumentAthugasemd')?.value || '';
+            const namshlutfallEl = document.querySelector('input[name="changeInstrumentNamshlutfall"]:checked');
+            const namshlutfall = namshlutfallEl ? namshlutfallEl.value : 'Heilt';
+            const adafagEl = document.getElementById('changeInstrumentAdafag');
+            const adafag = adafagEl ? adafagEl.value : '';
+            const athugasemdEl = document.getElementById('changeInstrumentAthugasemd');
+            const athugasemd = athugasemdEl ? athugasemdEl.value : '';
             const email = document.getElementById('changeInstrumentEmail').value;
             const terms = document.getElementById('changeInstrumentSkilmalar').checked;
             
@@ -2109,7 +1897,6 @@
                 errors.push('• Netfang er ekki á réttu formi (dæmi: nafn@dæmi.is)');
             }
             
-            // Check if Skapandi tónlist needs aðalfag
             if (namsgrein === 'Skapandi tónlist' && !adafag) {
                 errors.push('• Veldu aðalfag fyrir Skapandi tónlist');
             }
@@ -2119,7 +1906,6 @@
                 return;
             }
             
-            // Disable button
             const submitBtn = document.getElementById('btnSubmitChangeInstrument');
             if (submitBtn) {
                 submitBtn.disabled = true;
@@ -2128,9 +1914,12 @@
             
             const fullNotes = 'SKIPTA UM HLJÓÐFÆRI - Fyrri námsgrein: ' + (renewalStudentData.namsgrein || 'Óþekkt') + '\n\n' + (athugasemd ? 'Athugasemd: ' + athugasemd : '');
             
-            // Reikna aldursflokk úr kennitölu
             const changeInstParsed = parseKennitala(renewalStudentData.kennitala);
             const changeInstAgeGroup = changeInstParsed ? getAgeGroup(changeInstParsed.birthDate) : null;
+            
+            const fristundaEl = document.getElementById('changeInstrumentFristunda');
+            const hljodfaraEl = document.getElementById('changeInstrumentHljodfaraleiga');
+            const myndefniEl = document.getElementById('changeInstrumentMyndefni');
             
             const formData = {
                 kennitala: renewalStudentData.kennitala,
@@ -2142,21 +1931,19 @@
                 namshlutfall: namshlutfall,
                 studentsprof: false,
                 skoli: '',
-                fristundastyrkur: document.getElementById('changeInstrumentFristunda')?.checked || false,
-                hljodfaraleiga: document.getElementById('changeInstrumentHljodfaraleiga')?.checked || false,
-                myndefni: document.getElementById('changeInstrumentMyndefni')?.checked || false,
+                fristundastyrkur: fristundaEl ? fristundaEl.checked : false,
+                hljodfaraleiga: hljodfaraEl ? hljodfaraEl.checked : false,
+                myndefni: myndefniEl ? myndefniEl.checked : false,
                 netfangNemanda: email,
                 simiNemanda: '',
                 athugasemdNemanda: fullNotes,
                 adafagSkapandi: adafag,
-                // Heimilisfang - ekki breytt
                 logheimiliNemanda: '',
                 postnumerLogheimiliNemanda: '',
                 sveitarfelagLogheimiliNemanda: '',
                 heimiliNemanda: '',
                 postnumerHeimiliNemanda: '',
                 sveitarfelagHeimiliNemanda: '',
-                // Tengiliðir - ekki breytt
                 tengiliður1Nafn: '',
                 tengiliður1Kennitala: '',
                 tengiliður1Simi: '',
@@ -2184,16 +1971,16 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
             })
-            .then(response => {
+            .then(function(response) {
                 if (!response.ok) throw new Error('Villa við að senda umsókn');
                 return response.json();
             })
-            .then(data => {
+            .then(function(data) {
                 console.log('Success:', data);
                 document.querySelector('.form-step[data-step="change-instrument"]').classList.remove('active');
                 document.querySelector('.form-step[data-step="success"]').classList.add('active');
             })
-            .catch(error => {
+            .catch(function(error) {
                 console.error('Error:', error);
                 showValidationError('Villa kom upp við að senda umsókn. Vinsamlegast reyndu aftur.');
                 if (submitBtn) {
@@ -2203,9 +1990,9 @@
             });
         }
         
-        // Submit Change Teacher - simple form
         function submitChangeTeacher() {
-            const oskir = document.getElementById('changeTeacherOskir')?.value || '';
+            const oskirEl = document.getElementById('changeTeacherOskir');
+            const oskir = oskirEl ? oskirEl.value : '';
             const email = document.getElementById('changeTeacherEmail').value;
             const terms = document.getElementById('changeTeacherSkilmalar').checked;
             
@@ -2225,7 +2012,6 @@
                 return;
             }
             
-            // Disable button
             const submitBtn = document.getElementById('btnSubmitChangeTeacher');
             if (submitBtn) {
                 submitBtn.disabled = true;
@@ -2234,9 +2020,12 @@
             
             const fullNotes = 'SKIPTA UM KENNARA - Sama námsgrein: ' + (renewalStudentData.namsgrein || 'Óþekkt') + '\n\n' + (oskir ? 'Óskir nemanda: ' + oskir : '');
             
-            // Reikna aldursflokk úr kennitölu
             const changeTeacherParsed = parseKennitala(renewalStudentData.kennitala);
             const changeTeacherAgeGroup = changeTeacherParsed ? getAgeGroup(changeTeacherParsed.birthDate) : null;
+            
+            const fristundaEl = document.getElementById('changeTeacherFristunda');
+            const hljodfaraEl = document.getElementById('changeTeacherHljodfaraleiga');
+            const myndefniEl = document.getElementById('changeTeacherMyndefni');
             
             const formData = {
                 kennitala: renewalStudentData.kennitala,
@@ -2244,25 +2033,23 @@
                 tegund: 'Breyting',
                 aldursflokkur: changeTeacherAgeGroup ? changeTeacherAgeGroup.group : '',
                 namsgrein: renewalStudentData.namsgrein || '',
-                deild: '',
-                namshlutfall: '',
+                deild: renewalStudentData.deild || '',
+                namshlutfall: renewalStudentData.namshlutfall || '',
                 studentsprof: false,
                 skoli: '',
-                fristundastyrkur: document.getElementById('changeTeacherFristunda')?.checked || false,
-                hljodfaraleiga: document.getElementById('changeTeacherHljodfaraleiga')?.checked || false,
-                myndefni: document.getElementById('changeTeacherMyndefni')?.checked || false,
+                fristundastyrkur: fristundaEl ? fristundaEl.checked : false,
+                hljodfaraleiga: hljodfaraEl ? hljodfaraEl.checked : false,
+                myndefni: myndefniEl ? myndefniEl.checked : false,
                 netfangNemanda: email,
                 simiNemanda: '',
                 athugasemdNemanda: fullNotes,
                 adafagSkapandi: '',
-                // Heimilisfang - ekki breytt
                 logheimiliNemanda: '',
                 postnumerLogheimiliNemanda: '',
                 sveitarfelagLogheimiliNemanda: '',
                 heimiliNemanda: '',
                 postnumerHeimiliNemanda: '',
                 sveitarfelagHeimiliNemanda: '',
-                // Tengiliðir - ekki breytt
                 tengiliður1Nafn: '',
                 tengiliður1Kennitala: '',
                 tengiliður1Simi: '',
@@ -2290,16 +2077,16 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
             })
-            .then(response => {
+            .then(function(response) {
                 if (!response.ok) throw new Error('Villa við að senda umsókn');
                 return response.json();
             })
-            .then(data => {
+            .then(function(data) {
                 console.log('Success:', data);
                 document.querySelector('.form-step[data-step="change-teacher"]').classList.remove('active');
                 document.querySelector('.form-step[data-step="success"]').classList.add('active');
             })
-            .catch(error => {
+            .catch(function(error) {
                 console.error('Error:', error);
                 showValidationError('Villa kom upp við að senda umsókn. Vinsamlegast reyndu aftur.');
                 if (submitBtn) {
@@ -2309,12 +2096,10 @@
             });
         }
         
-        // Populate change instrument dropdown and update deild
         function populateChangeInstrumentDropdown() {
             const select = document.getElementById('changeInstrumentNamsgrein');
             if (!select) return;
             
-            // Get student age from renewalStudentData kennitala
             const kt = renewalStudentData.kennitala;
             if (!kt) return;
             
@@ -2323,12 +2108,11 @@
             
             select.innerHTML = '<option value="">Veldu námsgrein...</option>';
             
-            // Filter námsgreinar by age/bekkur (sama og í populateNamsgreinar)
             const filtered = namsgreinar
-                .filter(n => isNamsgreinAvailable(n, parsed.birthDate))
-                .sort((a, b) => a.name.localeCompare(b.name, 'is'));
+                .filter(function(n) { return isNamsgreinAvailable(n, parsed.birthDate); })
+                .sort(function(a, b) { return a.name.localeCompare(b.name, 'is'); });
             
-            filtered.forEach(namsgrein => {
+            filtered.forEach(function(namsgrein) {
                 const option = document.createElement('option');
                 option.value = namsgrein.name;
                 option.textContent = namsgrein.name;
@@ -2350,28 +2134,23 @@
             const selectedOption = select.options[select.selectedIndex];
             const namsgrein = select.value;
             
-            // Handle deild
             if (selectedOption && selectedOption.dataset.deild) {
                 deildInput.value = selectedOption.dataset.deild;
                 deildGroup.style.display = 'block';
             } else if (selectedOption && selectedOption.dataset.needsDepartmentChoice === 'true') {
-                // Needs department choice - show dropdown instead
                 deildInput.value = '';
                 deildGroup.style.display = 'none';
-                // TODO: Show department choice dropdown
             } else {
                 deildInput.value = '';
                 deildGroup.style.display = 'none';
             }
             
-            // Handle Skapandi tónlist aðalfag
             if (namsgrein === 'Skapandi tónlist') {
                 adafagGroup.classList.remove('hidden');
-                // Populate aðalfag dropdown
                 if (adafagSelect) {
                     adafagSelect.innerHTML = '<option value="">Veldu aðalfag...</option>';
                     const adafogOptions = ['Gítar', 'Píanó', 'Rafgítar', 'Rafbassi', 'Trommusett', 'Söngur'];
-                    adafogOptions.forEach(af => {
+                    adafogOptions.forEach(function(af) {
                         const opt = document.createElement('option');
                         opt.value = af;
                         opt.textContent = af;
@@ -2383,60 +2162,49 @@
             }
         }
 
-        // =============================================
-        // FORM NAVIGATION
-        // =============================================
         function goToStep(step) {
-            // Handle renewal steps (strings) vs new application steps (numbers)
             const isRenewalStep = typeof step === 'string' && (step.startsWith('renewal') || step.startsWith('change'));
             const isSuccessStep = step === 'success';
             
-            // Validate current step before moving forward (only for new applications)
             if (applicationMode === 'new' && typeof step === 'number' && typeof currentStep === 'number') {
                 if (step > currentStep && !validateStep(currentStep)) {
                     return;
                 }
             }
 
-            // Hide current step
-            document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.form-step').forEach(function(s) { s.classList.remove('active'); });
             
-            // Show new step
-            const newStepEl = document.querySelector(`.form-step[data-step="${step}"]`);
+            const newStepEl = document.querySelector('.form-step[data-step="' + step + '"]');
             if (newStepEl) {
                 newStepEl.classList.add('active');
             }
             
             currentStep = step;
             
-            // Populate change forms with student data
             if (step === 'change-instrument') {
                 document.getElementById('changeInstrumentNafn').textContent = renewalStudentData.nafn || '';
                 document.getElementById('changeInstrumentKt').textContent = renewalStudentData.kennitala || '';
-                document.getElementById('changeInstrumentCurrent').textContent = renewalStudentData.namsgrein || 'Óþekkt';
+                document.getElementById('changeInstrumentCurrent').textContent = renewalStudentData.namsgreinDisplay || renewalStudentData.namsgrein || 'Óþekkt';
                 populateChangeInstrumentDropdown();
             }
             
             if (step === 'change-teacher') {
                 document.getElementById('changeTeacherNafn').textContent = renewalStudentData.nafn || '';
                 document.getElementById('changeTeacherKt').textContent = renewalStudentData.kennitala || '';
-                document.getElementById('changeTeacherNamsgrein').textContent = renewalStudentData.namsgrein || 'Óþekkt';
+                document.getElementById('changeTeacherNamsgrein').textContent = renewalStudentData.namsgreinDisplay || renewalStudentData.namsgrein || 'Óþekkt';
             }
             
-            // Update progress (only for new applications)
             if (applicationMode === 'new' && typeof step === 'number') {
                 updateProgress();
                 updateStepContent();
             }
             
-            // Show/hide progress container
             if (isRenewalStep || step === 'start') {
                 document.getElementById('progressContainer').style.display = 'none';
             } else if (applicationMode === 'new' && typeof step === 'number') {
                 document.getElementById('progressContainer').style.display = 'block';
             }
             
-            // Handle success step
             if (isSuccessStep) {
                 document.getElementById('progressContainer').style.display = 'none';
             }
@@ -2447,7 +2215,7 @@
             const labels = document.querySelectorAll('.step-label');
             const progressLine = document.getElementById('progressLine');
             
-            indicators.forEach((ind, idx) => {
+            indicators.forEach(function(ind, idx) {
                 const stepNum = idx + 1;
                 ind.classList.remove('active', 'completed');
                 labels[idx].classList.remove('active');
@@ -2464,45 +2232,38 @@
                 }
             });
 
-            // Update progress line
             const progress = ((currentStep - 1) / 4) * 100;
-            progressLine.style.width = `${progress}%`;
+            progressLine.style.width = progress + '%';
         }
 
         function updateStepContent() {
-            // Update step 2: Show/hide school field based on age and populate dropdown
             const skoliSection = document.getElementById('skoliSection');
             const skoliLabel = document.getElementById('skoliLabel');
             const studentsprofInStep2 = document.getElementById('studentsprofStep2Group');
             
             if (studentBekkur !== null || studentAge !== null) {
                 if (studentBekkur >= 1 && studentBekkur <= 10) {
-                    // Grunnskólaaldur (6-15 ára)
                     skoliSection.classList.remove('hidden');
                     skoliLabel.textContent = 'Grunnskóli';
                     if (studentsprofInStep2) studentsprofInStep2.classList.add('hidden');
                     populateSkolar();
                 } else if (studentAge >= 15 && studentAge <= 24) {
-                    // Framhaldsskólaaldur (15-24 ára)
                     skoliSection.classList.remove('hidden');
                     skoliLabel.textContent = 'Framhaldsskóli';
                     if (studentsprofInStep2) studentsprofInStep2.classList.remove('hidden');
                     populateSkolar();
                 } else {
-                    // Yngri en 6 ára eða eldri en 24 ára
                     skoliSection.classList.add('hidden');
                     if (studentsprofInStep2) studentsprofInStep2.classList.add('hidden');
                 }
             }
 
-            // Update step 3: Show appropriate contact section
             const selfContactInfo = document.getElementById('selfContactInfo');
             const contactsContainer = document.getElementById('contactsContainer');
             const btnAddContact = document.getElementById('btnAddContact');
             const contactDescription = document.getElementById('contactDescription');
 
             if (studentAgeGroup && !studentAgeGroup.minors) {
-                // 18+ - nemandi er sjálfur tengiliður
                 selfContactInfo.classList.remove('hidden');
                 contactsContainer.classList.add('hidden');
                 btnAddContact.classList.add('hidden');
@@ -2514,33 +2275,26 @@
                 contactDescription.textContent = 'Vinsamlegast skráðu upplýsingar um forráðamann/forráðamenn.';
             }
 
-            // Update step 4: Populate námsgreinar based on age
             if (currentStep === 4) {
                 populateNamsgreinar();
             }
 
-            // Hide stúdentsprófsbraut in step 4 (moved to step 2)
             const studentsprofGroup = document.getElementById('studentsprofGroup');
             if (studentsprofGroup) {
                 studentsprofGroup.classList.add('hidden');
             }
             
-            // Update step 5: Show/hide frístundastyrk based on age (6-18 ára)
             const fristundastyrksGroup = document.getElementById('fristundastyrksGroup');
             if (fristundastyrksGroup) {
                 if (studentAge >= 6 && studentAge < 18) {
                     fristundastyrksGroup.classList.remove('hidden');
                 } else {
                     fristundastyrksGroup.classList.add('hidden');
-                    // Uncheck if hidden
                     document.getElementById('fristundastyrkur').checked = false;
                 }
             }
         }
 
-        // =============================================
-        // DEILDIR OG NÁMSGREINAR
-        // =============================================
         function populateNamsgreinar() {
             const namsgreinSelect = document.getElementById('namsgrein');
             const ktValue = document.getElementById('kennitala').value;
@@ -2552,7 +2306,6 @@
             
             namsgreinSelect.innerHTML = '<option value="">Veldu námsgrein...</option>';
             
-            // Athuga hvort ekkert nám sé í boði (1-2 ára)
             if (isNoCoursesAvailable(parsed.birthDate)) {
                 namsgreinSelect.innerHTML = '<option value="">Ekkert nám í boði</option>';
                 namsgreinSelect.disabled = true;
@@ -2570,12 +2323,11 @@
                 noCoursesMessage.classList.add('hidden');
             }
             
-            // Filter námsgreinar by age/bekkur
             const filtered = namsgreinar
-                .filter(n => isNamsgreinAvailable(n, parsed.birthDate))
-                .sort((a, b) => a.name.localeCompare(b.name, 'is'));
+                .filter(function(n) { return isNamsgreinAvailable(n, parsed.birthDate); })
+                .sort(function(a, b) { return a.name.localeCompare(b.name, 'is'); });
             
-            filtered.forEach(namsgrein => {
+            filtered.forEach(function(namsgrein) {
                 const option = document.createElement('option');
                 option.value = namsgrein.name;
                 option.textContent = namsgrein.name;
@@ -2585,15 +2337,13 @@
                 namsgreinSelect.appendChild(option);
             });
             
-            // Athuga hvort öll fög í boði eru með hideNamshlutfall
-            const allHideNamshlutfall = filtered.every(n => n.hideNamshlutfall === true);
+            const allHideNamshlutfall = filtered.every(function(n) { return n.hideNamshlutfall === true; });
             if (allHideNamshlutfall) {
                 namshlutiGroup.classList.add('hidden');
             } else {
                 namshlutiGroup.classList.remove('hidden');
             }
             
-            // Reset deild
             document.getElementById('deild').value = '';
             document.getElementById('deildGroup').style.display = 'none';
         }
@@ -2607,32 +2357,26 @@
             const adafagGroup = document.getElementById('adafagGroup');
             const selectedName = selectedOption ? selectedOption.value : '';
             
-            // Athuga hvort þetta fag þurfi deildarval
             if (selectedName && dualDepartmentSubjects[selectedName]) {
                 showDepartmentChoiceModal(selectedName);
-                // Fela aðalfagsval
                 adafagGroup.classList.add('hidden');
                 return;
             }
             
-            // Athuga hvort þetta er Skapandi tónlist (þarf aðalfagsval)
             if (selectedName === 'Skapandi tónlist') {
                 deildInput.value = 'Skapandi tónlist';
                 deildGroup.style.display = 'block';
                 namshlutiGroup.classList.add('hidden');
                 
-                // Sýna og fylla aðalfagsval
                 adafagGroup.classList.remove('hidden');
                 populateAdafagSelect();
             } else {
-                // Fela aðalfagsval
                 adafagGroup.classList.add('hidden');
                 
                 if (selectedOption && selectedOption.dataset.deild) {
                     deildInput.value = selectedOption.dataset.deild;
                     deildGroup.style.display = 'block';
                     
-                    // Sýna/fela námshlutfall eftir námsgrein
                     if (selectedOption.dataset.hideNamshlutfall === 'true') {
                         namshlutiGroup.classList.add('hidden');
                     } else {
@@ -2645,7 +2389,6 @@
                 }
             }
             
-            // Uppfæra hljóðfæraleigu sýnileika
             updateHljodfaraleigaVisibility();
         }
         
@@ -2653,7 +2396,7 @@
             const adafagSelect = document.getElementById('adafag');
             adafagSelect.innerHTML = '<option value="">Veldu aðalfag...</option>';
             
-            adafogSkapandiTonlist.forEach(fag => {
+            adafogSkapandiTonlist.forEach(function(fag) {
                 const option = document.createElement('option');
                 option.value = fag;
                 option.textContent = fag;
@@ -2669,22 +2412,18 @@
             
             if (!hljodfaraleiguGroup) return;
             
-            // Sækja valið hljóðfæri (nota actualName ef við á)
             let selectedInstrument = selectedOption ? (selectedOption.dataset.actualName || selectedOption.value) : '';
             
-            // Athuga hvort hljóðfærið er á listanum fyrir leigu
-            if (selectedInstrument && hljodfariFyrirLeigu.includes(selectedInstrument)) {
+            if (selectedInstrument && hljodfariFyrirLeigu.indexOf(selectedInstrument) !== -1) {
                 hljodfaraleiguGroup.classList.remove('hidden');
             } else {
                 hljodfaraleiguGroup.classList.add('hidden');
-                // Afvelja ef falið
                 if (hljodfaraleigaCheckbox) {
                     hljodfaraleigaCheckbox.checked = false;
                 }
             }
         }
         
-        // Global til að halda utan um valda námsgrein og deild
         let selectedSubjectName = null;
         let selectedDepartment = null;
         
@@ -2700,28 +2439,27 @@
                 document.body.appendChild(modal);
             }
             
-            modal.innerHTML = `
-                <div class="validation-modal-content" style="max-width: 500px;">
-                    <h3 style="font-family: var(--font-display); color: var(--color-primary); margin-bottom: 16px;">${subjectName}</h3>
-                    <p style="margin-bottom: 20px; color: var(--color-text);">${subjectInfo.question}</p>
-                    <p style="margin-bottom: 24px;">
-                        <a href="${subjectInfo.infoLink}" target="_blank" style="color: var(--color-primary);">
-                            ℹ️ Frekari upplýsingar um námið
-                        </a>
-                    </p>
-                    <div class="choice-buttons" style="flex-direction: column; gap: 12px;">
-                        <button type="button" class="btn btn-primary" style="width: 100%;" onclick="selectDepartment('${subjectName}', 'klassisk')">
-                            Klassísk deild
-                        </button>
-                        <button type="button" class="btn btn-secondary" style="width: 100%;" onclick="selectDepartment('${subjectName}', 'rytmisk')">
-                            Rytmísk deild
-                        </button>
-                    </div>
-                    <button type="button" class="btn btn-secondary" style="margin-top: 16px; width: 100%;" onclick="closeDepartmentModal()">
-                        Hætta við
-                    </button>
-                </div>
-            `;
+            modal.innerHTML = 
+                '<div class="validation-modal-content" style="max-width: 500px;">' +
+                    '<h3 style="font-family: var(--font-display); color: var(--color-primary); margin-bottom: 16px;">' + subjectName + '</h3>' +
+                    '<p style="margin-bottom: 20px; color: var(--color-text);">' + subjectInfo.question + '</p>' +
+                    '<p style="margin-bottom: 24px;">' +
+                        '<a href="' + subjectInfo.infoLink + '" target="_blank" style="color: var(--color-primary);">' +
+                            'ℹ️ Frekari upplýsingar um námið' +
+                        '</a>' +
+                    '</p>' +
+                    '<div class="choice-buttons" style="flex-direction: column; gap: 12px;">' +
+                        '<button type="button" class="btn btn-primary" style="width: 100%;" onclick="selectDepartment(\'' + subjectName + '\', \'klassisk\')">' +
+                            'Klassísk deild' +
+                        '</button>' +
+                        '<button type="button" class="btn btn-secondary" style="width: 100%;" onclick="selectDepartment(\'' + subjectName + '\', \'rytmisk\')">' +
+                            'Rytmísk deild' +
+                        '</button>' +
+                    '</div>' +
+                    '<button type="button" class="btn btn-secondary" style="margin-top: 16px; width: 100%;" onclick="closeDepartmentModal()">' +
+                        'Hætta við' +
+                    '</button>' +
+                '</div>';
             
             modal.classList.add('visible');
         }
@@ -2736,13 +2474,11 @@
             selectedDepartment = department;
             
             if (department === 'klassisk') {
-                // Uppfæra select til að sýna klassíska nafnið
                 const selectedOption = namsgreinSelect.options[namsgreinSelect.selectedIndex];
                 selectedOption.dataset.deild = 'Klassísk deild';
                 selectedOption.dataset.actualName = subjectInfo.klassiskName;
                 deildInput.value = 'Klassísk deild';
             } else {
-                // Uppfæra select til að sýna rytmíska nafnið
                 const selectedOption = namsgreinSelect.options[namsgreinSelect.selectedIndex];
                 selectedOption.dataset.deild = 'Rytmísk deild';
                 selectedOption.dataset.actualName = subjectInfo.rytmiskName;
@@ -2751,10 +2487,8 @@
             
             deildGroup.style.display = 'block';
             
-            // Sýna námshlutfall fyrir þessi fög
             document.getElementById('namshlutiGroup').classList.remove('hidden');
             
-            // Uppfæra hljóðfæraleigu sýnileika
             updateHljodfaraleigaVisibility();
             
             closeDepartmentModal();
@@ -2766,7 +2500,6 @@
                 modal.classList.remove('visible');
             }
             
-            // Ef notandi hættir við, hreinsa valið
             const namsgreinSelect = document.getElementById('namsgrein');
             const selectedOption = namsgreinSelect.options[namsgreinSelect.selectedIndex];
             
@@ -2777,7 +2510,6 @@
             }
         }
         
-        // Fylla inn skólalista
         function populateSkolar() {
             const bekkur = studentBekkur || 0;
             const age = studentAge || 0;
@@ -2786,7 +2518,6 @@
             
             if (!skoliSelect) return;
             
-            // Vista núverandi val
             const currentValue = skoliSelect.value;
             
             skoliSelect.innerHTML = '<option value="">Veldu skóla...</option>';
@@ -2794,26 +2525,22 @@
             let skolar = [];
             
             if (bekkur >= 1 && bekkur <= 10) {
-                // Grunnskólaaldur
                 skolar = grunnskolar;
             } else if (age >= 15 && age <= 24) {
-                // Framhaldsskólaaldur (15-24 ára)
                 skolar = framhaldsskolar;
             }
             
-            skolar.forEach(skoli => {
+            skolar.forEach(function(skoli) {
                 const option = document.createElement('option');
                 option.value = skoli;
                 option.textContent = skoli;
                 skoliSelect.appendChild(option);
             });
             
-            // Endurheimta val ef það var til
-            if (currentValue && skolar.includes(currentValue)) {
+            if (currentValue && skolar.indexOf(currentValue) !== -1) {
                 skoliSelect.value = currentValue;
             }
             
-            // Sýna/fela "Annað" skýringarreit
             skoliSelect.addEventListener('change', function() {
                 if (this.value === 'Annað') {
                     skoliAnnadGroup.classList.remove('hidden');
@@ -2823,9 +2550,6 @@
             });
         }
 
-        // =============================================
-        // TENGILIÐIR
-        // =============================================
         function addContact() {
             contactCount++;
             const container = document.getElementById('contactsContainer');
@@ -2833,68 +2557,59 @@
             const types = ['Forráðamaður 2', 'Velunnari', 'Annar tengiliður'];
             const typeIndex = Math.min(contactCount - 2, types.length - 1);
             const contactType = types[typeIndex];
+            const cc = contactCount;
             
-            const contactHtml = `
-                <div class="contact-card" id="contact${contactCount}">
-                    <div class="contact-card-header">
-                        <span class="contact-card-title">${contactType}</span>
-                        <button type="button" class="btn-remove" onclick="removeContact(${contactCount})">Fjarlægja</button>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="tengilidur${contactCount}_kennitala">Kennitala</label>
-                        <input type="text" id="tengilidur${contactCount}_kennitala" name="tengilidur${contactCount}_kennitala" placeholder="0000000000" maxlength="10">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="tengilidur${contactCount}_nafn">Nafn</label>
-                        <input type="text" id="tengilidur${contactCount}_nafn" name="tengilidur${contactCount}_nafn" placeholder="Sótt úr Þjóðskrá..." disabled>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="tengilidur${contactCount}_heimili">Heimilisfang</label>
-                        <input type="text" id="tengilidur${contactCount}_heimili" name="tengilidur${contactCount}_heimili" placeholder="Sótt úr Þjóðskrá..." disabled>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="tengilidur${contactCount}_postnumer">Póstnúmer</label>
-                            <input type="text" id="tengilidur${contactCount}_postnumer" name="tengilidur${contactCount}_postnumer" placeholder="000" disabled>
-                        </div>
-                        <div class="form-group">
-                            <label for="tengilidur${contactCount}_sveitarfelag">Sveitarfélag</label>
-                            <input type="text" id="tengilidur${contactCount}_sveitarfelag" name="tengilidur${contactCount}_sveitarfelag" placeholder="Sótt úr Þjóðskrá..." disabled>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="tengilidur${contactCount}_simi1">Símanúmer 1</label>
-                            <input type="tel" id="tengilidur${contactCount}_simi1" name="tengilidur${contactCount}_simi1" placeholder="000-0000">
-                        </div>
-                        <div class="form-group">
-                            <label for="tengilidur${contactCount}_simi2">Símanúmer 2 <span class="optional">(valkvætt)</span></label>
-                            <input type="tel" id="tengilidur${contactCount}_simi2" name="tengilidur${contactCount}_simi2" placeholder="000-0000">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="tengilidur${contactCount}_netfang">Netfang</label>
-                        <input type="email" id="tengilidur${contactCount}_netfang" name="tengilidur${contactCount}_netfang" placeholder="netfang@dæmi.is">
-                    </div>
-
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="tengilidur${contactCount}_greidandi" name="tengilidur${contactCount}_greidandi">
-                        <label for="tengilidur${contactCount}_greidandi">Þessi tengiliður er greiðandi</label>
-                    </div>
-                </div>
-            `;
+            const contactHtml = 
+                '<div class="contact-card" id="contact' + cc + '">' +
+                    '<div class="contact-card-header">' +
+                        '<span class="contact-card-title">' + contactType + '</span>' +
+                        '<button type="button" class="btn-remove" onclick="removeContact(' + cc + ')">Fjarlægja</button>' +
+                    '</div>' +
+                    '<div class="form-group">' +
+                        '<label for="tengilidur' + cc + '_kennitala">Kennitala</label>' +
+                        '<input type="text" id="tengilidur' + cc + '_kennitala" name="tengilidur' + cc + '_kennitala" placeholder="0000000000" maxlength="10">' +
+                    '</div>' +
+                    '<div class="form-group">' +
+                        '<label for="tengilidur' + cc + '_nafn">Nafn</label>' +
+                        '<input type="text" id="tengilidur' + cc + '_nafn" name="tengilidur' + cc + '_nafn" placeholder="Sótt úr Þjóðskrá..." disabled>' +
+                    '</div>' +
+                    '<div class="form-group">' +
+                        '<label for="tengilidur' + cc + '_heimili">Heimilisfang</label>' +
+                        '<input type="text" id="tengilidur' + cc + '_heimili" name="tengilidur' + cc + '_heimili" placeholder="Sótt úr Þjóðskrá..." disabled>' +
+                    '</div>' +
+                    '<div class="form-row">' +
+                        '<div class="form-group">' +
+                            '<label for="tengilidur' + cc + '_postnumer">Póstnúmer</label>' +
+                            '<input type="text" id="tengilidur' + cc + '_postnumer" name="tengilidur' + cc + '_postnumer" placeholder="000" disabled>' +
+                        '</div>' +
+                        '<div class="form-group">' +
+                            '<label for="tengilidur' + cc + '_sveitarfelag">Sveitarfélag</label>' +
+                            '<input type="text" id="tengilidur' + cc + '_sveitarfelag" name="tengilidur' + cc + '_sveitarfelag" placeholder="Sótt úr Þjóðskrá..." disabled>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="form-row">' +
+                        '<div class="form-group">' +
+                            '<label for="tengilidur' + cc + '_simi1">Símanúmer 1</label>' +
+                            '<input type="tel" id="tengilidur' + cc + '_simi1" name="tengilidur' + cc + '_simi1" placeholder="000-0000">' +
+                        '</div>' +
+                        '<div class="form-group">' +
+                            '<label for="tengilidur' + cc + '_simi2">Símanúmer 2 <span class="optional">(valkvætt)</span></label>' +
+                            '<input type="tel" id="tengilidur' + cc + '_simi2" name="tengilidur' + cc + '_simi2" placeholder="000-0000">' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="form-group">' +
+                        '<label for="tengilidur' + cc + '_netfang">Netfang</label>' +
+                        '<input type="email" id="tengilidur' + cc + '_netfang" name="tengilidur' + cc + '_netfang" placeholder="netfang@dæmi.is">' +
+                    '</div>' +
+                    '<div class="checkbox-item">' +
+                        '<input type="checkbox" id="tengilidur' + cc + '_greidandi" name="tengilidur' + cc + '_greidandi">' +
+                        '<label for="tengilidur' + cc + '_greidandi">Þessi tengiliður er greiðandi</label>' +
+                    '</div>' +
+                '</div>';
             
             container.insertAdjacentHTML('beforeend', contactHtml);
             
-            // Bæta við event listener fyrir nýja tengiliðinn
-            const newKtInput = document.getElementById(`tengilidur${contactCount}_kennitala`);
-            const currentContactNum = contactCount; // Capture value for closure
+            const newKtInput = document.getElementById('tengilidur' + cc + '_kennitala');
             if (newKtInput) {
                 newKtInput.addEventListener('input', function(e) {
                     this.value = this.value.replace(/[^0-9]/g, '');
@@ -2902,43 +2617,33 @@
                     if (this.value.length === 10) {
                         const parsed = parseKennitala(this.value);
                         if (parsed) {
-                            fetchTengilidarFromThjodskra(this.value, currentContactNum);
+                            fetchTengilidarFromThjodskra(this.value, cc);
                         }
                     }
                 });
             }
             
-            // Hide add button if max contacts reached
             if (contactCount >= 4) {
                 document.getElementById('btnAddContact').classList.add('hidden');
             }
         }
 
         function removeContact(id) {
-            const contact = document.getElementById(`contact${id}`);
+            const contact = document.getElementById('contact' + id);
             if (contact) {
                 contact.remove();
                 document.getElementById('btnAddContact').classList.remove('hidden');
             }
         }
 
-        // =============================================
-        // VALIDATION
-        // =============================================
         function validateStep(step) {
             switch(step) {
-                case 1:
-                    return validateKennitala();
-                case 2:
-                    return validateStudentInfo();
-                case 3:
-                    return validateContacts();
-                case 4:
-                    return validateSubject();
-                case 5:
-                    return validateTerms();
-                default:
-                    return true;
+                case 1: return validateKennitala();
+                case 2: return validateStudentInfo();
+                case 3: return validateContacts();
+                case 4: return validateSubject();
+                case 5: return validateTerms();
+                default: return true;
             }
         }
 
@@ -2973,7 +2678,6 @@
                 errors.push('• Netfang er ekki á réttu formi (dæmi: nafn@dæmi.is)');
             }
             
-            // Ef stúdentsprófsbraut er valin, verður að velja raunverulegan framhaldsskóla
             if (studentsprofChecked) {
                 if (!skoli || skoli === 'Er ekki í framhaldsskóla' || skoli === 'Annað') {
                     errors.push('• Mögulegt er að stunda nám á stúdentsprófsbraut við þessa skóla: Menntaskólann á Akureyri, Verkmenntaskólann á Akureyri, Framhaldsskólann á Laugum, Framhaldsskólann á Húsavík og Menntaskólann á Tröllaskaga. Vinsamlegast veljið eitt af ofangreindu.\n\nAth: Nemendur á Tröllaskaga þurfa að hafa samband við sinn framhaldsskóla til að fá nánari upplýsingar.');
@@ -2989,7 +2693,6 @@
         }
 
         function validateContacts() {
-            // Skip validation if 18+
             if (studentAgeGroup && !studentAgeGroup.minors) {
                 return true;
             }
@@ -3028,7 +2731,6 @@
                 return false;
             }
             
-            // Athuga hvort aðalfag sé valið ef Skapandi tónlist
             if (namsgrein === 'Skapandi tónlist') {
                 const adafag = document.getElementById('adafag').value;
                 if (!adafag) {
@@ -3051,29 +2753,24 @@
             return true;
         }
         
-        // =============================================
-        // VALIDATION ERROR DISPLAY
-        // =============================================
         function isValidEmail(email) {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return emailRegex.test(email);
         }
         
         function showValidationError(message) {
-            // Create or get error modal
             let modal = document.getElementById('validationModal');
             
             if (!modal) {
                 modal = document.createElement('div');
                 modal.id = 'validationModal';
                 modal.className = 'validation-modal';
-                modal.innerHTML = `
-                    <div class="validation-modal-content">
-                        <div class="validation-modal-icon">⚠️</div>
-                        <div class="validation-modal-message"></div>
-                        <button type="button" class="btn btn-primary" onclick="closeValidationModal()">Í lagi</button>
-                    </div>
-                `;
+                modal.innerHTML = 
+                    '<div class="validation-modal-content">' +
+                        '<div class="validation-modal-icon">⚠️</div>' +
+                        '<div class="validation-modal-message"></div>' +
+                        '<button type="button" class="btn btn-primary" onclick="closeValidationModal()">Í lagi</button>' +
+                    '</div>';
                 document.body.appendChild(modal);
             }
             
@@ -3088,22 +2785,31 @@
             }
         }
 
-        // =============================================
-        // FORM SUBMISSION
-        // =============================================
         function submitForm() {
             if (!validateStep(5)) {
                 return;
             }
             
-            // Disable submit button to prevent double submission
             const submitBtn = document.getElementById('btnSubmit');
             submitBtn.disabled = true;
             submitBtn.textContent = 'Sendi umsókn...';
             
-            // Collect all form data
+            const namshlutfallEl = document.querySelector('input[name="namshlutfall"]:checked');
+            const studentsprofStep2El = document.getElementById('studentsprofStep2');
+            const skoliEl = document.getElementById('skoli');
+            const fristundaEl = document.getElementById('fristundastyrkur');
+            const hljodfaraEl = document.getElementById('hljodfaraleiga');
+            const myndefniEl = document.getElementById('myndefni');
+            const athugasemdEl = document.getElementById('athugasemd');
+            const adafagEl = document.getElementById('adafag');
+            const logheimiliEl = document.getElementById('logheimili');
+            const postnumerEl = document.getElementById('postnumer');
+            const sveitarfelagEl = document.getElementById('sveitarfelag');
+            const annadHeimiliEl = document.getElementById('annadHeimili');
+            const postnumerAnnadEl = document.getElementById('postnumerAnnad');
+            const sveitarfelagAnnadEl = document.getElementById('sveitarfelagAnnad');
+            
             const formData = {
-                // Student info
                 kennitala: document.getElementById('kennitala').value,
                 nafn: document.getElementById('nafn').value,
                 tegund: 'Ný umsókn',
@@ -3114,104 +2820,95 @@
                     return opt.dataset.actualName || opt.value;
                 })(),
                 deild: document.getElementById('deild').value,
-                namshlutfall: document.querySelector('input[name="namshlutfall"]:checked')?.value || 'Heilt',
-                studentsprof: document.getElementById('studentsprofStep2')?.checked || false,
-                skoli: document.getElementById('skoli')?.value || '',
-                fristundastyrkur: document.getElementById('fristundastyrkur')?.checked || false,
-                hljodfaraleiga: document.getElementById('hljodfaraleiga')?.checked || false,
-                myndefni: document.getElementById('myndefni')?.checked || false,
+                namshlutfall: namshlutfallEl ? namshlutfallEl.value : 'Heilt',
+                studentsprof: studentsprofStep2El ? studentsprofStep2El.checked : false,
+                skoli: skoliEl ? skoliEl.value : '',
+                fristundastyrkur: fristundaEl ? fristundaEl.checked : false,
+                hljodfaraleiga: hljodfaraEl ? hljodfaraEl.checked : false,
+                myndefni: myndefniEl ? myndefniEl.checked : false,
                 netfangNemanda: document.getElementById('netfang').value,
                 simiNemanda: document.getElementById('simi1').value,
-                athugasemdNemanda: document.getElementById('athugasemd')?.value || '',
-                adafagSkapandi: document.getElementById('adafag')?.value || '',
+                athugasemdNemanda: athugasemdEl ? athugasemdEl.value : '',
+                adafagSkapandi: adafagEl ? adafagEl.value : '',
                 
-                // Heimilisfang nemanda (úr Þjóðskrá - lögheimili)
-                logheimiliNemanda: document.getElementById('logheimili')?.value || '',
-                postnumerLogheimiliNemanda: document.getElementById('postnumer')?.value || '',
-                sveitarfelagLogheimiliNemanda: document.getElementById('sveitarfelag')?.value || '',
+                logheimiliNemanda: logheimiliEl ? logheimiliEl.value : '',
+                postnumerLogheimiliNemanda: postnumerEl ? postnumerEl.value : '',
+                sveitarfelagLogheimiliNemanda: sveitarfelagEl ? sveitarfelagEl.value : '',
                 
-                // Annað heimili nemanda
-                heimiliNemanda: document.getElementById('annadHeimili')?.value || '',
-                postnumerHeimiliNemanda: document.getElementById('postnumerAnnad')?.value || '',
-                sveitarfelagHeimiliNemanda: document.getElementById('sveitarfelagAnnad')?.value || '',
+                heimiliNemanda: annadHeimiliEl ? annadHeimiliEl.value : '',
+                postnumerHeimiliNemanda: postnumerAnnadEl ? postnumerAnnadEl.value : '',
+                sveitarfelagHeimiliNemanda: sveitarfelagAnnadEl ? sveitarfelagAnnadEl.value : '',
                 
-                // Tengiliður 1
-                tengiliður1Nafn: document.getElementById('tengilidur1_nafn')?.value || '',
-                tengiliður1Kennitala: document.getElementById('tengilidur1_kennitala')?.value || '',
-                tengiliður1Simi: document.getElementById('tengilidur1_simi1')?.value || '',
-                tengiliður1Netfang: document.getElementById('tengilidur1_netfang')?.value || '',
-                tengiliður1Greidandi: document.getElementById('tengilidur1_greidandi')?.checked || false,
-                tengiliður1Heimili: document.getElementById('tengilidur1_heimili')?.value || '',
-                tengiliður1Postnumer: document.getElementById('tengilidur1_postnumer')?.value || '',
-                tengiliður1Sveitarfelag: document.getElementById('tengilidur1_sveitarfelag')?.value || '',
+                tengiliður1Nafn: getValue('tengilidur1_nafn'),
+                tengiliður1Kennitala: getValue('tengilidur1_kennitala'),
+                tengiliður1Simi: getValue('tengilidur1_simi1'),
+                tengiliður1Netfang: getValue('tengilidur1_netfang'),
+                tengiliður1Greidandi: getChecked('tengilidur1_greidandi'),
+                tengiliður1Heimili: getValue('tengilidur1_heimili'),
+                tengiliður1Postnumer: getValue('tengilidur1_postnumer'),
+                tengiliður1Sveitarfelag: getValue('tengilidur1_sveitarfelag'),
                 
-                // Tengiliður 2
-                tengiliður2Nafn: document.getElementById('tengilidur2_nafn')?.value || '',
-                tengiliður2Kennitala: document.getElementById('tengilidur2_kennitala')?.value || '',
-                tengiliður2Simi: document.getElementById('tengilidur2_simi1')?.value || '',
-                tengiliður2Netfang: document.getElementById('tengilidur2_netfang')?.value || '',
-                tengiliður2Greidandi: document.getElementById('tengilidur2_greidandi')?.checked || false,
-                tengiliður2Heimili: document.getElementById('tengilidur2_heimili')?.value || '',
-                tengiliður2Postnumer: document.getElementById('tengilidur2_postnumer')?.value || '',
-                tengiliður2Sveitarfelag: document.getElementById('tengilidur2_sveitarfelag')?.value || ''
+                tengiliður2Nafn: getValue('tengilidur2_nafn'),
+                tengiliður2Kennitala: getValue('tengilidur2_kennitala'),
+                tengiliður2Simi: getValue('tengilidur2_simi1'),
+                tengiliður2Netfang: getValue('tengilidur2_netfang'),
+                tengiliður2Greidandi: getChecked('tengilidur2_greidandi'),
+                tengiliður2Heimili: getValue('tengilidur2_heimili'),
+                tengiliður2Postnumer: getValue('tengilidur2_postnumer'),
+                tengiliður2Sveitarfelag: getValue('tengilidur2_sveitarfelag')
             };
             
             console.log('Form data:', formData);
             
-            // Power Automate URL
             const powerAutomateUrl = 'https://defaultfce2332bf493407ea472f173f9a0af.ea.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/1b25b90edcdd4f39940422d05d5ea0cf/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=54LdP4gKfBerBICVzlp7RovI6Pwqxo7m3Gxk7XkoYRo';
             
-            // Send to Power Automate
             fetch(powerAutomateUrl, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
             })
-            .then(response => {
+            .then(function(response) {
                 if (!response.ok) {
                     throw new Error('Villa við að senda umsókn');
                 }
                 return response.json();
             })
-            .then(data => {
+            .then(function(data) {
                 console.log('Success:', data);
+                document.querySelector('.form-step[data-step="5"]').classList.remove('active');
+                document.querySelector('.form-step[data-step="success"]').classList.add('active');
                 
-                // Hide current step
-                document.querySelector(`.form-step[data-step="5"]`).classList.remove('active');
-                
-                // Show success
-                document.querySelector(`.form-step[data-step="success"]`).classList.add('active');
-                
-                // Update progress to complete
-                document.querySelectorAll('.step-indicator').forEach(ind => {
+                document.querySelectorAll('.step-indicator').forEach(function(ind) {
                     ind.classList.add('completed');
                     ind.innerHTML = '✓';
                 });
                 document.getElementById('progressLine').style.width = '100%';
             })
-            .catch(error => {
+            .catch(function(error) {
                 console.error('Error:', error);
                 showValidationError('Villa kom upp við að senda umsókn. Vinsamlegast reyndu aftur eða hafðu samband við skólann.');
-                
-                // Re-enable submit button
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Senda umsókn';
             });
         }
+        
+        // Helper functions for form data extraction
+        function getValue(id) {
+            const el = document.getElementById(id);
+            return el ? el.value : '';
+        }
+        
+        function getChecked(id) {
+            const el = document.getElementById(id);
+            return el ? el.checked : false;
+        }
 
-        // =============================================
-        // EVENT LISTENERS
-        // =============================================
         document.addEventListener('DOMContentLoaded', function() {
-            // New application kennitala input
             const kennitalaInput = document.getElementById('kennitala');
             const btnNext1 = document.getElementById('btnNext1');
             const ageInfo = document.getElementById('ageInfo');
             
             kennitalaInput.addEventListener('input', function(e) {
-                // Only allow numbers
                 this.value = this.value.replace(/[^0-9]/g, '');
                 
                 const kt = this.value;
@@ -3221,12 +2918,10 @@
                     const parsed = parseKennitala(kt);
                     
                     if (parsed) {
-                        // Valid kennitala
                         errorEl.classList.remove('visible');
                         this.classList.remove('error');
                         btnNext1.disabled = false;
                         
-                        // Calculate and display age
                         studentAge = calculateAge(parsed.birthDate);
                         studentAgeGroup = getAgeGroup(parsed.birthDate);
                         studentBekkur = calculateBekkur(parsed.birthDate);
@@ -3235,23 +2930,20 @@
                                        'júlí', 'ágúst', 'september', 'október', 'nóvember', 'desember'];
                         
                         document.getElementById('birthDate').textContent = 
-                            `${parsed.day}. ${months[parsed.month - 1]} ${parsed.year}`;
-                        document.getElementById('ageDisplay').textContent = `${studentAge} ára`;
+                            parsed.day + '. ' + months[parsed.month - 1] + ' ' + parsed.year;
+                        document.getElementById('ageDisplay').textContent = studentAge + ' ára';
                         
-                        // Sýna bekk ef við á
                         let ageGroupText = studentAgeGroup.label;
                         if (studentBekkur >= 1 && studentBekkur <= 10) {
-                            ageGroupText += ` — ${studentBekkur}. bekkur`;
+                            ageGroupText += ' — ' + studentBekkur + '. bekkur';
                         }
                         document.getElementById('ageGroup').textContent = ageGroupText;
                         
                         ageInfo.classList.remove('hidden');
                         
-                        // Sækja upplýsingar úr Þjóðskrá
                         fetchFromThjodskra(kt);
                         
                     } else {
-                        // Invalid kennitala
                         errorEl.classList.add('visible');
                         this.classList.add('error');
                         btnNext1.disabled = true;
@@ -3277,19 +2969,16 @@
                 }
             });
 
-            // Renewal kennitala input
             const renewalKennitalaInput = document.getElementById('renewalKennitala');
             const btnSearchRenewal = document.getElementById('btnSearchRenewal');
             
             renewalKennitalaInput.addEventListener('input', function(e) {
-                // Only allow numbers
                 this.value = this.value.replace(/[^0-9]/g, '');
                 
                 const kt = this.value;
                 const errorEl = document.getElementById('renewalKennitalaError');
                 const notFoundEl = document.getElementById('renewalNotFound');
                 
-                // Hide not found message when typing
                 notFoundEl.classList.add('hidden');
                 
                 if (kt.length === 10) {
@@ -3311,7 +3000,6 @@
                 }
             });
             
-            // Tengiliður 1 kennitala - sækja úr Þjóðskrá
             const tengilidur1KtInput = document.getElementById('tengilidur1_kennitala');
             if (tengilidur1KtInput) {
                 tengilidur1KtInput.addEventListener('input', function(e) {
@@ -3326,7 +3014,6 @@
                 });
             }
             
-            // Tengiliður 2 kennitala - sækja úr Þjóðskrá
             const tengilidur2KtInput = document.getElementById('tengilidur2_kennitala');
             if (tengilidur2KtInput) {
                 tengilidur2KtInput.addEventListener('input', function(e) {
